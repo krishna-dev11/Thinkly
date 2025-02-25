@@ -9,14 +9,16 @@ import greenGirlImage from "../assets/Images/TimelineImage.png";
 import TimeLine from "../Components/Core/Home/TimeLine";
 import SwissKnife from "../Components/Core/Home/SwissKnife"
 import Instructor from "../assets/Images/Instructor.png"
-
+import FotterLinks from "../Components/Core/Home/FotterLinks"
+import { Link } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 const HomePage = () => {
   return (
-    // wrapper
-    <div className="h-[6631px] w-[100%] overflow-x-hidden m-0 p-0 box-border  ">
+    // wrapperh-   h-[6631px]
+    <div className=" w-[100%] overflow-x-hidden m-0 p-0 box-border  ">
       {/* nav  */}
-      <div className=" w-screen h-12 border bg-richblack-800 "></div>
+      <div className=" w-screen h-12 shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 "></div>
 
       {/* section 1 */}
       <div className="flex flex-col gap-10 bg-richblack-800 ">
@@ -191,7 +193,7 @@ const HomePage = () => {
       <div className=" bg-richblack-900 w-full flex">
 
 {/* instructor part */}
-      <div className='h-full w-[85%]   flex mx-auto p-10  '>
+      <div className='h-full w-[85%]   flex mx-auto p-10 mt-10 '>
 
         <div className="w-[50%] h-[28rem]  mx-auto relative ">
           <div className=" w-full h-full bg-white absolute z-0 -translate-x-5  -translate-y-5 "></div>
@@ -199,12 +201,12 @@ const HomePage = () => {
         </div>
 
            
-           <div className="w-[50%] flex flex-col gap-3 p-24"> 
+           <div className="w-[50%] flex flex-col gap-4 p-24"> 
            <div className='  flex flex-col '>
              <p className=' text-richblack-5 text-[2rem] font-inter font-600 leading-[2.75rem]'>Become an </p>   
              <Hieghlightedtext color={"bg-gradient-to-br from-[#0093E9] to-[#80D0C7] bg-clip-text text-transparent text-[2.23rem] font-inter  leading-[2.75rem]"} data={"instructor"}/>
            </div>
-           <p className=" text-richblack-300 text-[.8rem]">Instructors from around the world teach millions of students on  <br/> StudyNotion. We provide the tools and skills to teach what you <br/> love.</p>
+           <p className=" text-richblack-300 text-[.8rem]">Instructors from around the world teach millions of students on StudyNotion. We provide the tools and skills to teach what you love.</p>
            <button className={`py-2 px-3 rounded-md bg-yellow-50 self-start flex items-baseline gap-2 `}>
                    <p>Start Teaching Today</p>
                    <FaLongArrowAltRight fill='#000814' className=' translate-y-[.1rem]'/>
@@ -216,8 +218,30 @@ const HomePage = () => {
     
       </div>
          
+
+
+         {/* fotter section  */}
       {/* section 4 */}
-      <div className=" bg-richblack-800  h-[20rem] w-full shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-white/20"></div>
+       <div className=" bg-richblack-800  h-[40rem] w-full shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-white/20 flex flex-col ">       
+       <FotterLinks/>
+       <div  className=" bg-richblack-800  h-[5rem] w-[80%] mx-auto shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-white/20 flex justify-between items-center  " >
+
+        <div className="flex gap-x-3  h-[50%] justify-center items-center ">
+          <Link to={"/policy"} className=" text-sm  text-richblack-400 ">Privacy</Link>
+          <div className="w-[.1rem] h-[40%] bg-richblack-400 my-auto "></div>
+          <Link to={"/policy"} className=" text-sm text-richblack-400 ">Cookie Policy</Link>
+          <div className="w-[.1rem] h-[40%] bg-richblack-400 my-auto "></div>
+          <Link to={"/policy"} className=" text-sm text-richblack-400 ">Terms</Link>
+        </div>
+
+        <div className="flex items-center justify-center gap-x-2 text-sm text-richblack-400">
+          <p>Made with</p>
+          <FaHeart fill="red" size={10}/>
+          <p>CodeHelp @ 2025 Studynotion</p>
+        </div>
+       </div>
+       </div>
+
     </div>
   );
 };

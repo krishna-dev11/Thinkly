@@ -28,7 +28,7 @@ const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smallt
     </div>
     
       {/* Running code part */}
-      <div className=' flex  w-[47%] h-full border border-t-white border-l-white bg-richblack-[#111E32]'>
+      <div className=' flex  w-[47%] h-full  shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-l-[1px] border-white/20 bg-richblack-[#111E32]'>
          <div className=' h-full w-[8%] flex flex-col gap-y-[.01rem] justify-center items-center text-richblack-400 font-inter'>
             <p >1</p>
             <p>2</p>
