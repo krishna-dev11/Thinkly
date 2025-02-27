@@ -5,19 +5,18 @@ import SignUpForm from './SignUpForm'
 
 const Template = ({title , desc1 , desc2 , image , formtype}) => {
   return (
-    <div className=' h-screen w-screen bg-richblack-900 flex flex-col'>
-     <div className='h-[3rem] w-full bg-richblack-800'></div>
+    <div className='h-screen w-full bg-richblack-900 flex flex-col'>
      
      {/*  */}
-     <div className=' w-[90%] h-full flex mx-auto '>
+     <div className=' w-[80%] h-full flex mx-auto '>
 
-      <div className=' w-[50%] h-full bg-caribbeangreen-25 flex flex-col justify-center px-10'>
+      <div className=' w-[50%] h-full  flex flex-col gap-y-3 justify-center px-10'>
 
-        <p >{title}</p>
+        <p className='text-richblack-5 text-[1.5rem] font-semibold font-inter font-600 leading-[2.75rem]'>{title}</p>
 
-        <div>
-          <p>{desc1}</p>
-          <p>{desc2}</p>
+        <div className='flex  w-[25rem] '>
+          <span className=' text-richblack-100 '> {desc1}  <span className=' text-blue-100 font-edu-sa font-semibold italic'>{desc2}</span> </span>
+          
         </div>
 
         <div>{

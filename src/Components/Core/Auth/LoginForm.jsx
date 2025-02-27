@@ -23,43 +23,67 @@ const LoginForm = () => {
     const SubmitHandler = (event)=>{
         event.preventDefault();
         console.log(formData)
+
+
+
+
+
+
+
+        
     }
 
 
   return (
-    <form className=' bg-blue-100' onSubmit={SubmitHandler}>
+    <form className=' flex flex-col gap-3 ' onSubmit={SubmitHandler}>
 
-      <label>
-        <p>Email address</p>
+      <label className="w-full">
+        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+          Email Address <sup className="text-pink-200">*</sup>
+        </p>
         <input
+            className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
             type='text'
             placeholder='Enter email address'
             name='EmailAddress'
             onChange={changeHandler}
             value={formData.EmailAddress}
+            style={{
+            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+          }}
         />
       </label>
-      <label>
-        <p>Password</p>
+      <label  className='relative'>
+        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5 ">Password <sup className="text-pink-200">*</sup></p>
         <input
             type= { showpassword ? "text" : "password" } 
-            placeholder='Enter email address'
+            placeholder='Enter password'
             name='Password'
             onChange={changeHandler}
             value={formData.Password}
+            className="w-full rounded-[0.5rem] bg-richblack-800 p-[10px] text-richblack-5 focus:outline-none"
+          style={{
+             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+             
+                }}
         />
-        <span onClick={()=>{setShowPassword(!showpassword)}}>
+        <span onClick={()=>{setShowPassword(!showpassword)}} className=' top-10 right-5 absolute'>
             {
                 showpassword ? 
-                <FaEyeSlash /> :
-                <FaEye />
+                <FaEyeSlash fill='white'/> :
+                <FaEye fill='white'/>
             }
         </span>
-        <Link to={"*"} >
-            <p>Forgot Password</p>
+        <Link to={"/forgot-password"} className=' text-blue-200 text-sm absolute top-[4.7rem] right-0' >
+            <span>Forgot Password</span>
         </Link>
       </label>
-      <button>Login</button>
+      <button
+        type="submit"
+        className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+      >
+        Sign In
+      </button>
 
     </form>
   )
