@@ -95,7 +95,8 @@ const NavBar = () => {
         }
 
         {
-          (token !== null) && <div className=' h-3 w-3 bg-white'></div>        }
+          (token !== null) && <div className=' h-3 w-3 bg-white'></div>      
+        }
 
 
       </div>

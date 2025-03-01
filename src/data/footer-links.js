@@ -1,3 +1,53 @@
+export const FooterLink1 = [
+  {
+    title: "Company",
+    links: [
+      { title: "About", link: "/about" },
+      { title: "Careers", link: "/careers" },
+      { title: "Affiliates", link: "/affiliates" }
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { title: "Articles", link: "/articles" },
+      { title: "Blog", link: "/blog" },
+      { title: "Chart Sheet", link: "/chart-sheet" },
+      { title: "Code challenges", link: "/code-challenges" },
+      { title: "Docs", link: "/docs" },
+      { title: "Projects", link: "/projects" },
+      { title: "Videos", link: "/videos" },
+      { title: "Workspaces", link: "/workspaces" }
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+        {title: "Help Centre", link: "/career-paths"}
+    ]
+  },
+  {
+    title: "Plans",
+    links: [
+      { title: "Paid memberships", link: "/articles" },
+      { title: "For students", link: "/blog" },
+      { title: "Bussiness solutions", link: "/chart-sheet" }
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { title: "Forums", link: "/articles" },
+      { title: "Chapters", link: "/blog" },
+      { title: "Events", link: "/chart-sheet" }
+    ],
+  },
+];
+
+
+
+
+
 export const FooterLink2 = [
   {
     title: "Subjects",
@@ -47,9 +97,9 @@ export const FooterLink2 = [
         {title: "Career services", link: "/career-services"},
         {title: "Interview prep", link: "/interview-prep"},
         {title: "Professional certification", link: "/professional-certification"},
-        // {title: "-", link: "/hi"},
         {title: "Full Catalog", link: "/full-catalog"},
         {title: "Beta Content", link: "/beta-content"}
     ]
   }
 ];
+

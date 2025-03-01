@@ -12,6 +12,7 @@ import Instructor from "../assets/Images/Instructor.png"
 import FotterLinks from "../Components/Common/FotterLinks"
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import PowerOfCode from "../Components/Core/Home/PowerOfCode";
 
 const HomePage = () => {
   return (
@@ -21,7 +22,7 @@ const HomePage = () => {
      
 
       {/* section 1 */}
-      <div className="flex flex-col gap-10 bg-richblack-800  ">
+      <div className="flex flex-col gap-10 bg-richblack-900  ">
         {/* Empower Your Future with Coding Skills section */}
         <div className="h-[15rem] w-[70%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
           <div className="flex mx-auto justify-center bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
@@ -103,7 +104,9 @@ const HomePage = () => {
         </div>
 
         {/* 4th part cards */}
-        <div></div>
+        <div className=" w-full">
+          <PowerOfCode/>
+        </div>
       </div>
       {/* section 1 end */}
 

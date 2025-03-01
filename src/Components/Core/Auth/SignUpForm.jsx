@@ -1,8 +1,15 @@
 import React from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import Tab from '../../Common/Tab';
+import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
+import { TabData } from '../../../Utilities/Constaints';
+import { useDispatch, useSelector } from 'react-redux';
+import {setSignUpData} from "../../../Slices/Auth"
+import { sendOtp } from '../../../Services.jsx/Operations/authAPI';
 
 const SignUpForm = () => {
 
@@ -10,6 +17,12 @@ const SignUpForm = () => {
     
        const [showCreatepassword , setshowCreatepassword] = useState(false)
        const [showConfirmPassword , setshowConfirmPassword] = useState(false)
+       const [currentTab , setCurrentTab] = useState(ACCOUNT_TYPE.STUDENT)
+
+       const {signUpData} = useSelector(state=>state.auth)
+       const dispatch = useDispatch()
+
+       const navigate = useNavigate()
     
         const changeHandler = (event)=>{
             const {type , name , value ,checked} = event.target
@@ -24,10 +37,35 @@ const SignUpForm = () => {
 
         const SubmitHandler = (event)=>{
           event.preventDefault();
-          console.log(formData)
+
+          
+          if(formData.ConfirmPassword !== formData.CreatePassword)
+          {
+            toast.error("password Can`t Match")
+            return
+          }
+
+
+          const data = {
+            ...formData , currentTab
+          }
+
+          console.log(data)
+ 
+          dispatch(setSignUpData(data))
+
+          dispatch(sendOtp(formData.EmailAddress , navigate))
+          
+
         }
 
+        
+
   return (
+     <div className='flex flex-col gap-y-3'>
+        
+    <Tab tabData = {TabData} currentTab = {currentTab}  setCurrentTab = {setCurrentTab} />
+
     <form className=' ' onSubmit={SubmitHandler} >
 
       <div className='flex gap-x-2'>
@@ -88,6 +126,10 @@ const SignUpForm = () => {
       </p>
         <input
             required
+            placeholder='Enter Contact No'
+            name='contactNo'
+            onChange={changeHandler}
+            value={formData.contactNo}
             className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
             type='tel'
             style={{
@@ -152,6 +194,8 @@ const SignUpForm = () => {
       </button>
 
     </form>
+
+     </div>
   )
 }
 

@@ -13,7 +13,6 @@ require("dotenv").config();
 // send OTP check
 exports.sendOTP = async (req, res) => {
   try {
-    console.log("hi")
     const {email} = req.body;
 
     if (!email) {
