@@ -71,6 +71,9 @@ exports.sendOTP = async (req, res) => {
 
 // signUP  check
 exports.signUP = async (req, res) => {
+
+  
+  
   try {
     const {
       firstName,
@@ -81,6 +84,8 @@ exports.signUP = async (req, res) => {
       accountType,
       otp,
     } = req.body;
+
+    
 
     if (
       !firstName ||
@@ -97,6 +102,9 @@ exports.signUP = async (req, res) => {
       });
     }
 
+    
+    
+
     if (password !== confirmPassword) {
       return res.status(401).json({
         success: false,
@@ -106,6 +114,8 @@ exports.signUP = async (req, res) => {
    
     const checkUser = await user.findOne({ email: email });
 
+   
+
     if (checkUser) {
       return res.status(401).json({
         success: false,
@@ -113,16 +123,16 @@ exports.signUP = async (req, res) => {
           "you are already register with these email on our plateform go through the login page or start signUp with another email address",
       });
     }
-   
     
+  
 // find recent otp from otp schema
     const recentOtp = await OTP.find({ email: email })
       .sort({ createdAt: -1 })
       .limit(1);
 
       console.log(recentOtp)
-    
-    if (recentOtp.length === 0) {
+      
+    if (recentOtp.length === 0 || !recentOtp[0]) {
       return res.status(400).json({
         success: false,
         message: "OTP is not Found",

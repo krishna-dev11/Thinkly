@@ -6,6 +6,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useLocation } from 'react-router-dom';
+import { CiSearch } from "react-icons/ci";
 
 
 const NavBar = () => {
@@ -17,6 +18,8 @@ const NavBar = () => {
  function mathroute(route){
   return matchPath({path:route} , location.pathname)
  }
+
+//  console.log("FUCkkkkkkkkkkkkkkk",user)
 
   const categoryList =[
     {
@@ -34,7 +37,7 @@ const NavBar = () => {
   return (
     <div className=" w-full h-14 shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 ">
 
-      <div className=' flex justify-evenly items-center w-11/12  mx-auto h-full'>
+      <div className=' flex justify-between items-center w-11/12  mx-auto h-full px-10'>
         
        <Link to={"/"}>
        <img src={logo} className='w-[9rem]'/>
@@ -69,7 +72,15 @@ const NavBar = () => {
             </ul>
 
 
-      <div className='flex gap-2'>
+      <div className='flex gap-x-6'>
+
+
+        {
+          <div>
+          <CiSearch fill="white" size={25}/>
+          </div>
+        }
+
         {
           (token == null)  && <div>
              <Link to={"/login"} className='py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20'>Login</Link>
@@ -84,6 +95,7 @@ const NavBar = () => {
 
         }
 
+
         {
           user && user.accountType !== "Instructor" && 
           <Link to={"/dashboard/cart"}>
@@ -95,7 +107,7 @@ const NavBar = () => {
         }
 
         {
-          (token !== null) && <div className=' h-3 w-3 bg-white'></div>      
+          (token !== null) && <div className=' h-8 w-8 bg-richblack-700 rounded-full'></div>      
         }
 
 

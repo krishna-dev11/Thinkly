@@ -1,20 +1,28 @@
 import React, { useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Tab from '../../Common/Tab';
 import { TabData } from '../../../Utilities/Constaints';
 import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../../../Services.jsx/Operations/authAPI';
+import { setUser } from '../../../Slices/Profile';
+
 
 const LoginForm = () => {
 
    const[formData , setformdata] = useState({ EmailAddress:"" , Password:""})
 
    const [showpassword , setShowPassword] = useState(false)
-  const [currentTab , setCurrentTab] = useState(ACCOUNT_TYPE.STUDENT)
-   
+   const [accountType , setaccountType] = useState(ACCOUNT_TYPE.STUDENT)
+  
 
-    const changeHandler = (event)=>{
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+   
+  const changeHandler = (event)=>{
         const {type , name , value ,checked} = event.target
         setformdata((prev)=>{
             return {
@@ -27,14 +35,23 @@ const LoginForm = () => {
     const SubmitHandler = (event)=>{
         event.preventDefault();
         console.log(formData)
+
+        const data = {
+          ...formData , accountType
+        }
+
+        dispatch(setLogin(formData.EmailAddress , formData.Password ,  navigate))
         
+        dispatch(setUser(data))
     }
 
 
   return (
 
     <div>
-      <Tab tabData = {TabData} currentTab = {currentTab}  setCurrentTab = {setCurrentTab} />
+    {/* not usefull in login form */}
+    <Tab tabData = {TabData} accountType = {accountType}  setaccountType = {setaccountType} />
+
 
 <form className=' flex flex-col gap-3 ' onSubmit={SubmitHandler}>
 
@@ -75,7 +92,7 @@ const LoginForm = () => {
             <FaEye fill='white'/>
         }
     </span>
-    <Link to={"/forgot-password"} className=' text-blue-200 text-sm absolute top-[4.7rem] right-0' >
+    <Link to={"/forgotPassword"} className=' text-blue-200 text-sm absolute top-[4.7rem] right-0' >
         <span>Forgot Password</span>
     </Link>
   </label>

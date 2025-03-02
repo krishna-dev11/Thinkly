@@ -40,7 +40,7 @@ exports.forgotpasswordToken = async (req, res) => {
 
     // console.log(hi)
 
-    const url = `https://localhost:3000/update-password/${token}`;
+    const url = `http://localhost:3000/update-password/${token}`;
 
     // console.log(url)
 

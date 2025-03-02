@@ -10,16 +10,17 @@ import { TabData } from '../../../Utilities/Constaints';
 import { useDispatch, useSelector } from 'react-redux';
 import {setSignUpData} from "../../../Slices/Auth"
 import { sendOtp } from '../../../Services.jsx/Operations/authAPI';
+// import { setUser } from '../../../Slices/Profile';
 
 const SignUpForm = () => {
 
-    const[formData , setformdata] = useState({ FirstName:"" , lastName:"" , contactNo:"" ,CreatePassword:"" ,ConfirmPassword:"" , EmailAddress:"" })
+    const[formData , setformdata] = useState({ FirstName:"" , lastName:""  ,CreatePassword:"" ,ConfirmPassword:"" , EmailAddress:"" })
     
        const [showCreatepassword , setshowCreatepassword] = useState(false)
        const [showConfirmPassword , setshowConfirmPassword] = useState(false)
-       const [currentTab , setCurrentTab] = useState(ACCOUNT_TYPE.STUDENT)
+       const [accountType , setaccountType] = useState(ACCOUNT_TYPE.STUDENT)
 
-       const {signUpData} = useSelector(state=>state.auth)
+      //  const {signUpData} = useSelector(state=>state.auth)
        const dispatch = useDispatch()
 
        const navigate = useNavigate()
@@ -47,7 +48,7 @@ const SignUpForm = () => {
 
 
           const data = {
-            ...formData , currentTab
+            ...formData , accountType
           }
 
           console.log(data)
@@ -55,6 +56,8 @@ const SignUpForm = () => {
           dispatch(setSignUpData(data))
 
           dispatch(sendOtp(formData.EmailAddress , navigate))
+
+          // dispatch(setUser(data))
           
 
         }
@@ -64,7 +67,7 @@ const SignUpForm = () => {
   return (
      <div className='flex flex-col gap-y-3'>
         
-    <Tab tabData = {TabData} currentTab = {currentTab}  setCurrentTab = {setCurrentTab} />
+    <Tab tabData = {TabData} accountType = {accountType}  setaccountType = {setaccountType} />
 
     <form className=' ' onSubmit={SubmitHandler} >
 
@@ -120,24 +123,6 @@ const SignUpForm = () => {
         />
       </label>
 
-      <label>
-      <div className=''>
-      <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Phone Number<sup className="text-pink-200">*</sup>
-      </p>
-        <input
-            required
-            placeholder='Enter Contact No'
-            name='contactNo'
-            onChange={changeHandler}
-            value={formData.contactNo}
-            className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
-            type='tel'
-            style={{
-            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-          }}
-        />
-      </div>
-      </label>
 
       <div className='flex gap-x-3'>
        <label className='relative'>
