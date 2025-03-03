@@ -10,7 +10,7 @@ import { TabData } from '../../../Utilities/Constaints';
 import { useDispatch, useSelector } from 'react-redux';
 import {setSignUpData} from "../../../Slices/Auth"
 import { sendOtp } from '../../../Services.jsx/Operations/authAPI';
-// import { setUser } from '../../../Slices/Profile';
+import { setUser } from '../../../Slices/Profile';
 
 const SignUpForm = () => {
 
@@ -51,13 +51,14 @@ const SignUpForm = () => {
             ...formData , accountType
           }
 
-          console.log(data)
+          console.log(data , ":")
  
           dispatch(setSignUpData(data))
 
           dispatch(sendOtp(formData.EmailAddress , navigate))
 
-          // dispatch(setUser(data))
+          dispatch(setUser(data))
+          console.log("sunny")
           
 
         }

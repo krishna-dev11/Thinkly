@@ -36,13 +36,13 @@ const LoginForm = () => {
         event.preventDefault();
         console.log(formData)
 
-        const data = {
-          ...formData , accountType
-        }
+        // const data = {
+        //   ...formData , accountType
+        // }
 
         dispatch(setLogin(formData.EmailAddress , formData.Password ,  navigate))
         
-        dispatch(setUser(data))
+        // dispatch(setUser(data))
     }
 
 
@@ -50,7 +50,7 @@ const LoginForm = () => {
 
     <div>
     {/* not usefull in login form */}
-    <Tab tabData = {TabData} accountType = {accountType}  setaccountType = {setaccountType} />
+<Tab tabData = {TabData} accountType = {accountType}  setaccountType = {setaccountType} />
 
 
 <form className=' flex flex-col gap-3 ' onSubmit={SubmitHandler}>

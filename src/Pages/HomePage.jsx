@@ -24,7 +24,7 @@ const HomePage = () => {
       {/* section 1 */}
       <div className="flex flex-col gap-10 bg-richblack-900  ">
         {/* Empower Your Future with Coding Skills section */}
-        <div className="h-[15rem] w-[70%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
+        <div className="h-[15rem] w-[7 0%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
           <div className="flex mx-auto justify-center bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
             <p className=" text-richblack-200 text-[.9rem]">
               Become an Instructor

@@ -2,8 +2,11 @@ import React from 'react'
 
 const Hieghlightedtext = ({color , data}) => {
   return (
-    <div className={` text-2xl font-semibold ${color}`}>{data}</div>
+    <span className={color}>{data}</span> 
   )
 }
 
 export default Hieghlightedtext
+
+
+// text-2xl font-semibold

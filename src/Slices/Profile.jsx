@@ -4,12 +4,15 @@ const initialState = {
     user:null,
 }
 
+
   const profileSlice = createSlice({
     name:"profile",
     initialState,
     reducers : {
         setUser(state , action){
             state.user = action.payload
+            console.log("nikhil" , state.user)
+
         }
     }
   })

@@ -19,7 +19,7 @@ const NavBar = () => {
   return matchPath({path:route} , location.pathname)
  }
 
-//  console.log("FUCkkkkkkkkkkkkkkk",user)
+// console.log("FUCkkkkkkkkkkkkkkk",user)
 
   const categoryList =[
     {
@@ -43,7 +43,7 @@ const NavBar = () => {
        <img src={logo} className='w-[9rem]'/>
        </Link>
 
-        
+ {/* middle part */}
             <ul className='flex gap-x-5'>
                 { 
                   NavbarLinks.map((link , index)=>(
@@ -71,7 +71,7 @@ const NavBar = () => {
                 }
             </ul>
 
-
+{/* right part */}
       <div className='flex gap-x-6'>
 
 
