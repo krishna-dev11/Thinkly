@@ -1,31 +1,14 @@
 import React from 'react'
-import aboutUs1 from "../assets/Images/aboutus1.webp"
-import aboutUs2 from "../assets/Images/aboutus2.webp"
-import aboutUs3 from "../assets/Images/aboutus3.webp"
+import { topImages } from '../data/aboutus-data';
 import Hieghlightedtext from '../Components/Core/Home/Hieghlightedtext'
 import { PiQuotesFill } from "react-icons/pi";
 import QuoteSection from '../Components/Core/About.jsx/QuoteSection'
 import FoundingStory from '../Components/Core/About.jsx/FoundingStory'
 import { Accomplishment } from '../data/aboutus-data'
+import Grey_whiteBox from '../Components/Core/About.jsx/Grey_whiteBox'
 
 
 const AboutPage = () => {
-
-    const topImages = [
-        {
-          id:1,
-          imageUrl : aboutUs1 
-        },
-        {
-          id:2,
-          imageUrl : aboutUs2
-        },
-        {
-           id:3,
-           imageUrl : aboutUs3
-        }
-    ]
-
 
   return (
     <div className='  w-[100%] overflow-x-hidden m-0 p-0 box-border '>
@@ -84,9 +67,12 @@ const AboutPage = () => {
 
 
     {/* section 4 */}
-    <div>
-      <
+    <div className='w-full   bg-richblack-900 py-32'>
+      <Grey_whiteBox/>
     </div>
+
+    {/* section 4 - footer */}
+    
 
     
 
