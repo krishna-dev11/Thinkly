@@ -70,7 +70,7 @@ exports.forgotpasswordToken = async (req, res) => {
 exports.forgotPassword = async (req, res) => {
   try {
     console.log(req.body)
-    const { password, confirmedPassword , token } = req.body
+    const { password, confirmedPassword , token } = req.body 
 
     if (!password || !confirmedPassword ) {
       return res.status(401).json({

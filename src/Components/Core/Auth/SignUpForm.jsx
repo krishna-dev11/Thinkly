@@ -51,14 +51,18 @@ const SignUpForm = () => {
             ...formData , accountType
           }
 
-          console.log(data , ":")
- 
+          // console.log(data , ":")
+
           dispatch(setSignUpData(data))
 
           dispatch(sendOtp(formData.EmailAddress , navigate))
+ 
+
+
+          
 
           dispatch(setUser(data))
-          console.log("sunny")
+          // console.log("sunny")
           
 
         }

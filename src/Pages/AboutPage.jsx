@@ -6,6 +6,8 @@ import QuoteSection from '../Components/Core/About.jsx/QuoteSection'
 import FoundingStory from '../Components/Core/About.jsx/FoundingStory'
 import { Accomplishment } from '../data/aboutus-data'
 import Grey_whiteBox from '../Components/Core/About.jsx/Grey_whiteBox'
+import Fotter from '../Components/Common/Fotter';
+import ContactForm from '../Components/Core/About.jsx/ContactForm';
 
 
 const AboutPage = () => {
@@ -67,12 +69,15 @@ const AboutPage = () => {
 
 
     {/* section 4 */}
-    <div className='w-full   bg-richblack-900 py-32'>
+    <div className='w-full  flex flex-col gap-y-32  bg-richblack-900 py-32'>
       <Grey_whiteBox/>
+      <div className= " w-[40%] mx-auto">
+      <ContactForm heading={"Get in Touch"} description={"We’d love to here for you, Please fill out this form."}/>
+      </div>
     </div>
 
     {/* section 4 - footer */}
-    
+    <Fotter/>
 
     
 

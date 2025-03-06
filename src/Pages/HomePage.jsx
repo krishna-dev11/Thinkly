@@ -13,6 +13,9 @@ import FotterLinks from "../Components/Common/FotterLinks"
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import PowerOfCode from "../Components/Core/Home/PowerOfCode";
+import Fotter from "../Components/Common/Fotter";
+import BackGroundGradient from "../Components/Common/BackGroundGradient";
+// import GradientInteractiveBox from "../Components/Common/GradientInteractiveBox";
 
 const HomePage = () => {
   return (
@@ -24,7 +27,7 @@ const HomePage = () => {
       {/* section 1 */}
       <div className="flex flex-col gap-10 bg-richblack-900  ">
         {/* Empower Your Future with Coding Skills section */}
-        <div className="h-[15rem] w-[7 0%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
+        <div className="h-[15rem] w-[70%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
           <div className="flex mx-auto justify-center bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
             <p className=" text-richblack-200 text-[.9rem]">
               Become an Instructor
@@ -67,7 +70,8 @@ const HomePage = () => {
 
         {/* video part */}
         <div className="w-[77%] h-[34rem] mx-auto relative ">
-          <div className=" w-full h-full bg-white absolute z-0 translate-x-5  translate-y-5"></div>
+        <BackGroundGradient shade={"bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]"} position={"-top-[2rem] right-[10rem] "} dimensions={"w-[40rem] h-[20rem]"} z={"-z-0"}/>
+        <div className=" w-full h-full bg-white absolute translate-x-5  translate-y-5"></div>
           <video className=" absolute" muted loop autoPlay>
             <source src={homepageVideo}></source>
           </video>
@@ -86,6 +90,7 @@ const HomePage = () => {
             yellowButtondata={"Try it Yourself"}
             blackbuttondata={"Learn More"}
             flex_type={"flex-row"}
+            gradientShade = {"bg-[radial-gradient(circle,#C850C0_10%,#4158D0_40%,#FFCC70_90%)]"}
             code={`<!DOCTYPE html>\n<html>\nhead><title>Example</\ntitle><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</\na><ahref="three/">Three</a>\n/nav>`}
           />
 
@@ -100,7 +105,10 @@ const HomePage = () => {
             blackbuttondata={"Learn More"}
             code={`<!DOCTYPE html>\n<html>\nhead><title>Example</\ntitle><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</\na><ahref="three/">Three</a>\n/nav>`}
             flex_type={"flex-row-reverse"}
+            gradientShade = {"bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]"}
           />
+
+         
         </div>
 
         {/* 4th part cards */}
@@ -162,6 +170,7 @@ const HomePage = () => {
             </div> 
 
             <div className="w-[50%] h-[27rem] mx-auto relative ">
+            <BackGroundGradient shade={"bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]"} position={"top-[6rem] -left-[5rem] "} dimensions={"w-[50rem] h-[10rem]"} z={"-z-0"}/>
               <div className=" flex bg-caribbeangreen-700 justify-evenly w-[70%] h-[6rem] z-30 absolute bottom-[-3rem] left-24">
                 <div className="flex w-[50%]  justify-center  items-center gap-3">
                   <p className="text-white text-[2.3rem] font-bold ">10</p>
@@ -225,25 +234,7 @@ const HomePage = () => {
 
          {/* fotter section  */}
       {/* section 4 */}
-       <div className=" bg-richblack-800  h-[40rem] w-full shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-white/20 flex flex-col ">       
-       <FotterLinks/>
-       <div  className=" bg-richblack-800  h-[5rem] w-[80%] mx-auto shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-white/20 flex justify-between items-center  " >
-
-        <div className="flex gap-x-3  h-[50%] justify-center items-center ">
-          <Link to={"/policy"} className=" text-sm  text-richblack-400 ">Privacy</Link>
-          <div className="w-[.1rem] h-[40%] bg-richblack-400 my-auto "></div>
-          <Link to={"/policy"} className=" text-sm text-richblack-400 ">Cookie Policy</Link>
-          <div className="w-[.1rem] h-[40%] bg-richblack-400 my-auto "></div>
-          <Link to={"/policy"} className=" text-sm text-richblack-400 ">Terms</Link>
-        </div>
-
-        <div className="flex items-center justify-center gap-x-2 text-sm text-richblack-400">
-          <p>Made with</p>
-          <FaHeart fill="red" size={10}/>
-          <p>CodeHelp @ 2025 Studynotion</p>
-        </div>
-       </div>
-       </div>
+      <Fotter/>
 
     </div>
   );

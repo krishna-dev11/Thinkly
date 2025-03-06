@@ -1,23 +1,38 @@
 import React from 'react'
 import logo from '../../assets/Logo/Logo-Full-Light.png'
 import {NavbarLinks} from '../../data/navbar-links'
-import { Link, matchPath } from 'react-router-dom'
+import { Link, matchPath, useNavigate } from 'react-router-dom'
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useLocation } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
+import { setLogOut } from '../../Services.jsx/Operations/authAPI';
+import { CiSettings } from "react-icons/ci";
+import { RiDashboard2Line } from "react-icons/ri";
+import { IoLogOutOutline } from "react-icons/io5";
 
 
 const NavBar = () => {
+
+
+  
 
  const {token} = useSelector((state)=>state.auth)
  const {user} = useSelector((state)=>state.profile)
  const location = useLocation();
 
+ const dispatch = useDispatch()
+ const navigate = useNavigate()
+
+//  console.log(token , " I Am NAVBAR Token")
+//  console.log(user , " I Am NAVBAR user")
+
+
  function mathroute(route){
   return matchPath({path:route} , location.pathname)
  }
+
 
 // console.log("FUCkkkkkkkkkkkkkkk",user)
 
@@ -35,7 +50,7 @@ const NavBar = () => {
   ]
 
   return (
-    <div className=" w-full h-14 shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 ">
+    <div className=" w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 ">
 
       <div className=' flex justify-between items-center w-11/12  mx-auto h-full px-10'>
         
@@ -52,7 +67,7 @@ const NavBar = () => {
                             <div className='relative group'>
                                 <div className='flex gap-x-1 items-baseline '>
                                     <p className=''>{link.title}</p>
-                                    <MdKeyboardArrowDown className=' translate-y-1'/>
+                                    <MdKeyboardArrowDown className=' translate-y-1' />
                                 </div>
                                 <div className='w-48 text-black bg-white absolute top-9 rounded-md opacity-0 group-hover:opacity-100 z-20 flex flex-col gap-y-1 p-1 '>{
                                   categoryList.map((category)=>(
@@ -72,7 +87,7 @@ const NavBar = () => {
             </ul>
 
 {/* right part */}
-      <div className='flex gap-x-6'>
+      <div className='flex gap-x-6 items-baseline  '>
 
 
         {
@@ -82,14 +97,16 @@ const NavBar = () => {
         }
 
         {
-          (token == null)  && <div>
+          token === null  && 
+          <div>
              <Link to={"/login"} className='py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20'>Login</Link>
          </div>
 
         }
 
         {
-          (token == null)  && <div>
+          token === null  && 
+          <div>
              <Link to={"/signup"} className='py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20'>SignUp</Link>
          </div>
 
@@ -97,7 +114,7 @@ const NavBar = () => {
 
 
         {
-          user && user.accountType !== "Instructor" && 
+          user !== null && user.accountType !== "Instructor" && 
           <Link to={"/dashboard/cart"}>
           <div className=' relative flex flex-col gap-x-1'>
           <MdOutlineShoppingCart fill='white' size={23} />
@@ -107,7 +124,19 @@ const NavBar = () => {
         }
 
         {
-          (token !== null) && <div className=' h-8 w-8 bg-richblack-700 rounded-full'></div>      
+            user && token !== null  && <div className=' h-[2.1rem] w-[2.1rem] rounded-full group'>
+            <img src={user?.imageUrl}   className='h-[2.1rem] w-[2.1rem] rounded-full'/>
+             <div className=' absolute opacity-0 group-hover:opacity-100 bg-richblack-500 gap-y-1  top-14 py-1 rounded-md flex flex-col'>
+                  <button onClick={()=>(navigate("/dashboard/my-profile"))} className=' bg-richblack-800 border hover:bg-richblack-700 w-[95%] rounded-md py-1 mx-auto flex justify-evenly items-center gap-x-1 px-[.3rem] '>
+                    <RiDashboard2Line fill='#c5c7d4' size={25}/>
+                    <p className=' text-richblack-50 text-sm'>DashBoard</p>
+                  </button>
+                  <button  onClick={()=>dispatch(setLogOut(navigate))}  className=' bg-richblack-800 border w-[95%] rounded-md hover:bg-richblack-700 py-1 mx-auto flex  items-center gap-x-1 px-1 justify-evenly'  >
+                    <IoLogOutOutline color='c5c7d4' size={25} />
+                    <p className=' text-richblack-50 text-sm'>LogOut</p>
+                  </button>
+             </div>
+          </div>      
         }
 
 

@@ -1,15 +1,29 @@
+import logo from "../assets/Logo/Logo-Full-Light.png"
+import { FaFacebook } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+
+
 export const FooterLink1 = [
   {
-    title: "Company",
-    links: [
+    Websitelogo : logo , 
+    title1: "Company",
+    links1: [
       { title: "About", link: "/about" },
       { title: "Careers", link: "/careers" },
       { title: "Affiliates", link: "/affiliates" }
     ],
+    companylogos : [
+      {logo: <FaFacebook/>},
+      {logo: <FaGoogle/>},
+      {logo: <FaTwitter/>},
+      {logo : <FaYoutube/>}
+    ]
   },
   {
-    title: "Resources",
-    links: [
+    title1: "Resources",
+    links1: [
       { title: "Articles", link: "/articles" },
       { title: "Blog", link: "/blog" },
       { title: "Chart Sheet", link: "/chart-sheet" },
@@ -19,29 +33,28 @@ export const FooterLink1 = [
       { title: "Videos", link: "/videos" },
       { title: "Workspaces", link: "/workspaces" }
     ],
-  },
-  {
-    title: "Support",
-    links: [
+
+    title2: "Support",
+    links2: [
         {title: "Help Centre", link: "/career-paths"}
     ]
   },
+  
   {
-    title: "Plans",
-    links: [
+    title1: "Plans",
+    links1: [
       { title: "Paid memberships", link: "/articles" },
       { title: "For students", link: "/blog" },
       { title: "Bussiness solutions", link: "/chart-sheet" }
     ],
-  },
-  {
-    title: "Community",
-    links: [
+
+    title2: "Community",
+    links2: [
       { title: "Forums", link: "/articles" },
       { title: "Chapters", link: "/blog" },
       { title: "Events", link: "/chart-sheet" }
     ],
-  },
+  }
 ];
 
 

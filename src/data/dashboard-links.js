@@ -1,44 +1,45 @@
-import { ACCOUNT_TYPE } from "../utils/constants";
+import { ACCOUNT_TYPE } from "../Utilities/Constaints";
 export const sidebarLinks = [
   {
-    id: 1,
     name: "My Profile",
     path: "/dashboard/my-profile",
-    icon: "VscAccount",
+    type:ACCOUNT_TYPE.STUDENT,
+    icon: "FaUser ",
   },
   {
-    id: 2,
     name: "Dashboard",
     path: "/dashboard/instructor",
     type: ACCOUNT_TYPE.INSTRUCTOR,
-    icon: "VscDashboard",
+    icon: "FaTachometerAlt ",
   },
   {
-    id: 3,
     name: "My Courses",
     path: "/dashboard/my-courses",
     type: ACCOUNT_TYPE.INSTRUCTOR,
-    icon: "VscVm",
+    icon: "FaTv ",
   },
   {
-    id: 4,
-    name: "Add Course",
-    path: "/dashboard/add-course",
-    type: ACCOUNT_TYPE.INSTRUCTOR,
-    icon: "VscAdd",
-  },
-  {
-    id: 5,
     name: "Enrolled Courses",
     path: "/dashboard/enrolled-courses",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "VscMortarBoard",
+    icon: "FaBook "
   },
   {
-    id: 6,
     name: "Purchase History",
     path: "/dashboard/purchase-history",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "VscHistory",
+    icon: "FaShoppingCart ",
+  },
+  {
+    name: "Wishlist",
+    path: "/dashboard/wishlist",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "FaBookmark ",
+  },
+  {
+    name: "Courses",
+    path: "/dashboard/courses",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "FaGraduationCap ",
   },
 ];

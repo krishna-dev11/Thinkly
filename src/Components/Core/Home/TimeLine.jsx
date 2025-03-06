@@ -15,18 +15,18 @@ const TimeLine = () => {
         },
         {
             Logo: Logo2,
-            heading: "Leadership",
-            Description:"Fully committed to the success company",
+            heading: "Responsibility",
+            Description:"Students will always be our top priority",
         },
         {
             Logo: Logo3,
-            heading: "Leadership",
-            Description:"Fully committed to the success company",
+            heading: "Flexibility",
+            Description:"The ability to switch is an important skills",
         },
         {
             Logo: Logo4,
-            heading: "Leadership",
-            Description:"Fully committed to the success company",
+            heading: "Solve the problem",
+            Description:"Code your way to a solution",
         },
     ];
 
@@ -34,7 +34,7 @@ const TimeLine = () => {
     <div className='flex flex-col gap-y-10 '>{
         timeline.map( (Singletimeline , index) => (
             <div className=' flex gap-x-6' key={index}>
-                <div className='bg-white h-[3rem] w-[3rem] rounded-full justify-center items-center flex'>
+                <div className=' shadow-sm shadow-richblack-100  h-[3rem] w-[3rem] rounded-full justify-center items-center flex'>
                 <img src={Singletimeline.Logo} ></img>
                 </div>
                 <div>

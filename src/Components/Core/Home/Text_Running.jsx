@@ -3,14 +3,15 @@ import Hieghlightedtext from "./Hieghlightedtext"
 import { FaLongArrowAltRight } from "react-icons/fa"
 import BlackYellowButton from "./BlackYellowButton"
 import { TypeAnimation } from 'react-type-animation';
+import BackGroundGradient from '../../Common/BackGroundGradient';
 
-const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smalltext , yellowButtondata , blackbuttondata , flex_type , code }) => {
+
+const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smalltext , yellowButtondata , blackbuttondata , flex_type , code , gradientShade}) => {
   return (
     <div className={`w-[85%] flex  ${flex_type}  h-[18rem] mx-auto mt-10`}>
 
       {/* text-button part */}
       <div className='h-full w-[50%]   flex  flex-col gap-y-3 p-10 '>
-           
            <div className='  flex flex-col '>
              <div className='flex items-baseline gap-x-2'>
              <p className=' text-richblack-5 text-[2rem] font-inter font-600 leading-[2.75rem]'>{textpart1data}</p>
@@ -28,7 +29,8 @@ const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smallt
     </div>
     
       {/* Running code part */}
-      <div className=' flex  w-[47%] h-full  shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-l-[1px] border-white/20 bg-richblack-[#111E32]'>
+      <div className=' flex  w-[47%] h-full  shadow-lg shadow-blue-900/30 backdrop-blur-md  border-t-[1px] border-l-[1px] border-white/20 bg-richblack-[#111E32] relative'>
+         <BackGroundGradient shade={gradientShade} position={"-top-[4rem] -left-[2rem]"} dimensions={"w-[20rem] h-[20rem]"}/>
          <div className=' h-full w-[8%] flex flex-col gap-y-[.01rem] justify-center items-center text-richblack-400 font-inter'>
             <p >1</p>
             <p>2</p>
@@ -42,9 +44,9 @@ const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smallt
             <p>10</p>
             <p>11</p>
          </div>
-         <div className=' font-semibold p-[.6rem] '>
+         <div className=' font-semibold p-[.6rem]  '>
          <TypeAnimation
-            style={{ whiteSpace: 'pre-line', color:"white" , display: 'block' }}
+            style={{ whiteSpace: 'pre-line', color:"#999daa" , display: 'block' }}
             sequence={[ code , 1000, '']}
             cursor={true}
             repeat={Infinity}

@@ -1,7 +1,8 @@
 import toast from "react-hot-toast"
-import {setLoading} from  '../../Slices/Auth'
+import {setLoading, settoken} from  '../../Slices/Auth'
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
+import { setUser } from "../../Slices/Profile"
 
 
 
@@ -23,14 +24,16 @@ export function sendOtp(email , navigate){
         dispatch(setLoading(true))
         
         try{
-            const response =  apiConnector("POST" , SENDOTP_API , {
+            const response = await apiConnector("POST" , SENDOTP_API , {
                 email:email ,
                 checkUserPresent : true
             } )
+           
+            if (!response) {
+                throw new Error(response.data.message)
+              }
 
-            // console.log("hi" , response.data)
-
-            toast.success("OTP SEND Succefully")
+            toast.success("OTP SENDED")
             navigate("/enterOtp")
         }catch(error){
             console.log("error in sending OTP")
@@ -60,14 +63,13 @@ export function signUp(firstName , lastName, email , password, confirmPassword, 
                 otp
             })
 
-            console.log("hiiiiiibyeeee" , firstName , lastName, email , password, confirmPassword, accountType , otp)
+            // console.log("hiiiiiibyeeee" , firstName , lastName, email , password, confirmPassword, accountType , otp)
 
-
-            if(!response.data.success){
-                throw new Error(response.data.message)
+           if (!response.data || !response.data.success) {
+               throw new Error(response.data?.message || "Unknown error occurred");
             }
 
-            toast.success("SignUp Successfull")
+            toast.success("SignUp Successful")
             navigate('/login')
 
         }catch(error){
@@ -93,6 +95,16 @@ export function setLogin(email , password , navigate){
                 password
             })
 
+            // console.log(response.data.User)
+            // console.log(response.data.token)
+
+
+            dispatch(settoken(response.data.token))
+            localStorage.setItem("token" , JSON.stringify(response.data.token))
+
+            dispatch(setUser(response.data.User))
+            localStorage.setItem("user" , JSON.stringify(response.data.User))
+
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
@@ -104,6 +116,36 @@ export function setLogin(email , password , navigate){
              console.log(error)
              console.log("error in Login")
              toast.error("login failed")
+        }
+        dispatch(setLoading(false))
+        toast.dismiss(toastId)
+        
+    }
+}
+
+export function setLogOut(navigate){
+    return async (dispatch)=>{
+        
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true))
+        try{
+
+            dispatch(setUser(null))
+            localStorage.clear("token")
+
+            dispatch(settoken(null))
+            localStorage.clear("user")
+
+            window.location.reload()
+            
+            toast.success("LogOut")
+
+            navigate("/")
+
+        }catch(error){
+             console.log(error)
+             console.log("error in LogOut")
+             toast.error("logOut failed")
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
@@ -159,7 +201,7 @@ export function forgotPassword( password , confirmedPassword , token , navigate)
             }
 
             toast.success("Password Update successfully")
-            navigate("/login")
+            navigate("/resetCompletePage")
 
 
         }catch(error){

@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
-import Tab from '../../Common/Tab';
-import { TabData } from '../../../Utilities/Constaints';
-import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
+// import Tab from '../../Common/Tab';
+// import { TabData } from '../../../Utilities/Constaints';
+// import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogin } from '../../../Services.jsx/Operations/authAPI';
-import { setUser } from '../../../Slices/Profile';
+// import { setUser } from '../../../Slices/Profile';
 
 
 const LoginForm = () => {
@@ -15,7 +15,7 @@ const LoginForm = () => {
    const[formData , setformdata] = useState({ EmailAddress:"" , Password:""})
 
    const [showpassword , setShowPassword] = useState(false)
-   const [accountType , setaccountType] = useState(ACCOUNT_TYPE.STUDENT)
+  //  const [accountType , setaccountType] = useState(ACCOUNT_TYPE.STUDENT)
   
 
   const dispatch = useDispatch()
@@ -48,9 +48,9 @@ const LoginForm = () => {
 
   return (
 
-    <div>
+    <div className=' flex flex-col gap-y-4'>
     {/* not usefull in login form */}
-<Tab tabData = {TabData} accountType = {accountType}  setaccountType = {setaccountType} />
+{/* <Tab tabData = {TabData} accountType = {accountType}  setaccountType = {setaccountType} /> */}
 
 
 <form className=' flex flex-col gap-3 ' onSubmit={SubmitHandler}>

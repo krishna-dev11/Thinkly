@@ -16,7 +16,7 @@ const Grey_whiteBox = () => {
                     <p className=" text-richblack-300 font-inter text-[.8rem] w-[90%]">{one.description}</p>
                     <Link to={one.ButtonLink}><button className={`py-2 px-3 rounded-md bg-yellow-50 mt-5`}>Learn More</button></Link>
                 </div>) :
-                (<div className={`flex flex-col gap-10 p-5 justify-center hover:scale-105  duration-200
+                (<div className={`flex flex-col gap-10 p-5 justify-center hover:scale-105 hover:rounded-md duration-200
                                   ${one.id % 2 === 0 ?  " bg-richblack-600" : " bg-richblack-800" } 
                                   ${one.id === 4  && " col-start-2"}
                                   ${one.id === 1  && " col-span-2" }`}>

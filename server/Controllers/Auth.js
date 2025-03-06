@@ -167,7 +167,7 @@ exports.signUP = async (req, res) => {
       accountType,
       approved:approved,
       password:hashedPassword,
-      imageUrl:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      imageUrl:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}-${lastName}`,
       additionalDetails: profileDetails._id,
     });
     console.log("hi")
@@ -259,7 +259,6 @@ exports.login = async (req, res) => {
     });
   }
 };
-
 
 // Controller for Changing Password
 exports.changePassword = async (req, res) => {
