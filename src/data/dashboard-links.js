@@ -4,42 +4,42 @@ export const sidebarLinks = [
     name: "My Profile",
     path: "/dashboard/my-profile",
     type:ACCOUNT_TYPE.STUDENT,
-    icon: "FaUser ",
+    icon: "FaUser",
   },
   {
     name: "Dashboard",
     path: "/dashboard/instructor",
     type: ACCOUNT_TYPE.INSTRUCTOR,
-    icon: "FaTachometerAlt ",
+    icon: "FaTachometerAlt",
   },
   {
     name: "My Courses",
     path: "/dashboard/my-courses",
     type: ACCOUNT_TYPE.INSTRUCTOR,
-    icon: "FaTv ",
+    icon: "FaTv",
   },
   {
     name: "Enrolled Courses",
     path: "/dashboard/enrolled-courses",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "FaBook "
+    icon: "FaBook"
   },
   {
     name: "Purchase History",
     path: "/dashboard/purchase-history",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "FaShoppingCart ",
+    icon: "FaShoppingCart",
   },
   {
     name: "Wishlist",
     path: "/dashboard/wishlist",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "FaBookmark ",
+    icon: "FaBookmark",
   },
   {
     name: "Courses",
     path: "/dashboard/courses",
     type: ACCOUNT_TYPE.STUDENT,
-    icon: "FaGraduationCap ",
+    icon: "FaGraduationCap",
   },
 ];

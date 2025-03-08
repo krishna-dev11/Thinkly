@@ -1,15 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { sidebarLinks } from "../../../data/dashboard-links";
 import { Link } from "react-router-dom";
 import SlideBarButton from "./SlideBarButton";
+import { sidebarLinks } from "../../../../data/dashboard-links";
 
 const SideBar = () => {
   const { loading: authLoading } = useSelector((state) => state.auth);
-  const { loading: profileLoading, user } = useSelector(
-    (state) => state.profile
+  const { loading: profileLoading, user } = useSelector((state) => state.profile
   );
-  console.log(user);
+  // console.log(user);
 
   if (authLoading || profileLoading) {
     return <div className=" text-yellow-50">Loading...</div>;

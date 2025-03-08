@@ -14,12 +14,13 @@ import ResestCompletePage from "./Pages/ResestCompletePage";
 import OpenRoute from "./Components/Core/Auth/OpenRoute";
 import Dashboard from "./Pages/Dashboard";
 import PrivateRoute from "./Components/Core/Auth/PrivateRoute";
-import MyProfile from "./Components/Core/DashBoard/MyProfile";
-import Setting from "./Components/Core/DashBoard/Setting";
-import EnrolledCourses from "./Components/Core/DashBoard/EnrolledCourses";
-import PurchaseHistory from "./Components/Core/DashBoard/PurchaseHistory";
-import WishList from "./Components/Core/DashBoard/WishList";
-import Courses from "./Components/Core/DashBoard/Courses";
+import MyProfile from "./Components/Core/DashBoard/RightPart/MyProfile";
+import EnrolledCourses from "./Components/Core/DashBoard/RightPart/EnrolledCoursesfolder/EnrolledCourses";
+import PurchaseHistory from "./Components/Core/DashBoard/RightPart/PurchaseHistory";
+import WishList from "./Components/Core/DashBoard/RightPart/WishList";
+import Courses from "./Components/Core/DashBoard/RightPart/Courses";
+import SettingIndex from "./Components/Core/DashBoard/RightPart/Settings/SettingIndex";
+
 
 function App() {
   return (
@@ -103,7 +104,7 @@ function App() {
            <Route path="/dashboard/purchase-history" element={<PurchaseHistory/>}/>
            <Route path="/dashboard/wishlist" element={<WishList/>}/>
            <Route path="/dashboard/courses" element={<Courses/>}/>
-           <Route path="/dashboard/setting" element={<Setting/>}/>
+           <Route path="/dashboard/setting" element={<SettingIndex/>}/>
 
 
         </Route>
