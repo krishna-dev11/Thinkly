@@ -71,8 +71,8 @@ const HomePage = () => {
         {/* video part */}
         <div className="w-[77%] h-[34rem] mx-auto relative ">
         <BackGroundGradient shade={"bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]"} position={"-top-[2rem] right-[10rem] "} dimensions={"w-[40rem] h-[20rem]"} z={"-z-0"}/>
-        <div className=" w-full h-full bg-white absolute translate-x-5  translate-y-5"></div>
-          <video className=" absolute" muted loop autoPlay>
+        <div className=" w-full h-full bg-white absolute translate-x-5  translate-y-5 rounded-sm"></div>
+          <video className=" absolute rounded-sm "  muted loop autoPlay>
             <source src={homepageVideo}></source>
           </video>
         </div>
@@ -187,8 +187,8 @@ const HomePage = () => {
                 </div>
                 <div></div>
               </div>
-              <div className=" w-full h-full bg-white absolute z-0 translate-x-5  translate-y-5"></div>
-              <img src={greenGirlImage} className=" absolute" />
+              <div className=" w-full h-full bg-white absolute z-0 translate-x-5  translate-y-5 rounded-sm"></div>
+              <img src={greenGirlImage} className=" absolute rounded-sm" />
             </div>
 
           </div>

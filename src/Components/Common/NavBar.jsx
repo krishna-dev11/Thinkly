@@ -11,6 +11,8 @@ import { setLogOut } from '../../Services.jsx/Operations/authAPI';
 import { CiSettings } from "react-icons/ci";
 import { RiDashboard2Line } from "react-icons/ri";
 import { IoLogOutOutline } from "react-icons/io5";
+import { GetAllCategories } from '../../Services.jsx/Operations/DashBoard';
+import { useEffect } from 'react';
 
 
 const NavBar = () => {
@@ -36,18 +38,30 @@ const NavBar = () => {
 
 // console.log("FUCkkkkkkkkkkkkkkk",user)
 
-  const categoryList =[
-    {
-      id:1,
-      title:'Python',
-      link:"/category/python"
-    },
-    {
-      id:2,
-      title:'Web-Dev',
-      link:"/category/web-dev"
-    }
-  ]
+  // const categoryList =[
+  //   {
+  //     id:1,
+  //     title:'Python',
+  //     link:"/category/python"
+  //   },
+  //   {
+  //     id:2,
+  //     title:'Web-Dev',
+  //     link:"/category/web-dev"
+  //   }
+  // ]
+    const {category} = useSelector(state=>state.Category)
+
+    useEffect(()=>{
+       const getAllCategories = async()=>{
+           try{
+              dispatch(GetAllCategories(token))
+           }catch(error){
+              console.log(error)
+           }
+       }
+       getAllCategories()
+    },[])
 
   return (
     <div className=" w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 ">
@@ -70,9 +84,9 @@ const NavBar = () => {
                                     <MdKeyboardArrowDown className=' translate-y-1' />
                                 </div>
                                 <div className='w-48 text-black bg-white absolute top-9 rounded-md opacity-0 group-hover:opacity-100 z-20 flex flex-col gap-y-1 p-1 '>{
-                                  categoryList.map((category)=>(
-                                     <div className='p-1 flex justify-center items-center text-richblack-600 font-semibold rounded-md bg-richblack-25 w-[98%] mx-auto hover:bg-richblack-50'>
-                                     <Link to={category.link} key={category.id} >{category.title}</Link>
+                                  category.map((category , index)=>(
+                                     <div key={index} className='p-1 flex justify-center items-center text-richblack-600 font-semibold rounded-md bg-richblack-25 w-[98%] mx-auto hover:bg-richblack-50'>
+                                     <Link to={category.link} key={category.id} >{category.name}</Link>
                                      </div>
                                   ))
                                 }</div>

@@ -12,7 +12,7 @@ const SlideBarButton = ({ icon, path, name }) => {
   const location = useLocation()
 
   function matchroute(route) {
-    return matchPath({ path: route }, location.pathname);
+    return matchPath({ path : route }, location.pathname);
   }
 
   return (

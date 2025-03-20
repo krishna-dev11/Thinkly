@@ -12,7 +12,7 @@ const SettingIndex = () => {
         My Profile
       </p>
 
-      <div className=" w-[80%]  mx-auto flex flex-col gap-y-4 mt-4 ">
+      <div className=" w-[80%]  mx-auto flex flex-col gap-y-4  py-10">
 
          <UpdateProfilePicture/>
 

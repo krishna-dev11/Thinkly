@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { MdEditDocument } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
@@ -10,7 +10,7 @@ const MyProfile = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="h-full w-full">
+    <div className="  h-full w-full">
       <p className=" text-richblack-5 text-2xl font-semibold px-4 py-5">
         My Profile
       </p>
@@ -27,8 +27,8 @@ const MyProfile = () => {
             </div>
           </div>
 
-          <button className=" bg-yellow-50 px-4 flex items-baseline gap-x-2 py-1 rounded-lg" onClick={()=>(navigate("/dashboard/setting"))}>
-             <MdEditDocument fill="#000814" size={22} className=" translate-y-1"/>
+          <button className=" bg-yellow-50 px-3 flex items-baseline gap-x-2 py-1 rounded-lg" onClick={()=>(navigate("/dashboard/setting"))}>
+             <CiEdit fill="#000814" size={20} className=" translate-y-1"/>
              <p className=" text-richblack-900 font-semibold font-inter">Edit</p>
           </button>
         </div>
@@ -44,8 +44,8 @@ const MyProfile = () => {
               </div>     
           </div>
 
-          <button className=" bg-yellow-50 px-4 flex items-baseline gap-x-2 py-1 rounded-lg" onClick={()=>(navigate("/dashboard/setting"))}>
-             <MdEditDocument fill="#000814" size={22} className=" translate-y-1"/>
+          <button className=" bg-yellow-50 px-3 flex items-baseline gap-x-2 py-1 rounded-lg" onClick={()=>(navigate("/dashboard/setting"))}>
+             <CiEdit fill="#000814" size={22} className=" translate-y-1"/>
              <p className=" text-richblack-900  font-semibold font-inter">Edit</p>
           </button>
         </div>
@@ -89,8 +89,8 @@ const MyProfile = () => {
               </div>   
           </div>
 
-          <button className=" bg-yellow-50 px-4 flex items-baseline gap-x-2 py-1 rounded-lg" onClick={()=>(navigate("/dashboard/setting"))}>
-             <MdEditDocument fill="#000814" size={22} className=" translate-y-1"/>
+          <button className=" bg-yellow-50 px-3 flex items-baseline gap-x-2 py-1 rounded-lg" onClick={()=>(navigate("/dashboard/setting"))}>
+             <CiEdit fill="#000814" size={22} className=" translate-y-1"/>
              <p className=" text-richblack-900  font-semibold font-inter">Edit</p>
           </button>
         </div>

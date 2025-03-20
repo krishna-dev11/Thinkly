@@ -8,12 +8,12 @@ const {uploadImageToCloudinary} = require("../Utilities/uploadImageToCloudinary"
 exports.createCourse = async(req , res)=>{
     try{
 
-
+        console.log(req.body)
         // const {courseName , courseDescription ,  whatYouWillLearn , price  , tag , category , instructions} = req.body ;
-        const {courseName , courseDescription ,  whatYouWillLearn , price  , tag , category ,status , instructions} = req.body ;
+        const {courseName , courseDescription ,  whatYouWillLearn , price  , tag , category , status , instructions} = req.body ;
+        const thumbnail = req.files.thumbnailImage
+        console.log(thumbnail)
         
-
-        const thumbnail = req.files.thumbnailImage;
 
         if(!courseName || !courseDescription || !whatYouWillLearn || !price || !tag  || !thumbnail  || !category  || !instructions ){
             return res.status(400).json({
@@ -22,10 +22,14 @@ exports.createCourse = async(req , res)=>{
               });
         }
 
+        
         if (!status || status === undefined) {
 			status = "Draft";
+            
 		}
-// console.log(status)
+        
+console.log(status)
+
         const userId = req.user.id
         const checkInstructor = await user.findById({ _id:userId } , 
             {
@@ -40,12 +44,13 @@ exports.createCourse = async(req , res)=>{
               });
         }
 
-        const categoryDetails = await  Category.findById({_id:category})
+        const categoryDetails = await  Category.findById(category)
+        // const categoryDetails = await  Category.findOne({name:category})
         // console.log(categoryDetails)
         if(!categoryDetails){
             return res.status(400).json({
                 success: false,
-                message:"tag can't find in tags schema",
+                message:"Catigory can't find in Category schema",
               });
         }
 

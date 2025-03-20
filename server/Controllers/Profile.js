@@ -7,13 +7,13 @@ require("dotenv").config();
 // check
 exports.updateProfile = async( req , res )=>{
     try{
-        console.log(req.body)
-        const {gender, dateOfBirth="" , about="" , contactNumber} = req.body;
+        // console.log(req.body ,"hiiiiiii")
+        const { gender, dateOfBirth="" , about="" , contactNumber , FirstName , LastName } = req.body;
 
         const userId = req.user.id
         
 
-        if(!gender || !dateOfBirth || !about || !contactNumber ){
+        if(!gender || !dateOfBirth || !about || !contactNumber || !FirstName || !LastName ){
             return res.status(400).json({
                 success:false,
                 message:"please fills all details carefully"
@@ -23,16 +23,22 @@ exports.updateProfile = async( req , res )=>{
         const existingUser = await user.findById({_id : userId});
         const profile  = await Profile.findById(existingUser.additionalDetails);
 
+        existingUser.firstName = FirstName;
+        existingUser.lastName = LastName;
+        await existingUser.save()
+
         profile.dateOfBirth = dateOfBirth;
         profile.about = about;
         profile.contactNumber = contactNumber;
+        profile.gender = gender
         await profile.save();
 
 
         return res.status(200).json({
             success:true,
             message:"additional details submitted successfully",
-            profile
+            profile,
+            existingUser
         })   
 
     }catch(error){
@@ -79,11 +85,12 @@ exports.getAllUserDetails = async(req , res)=>{
 // check
 exports.updateDisplayPicture = async(req , res)=>{
     try{
-
-        const profilePicture = req.files.profilePicture;
+        
+        const profilePicture = req.files.displayPicture;
 
         const userId = req.user.id;
 
+        // console.log(profilePicture , userId , "alakh")
         const image = await uploadImageToCloudinary( profilePicture ,
             process.env.CLOUDINARY_FOLDER,
             1000,
@@ -114,7 +121,7 @@ exports.updateDisplayPicture = async(req , res)=>{
 exports.deleteAccount = async(req , res)=>{
     try{
       
-        console.log(req.user)
+        // console.log(req.user)
         const userId = req.user.id;
         // const userId = req.body.id
 

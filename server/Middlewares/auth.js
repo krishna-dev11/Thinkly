@@ -3,6 +3,7 @@ require("dotenv").config();
 // auth  check
 exports.auth = async(req , res , next)=>{
     try{
+        console.log(req ,"hiiibyeeeeeeee")
         const token = req.body.token || req.cookies.token || req.header("Authorisation").replace("Bearer " , "");
         if(!token){
             return res.status(401).json({
@@ -21,8 +22,8 @@ exports.auth = async(req , res , next)=>{
             
             return res.status(401).json({
                 success:false,
-                message:"token is Invalid"
-            })
+                message:"token is Invalid",
+            }) 
 
         }
        
@@ -38,7 +39,6 @@ exports.auth = async(req , res , next)=>{
 
     }
 }
-
 
 // checked
 // isstudent
@@ -65,7 +65,6 @@ exports.isStudent = async(req , res , next)=>{
     }
 }
 
-
 // checked 
 // isInstructor
 exports.isInstructor = async(req , res , next)=>{
@@ -90,7 +89,6 @@ exports.isInstructor = async(req , res , next)=>{
 
     }
 }
-
 
 // checked
 // isAdmin  

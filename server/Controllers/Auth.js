@@ -5,8 +5,10 @@ const profile = require("../Models/profile");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie-parser");
 const otpGenerator = require("otp-generator");
-const mailSender = require("../Utilities/mailSender");
-const { passwordUpdated } = require("../mail/templates/passwordUpdate");
+// const mailSender = require("../Utilities/mailSender");
+// const { passwordUpdate } = require("../mail/templates/passwordUpdate");
+const passwordUpdate = require("../mail/templates/passwordUpdate");
+const { mailSender } = require("../Utilities/mailSender");
 require("dotenv").config();
 
 
@@ -150,7 +152,10 @@ exports.signUP = async (req, res) => {
 
     // Create the user
 		let approved = "";
-		approved === "Instructor" ? (approved = false) : (approved = true);
+    accountType === "Instructor" ? (approved = false) : (approved = true)
+		// approved === "Instructor" ? (approved = false) : (approved = true);    yeh line sahi hai
+
+
     
 
     const profileDetails = await profile.create({
@@ -170,7 +175,7 @@ exports.signUP = async (req, res) => {
       imageUrl:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName}-${lastName}`,
       additionalDetails: profileDetails._id,
     });
-    console.log("hi")
+    // console.log("hi")
     
 
     return res.status(200).json({
@@ -211,7 +216,7 @@ exports.login = async (req, res) => {
     }
 
     
-    if (await bcrypt.compare(password, User.password )) {
+    if (await bcrypt.compare(password , User.password )) {
       
       const payload = {
         email: User.email,
@@ -219,8 +224,6 @@ exports.login = async (req, res) => {
         accountType: User.accountType,
       };
       // console.log(payload)
-
-      
       const token = jwt.sign(payload, process.env.SECRET_KEY, {
         expiresIn: "24h",
       });
@@ -243,8 +246,7 @@ exports.login = async (req, res) => {
         message: "User Logged in Successfully",
       });
 
-    
-      
+       
      
     } else {
       res.status(401).json({
@@ -264,7 +266,7 @@ exports.login = async (req, res) => {
 exports.changePassword = async (req, res) => {
 	try {
 		// Get user data from req.user
-    console.log(req.body)
+    // console.log(req.body)
 		const userDetails = await user.findById(req.user.id);
 
 		// Get old password, new password, and confirm new password from req.body
@@ -293,7 +295,7 @@ exports.changePassword = async (req, res) => {
 
 		// Update password
 		const encryptedPassword = await bcrypt.hash(newPassword, 10);
-		const updatedUserDetails = await User.findByIdAndUpdate(
+		const updatedUserDetails = await user.findByIdAndUpdate(
 			req.user.id,
 			{ password: encryptedPassword },
 			{ new: true }
@@ -303,10 +305,8 @@ exports.changePassword = async (req, res) => {
 		try {
 			const emailResponse = await mailSender(
 				updatedUserDetails.email,
-				passwordUpdated(
-					updatedUserDetails.email,
-					`Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
-				)
+        "Password Changed Succssful",
+				passwordUpdate(updatedUserDetails.email, updatedUserDetails.firstName)
 			);
 			console.log("Email sent successfully:", emailResponse.response);
 		} catch (error) {

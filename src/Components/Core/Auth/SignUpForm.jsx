@@ -39,13 +39,11 @@ const SignUpForm = () => {
         const SubmitHandler = (event)=>{
           event.preventDefault();
 
-          
           if(formData.ConfirmPassword !== formData.CreatePassword)
           {
             toast.error("password Can`t Match")
             return
           }
-
 
           const data = {
             ...formData , accountType
@@ -57,14 +55,9 @@ const SignUpForm = () => {
 
           dispatch(sendOtp(formData.EmailAddress , navigate))
  
-
-
-          
-
           dispatch(setUser(data))
           // console.log("sunny")
           
-
         }
 
         
@@ -116,7 +109,6 @@ const SignUpForm = () => {
       </p>
         <input
             required
-            className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
             type='text'
             placeholder='Enter email address'
             name='EmailAddress'
@@ -124,7 +116,8 @@ const SignUpForm = () => {
             value={formData.EmailAddress}
             style={{
             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-          }}
+            }}
+            className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
         />
       </label>
 

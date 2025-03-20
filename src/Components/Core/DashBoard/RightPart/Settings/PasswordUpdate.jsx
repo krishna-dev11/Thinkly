@@ -4,12 +4,22 @@ import { useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChangePassword } from '../../../../../Services.jsx/Operations/DashBoard';
 
 
 const PasswordUpdate = () => {
 
-    const [showCreatepassword , setshowCreatepassword] = useState(false)
-    const [showConfirmPassword , setshowConfirmPassword] = useState(false)
+    const [showCreateNewpassword , setshowCreateNewpassword] = useState(false)
+    const [showConfirmNewPassword , setshowConfirmNewPassword] = useState(false)
+    const [showOldPassword , setshowOldPassword] = useState(false)
+
+
+    const dispatch = useDispatch()
+    const {token} = useSelector(state=>state.auth)
+    
+    const navigate = useNavigate()
 
     const {
 
@@ -23,37 +33,52 @@ const PasswordUpdate = () => {
     useEffect(()=>{
         if(isSubmitSuccessful){
             reset({
-                NewPassword:"",
-                ConfirmNewPassword:""
+                newPassword:"",
+                confirmNewPassword:"",
+                oldPassword:""
             })
         }
     })
 
-    const navigate = useNavigate()
 
 
 
-    const submitNewPassword = async()=>{
+    const submitNewPassword = async(event)=>{
         try{
 
-        }catch(error){
+
+            console.log(event)
+            if(!event.oldPassword){
+                return toast.error("Old Password is manditory")
+            }
+   
+            if(event.NewPassword !== event.ConfirmNewPassword)
+            {
+                return  toast.error("Password can't match")
+            }
+
+           dispatch(ChangePassword(token , event))            
             
+        }catch(error){
+            console.log(error)
         }
     }
 
 
   return (
-    <form onClick={handleSubmit(submitNewPassword)}>
+    <form onClick={handleSubmit(submitNewPassword)} className=' flex flex-col gap-y-5 items-end'>
         <div className=" flex flex-col py-4 rounded-md px-5 w-full bg-richblack-800  gap-x-3 items-center border border-richblack-700">
-                 <div className='flex gap-x-3'>
-                  <label className='relative'>
+
+                 <div className='flex gap-x-3 w-full justify-evenly'>
+
+                 <label className='relative w-[32%]'>
                   <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Create Password<sup className="text-pink-200">*</sup></p>
                    <input
-                       className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
-                       type= { showCreatepassword ? "text" : "password" } 
-                       placeholder='Enter New Password'
-                       name='NewPassword'
-                       {...register("NewPassword" , {
+                       className='w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5'
+                       type= { showOldPassword ? "text" : "password" } 
+                       placeholder='Enter old Password'
+                       name='oldPassword'
+                       {...register("oldPassword" , {
                         required:{
                             value:true,
                             message:"Please Enter New Password"
@@ -63,23 +88,50 @@ const PasswordUpdate = () => {
                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                      }}
                    />
-                   <span onClick={()=>{setshowCreatepassword(!showCreatepassword)}} className='top-10 right-5 absolute'>
+                   <span onClick={()=>{setshowOldPassword(!showOldPassword)}} className='top-10 right-5 absolute'>
                        {
-                           showCreatepassword ? 
+                        showCreateNewpassword ? 
                            <FaEyeSlash fill='white' /> :
                            <FaEye fill='white'/>
                        }
                    </span>
                   </label>
-                  <label className=' relative'>
+
+                  <label className='relative w-[32%]'>
+                  <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Create Password<sup className="text-pink-200">*</sup></p>
+                   <input
+                       type= { showCreateNewpassword ? "text" : "password" } 
+                       className='w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5'
+                       placeholder='Enter New Password'
+                       name='newPassword'
+                       {...register("newPassword" , {
+                        required:{
+                            value:true,
+                            message:"Please Enter New Password"
+                        }
+                       })}
+                       style={{
+                       boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                     }}
+                   />
+                   <span onClick={()=>{setshowCreateNewpassword(!showCreateNewpassword)}} className='top-10 right-5 absolute'>
+                       {
+                        showCreateNewpassword ? 
+                           <FaEyeSlash fill='white' /> :
+                           <FaEye fill='white'/>
+                       }
+                   </span>
+                  </label>
+
+                  <label className=' relative w-[32%]'>
                   <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Confirm Password<sup className="text-pink-200">*</sup></p>
                    <input
                        required
-                       className='w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5'
-                       type= { showConfirmPassword ? "text" : "password" } 
+                       className='w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5'
+                       type= { showConfirmNewPassword ? "text" : "password" } 
                        placeholder='Enter Confirm Password'
-                       name='ConfirmNewPassword'
-                       {...register("ConfirmNewPassword" , {
+                       name='confirmNewPassword'
+                       {...register("confirmNewPassword" , {
                         required:{
                             value:true,
                             message:"Please Enter Confirm Password"
@@ -89,14 +141,15 @@ const PasswordUpdate = () => {
                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                      }}
                    />
-                   <span onClick={()=>{setshowConfirmPassword(!showConfirmPassword)}} className='top-10 right-5 absolute'>
+                   <span onClick={()=>{setshowConfirmNewPassword(!showConfirmNewPassword)}} className='top-10 right-5 absolute'>
                        {
-                           showConfirmPassword ? 
+                        showConfirmNewPassword ? 
                            <FaEyeSlash fill='white'/> :
                            <FaEye fill='white'/>
                        }
                    </span>
                   </label>
+
                  </div> 
         </div>
 

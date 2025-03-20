@@ -34,11 +34,7 @@ const LoginForm = () => {
 
     const SubmitHandler = (event)=>{
         event.preventDefault();
-        console.log(formData)
-
-        // const data = {
-        //   ...formData , accountType
-        // }
+        // console.log(formData)
 
         dispatch(setLogin(formData.EmailAddress , formData.Password ,  navigate))
         

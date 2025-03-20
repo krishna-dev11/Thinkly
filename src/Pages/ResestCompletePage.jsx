@@ -15,7 +15,7 @@ const ResestCompletePage = () => {
             type="submit"
             className="mt-6 w-full rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
           >
-            Reset Password
+            Go Back to Login!
           </button>
         </Link>
         <Link to={"/"} className="flex gap-x-3 items-baseline">

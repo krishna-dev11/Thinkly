@@ -16,7 +16,7 @@ const {
 
 
 
-export function sendOtp(email , navigate){
+export function  sendOtp(email , navigate){
 
     return async (dispatch)=>{
 
@@ -94,7 +94,8 @@ export function setLogin(email , password , navigate){
                 email, 
                 password
             })
-
+            // console.log(response)
+            // console.log(response.data)
             // console.log(response.data.User)
             // console.log(response.data.token)
 

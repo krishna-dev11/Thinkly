@@ -15,25 +15,39 @@ import OpenRoute from "./Components/Core/Auth/OpenRoute";
 import Dashboard from "./Pages/Dashboard";
 import PrivateRoute from "./Components/Core/Auth/PrivateRoute";
 import MyProfile from "./Components/Core/DashBoard/RightPart/MyProfile";
-import EnrolledCourses from "./Components/Core/DashBoard/RightPart/EnrolledCoursesfolder/EnrolledCourses";
+// import EnrolledCourses from "./Components/Core/DashBoard/RightPart/EnrolledCoursesfolder/EnrolledCourses";
 import PurchaseHistory from "./Components/Core/DashBoard/RightPart/PurchaseHistory";
 import WishList from "./Components/Core/DashBoard/RightPart/WishList";
-import Courses from "./Components/Core/DashBoard/RightPart/Courses";
 import SettingIndex from "./Components/Core/DashBoard/RightPart/Settings/SettingIndex";
-
+import AddNewCourse from "./Components/Core/DashBoard/RightPart/AddCourse/AddNewCourse";
 
 function App() {
   return (
-    <div className=" h-screen">
+    <div className="h-screen">
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactUsPage />} />
+        <Route
+          path="/"
+          element={
+              <HomePage/>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+              <AboutPage/>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+              <ContactUsPage/>
+          }
+        />
 
         {/* OPEN Routes */}
         <Route
-          path="login"
+          path="/login"
           element={
             <OpenRoute>
               <Login />
@@ -98,18 +112,19 @@ function App() {
             </PrivateRoute>
           }
         >
-          
-           <Route path="/dashboard/my-profile" element={<MyProfile/>}/>
-           <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}/>
-           <Route path="/dashboard/purchase-history" element={<PurchaseHistory/>}/>
-           <Route path="/dashboard/wishlist" element={<WishList/>}/>
-           <Route path="/dashboard/courses" element={<Courses/>}/>
-           <Route path="/dashboard/setting" element={<SettingIndex/>}/>
-
-
+          <Route path="/dashboard/my-profile" element={<MyProfile />} />
+          {/* <Route
+            path="/dashboard/enrolled-courses"
+            element={<EnrolledCourses />}
+          /> */}
+          <Route
+            path="/dashboard/purchase-history"
+            element={<PurchaseHistory />}
+          />
+          <Route path="/dashboard/wishlist" element={<WishList />} />
+          <Route path="/dashboard/setting" element={<SettingIndex />} />
+          <Route path="/dashboard/add-course" element={<AddNewCourse/>} />
         </Route>
-
-
       </Routes>
     </div>
   );

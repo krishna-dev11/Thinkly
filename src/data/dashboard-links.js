@@ -3,7 +3,6 @@ export const sidebarLinks = [
   {
     name: "My Profile",
     path: "/dashboard/my-profile",
-    type:ACCOUNT_TYPE.STUDENT,
     icon: "FaUser",
   },
   {
@@ -41,5 +40,11 @@ export const sidebarLinks = [
     path: "/dashboard/courses",
     type: ACCOUNT_TYPE.STUDENT,
     icon: "FaGraduationCap",
+  },
+  {
+    name: "Add Course",
+    path: "/dashboard/add-course",
+    type: ACCOUNT_TYPE.INSTRUCTOR,
+    icon: "FaPlus",
   },
 ];
