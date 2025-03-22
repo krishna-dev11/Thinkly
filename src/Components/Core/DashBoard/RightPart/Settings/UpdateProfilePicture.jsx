@@ -61,11 +61,22 @@ const UpdateProfilePicture = () => {
 
   return (
     <div className=" flex  py-4 rounded-md px-5 w-full bg-richblack-800  gap-x-5 items-center border border-richblack-700">
-      <img
-        src={ previewSource || user?.imageUrl }
-        alt={user?.firstName}
-        className=" w-[4rem] h-[4rem] rounded-full "
-      /> 
+<div className="relative w-[4rem] h-[4rem]">
+  {loading && (
+    <div
+      className="absolute -left-[3px] -top-[3.5px] inset-0 rounded-full p-[2.2rem] animate-spin"
+      style={{
+        background: "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+      }}
+    ></div>
+  )}
+  <img
+    src={previewSource || user?.imageUrl}
+    alt={user?.firstName}
+    className="w-full h-full rounded-full absolute inset-0"
+  />
+</div>
+
       <div className=" flex flex-col gap-y-2" >
         <p className=" text-richblack-5 font-inter ">Change Profile Picture</p>
         <div className=" flex gap-x-2">

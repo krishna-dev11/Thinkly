@@ -106,7 +106,7 @@ exports.updateDisplayPicture = async(req , res)=>{
         return res.status(200).json({
             success:true,
             message:"Image updated successfully",
-            data : updateprofilePicture
+            User : updateprofilePicture
         })
 
     }catch(error){

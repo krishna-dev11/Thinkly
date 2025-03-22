@@ -27,7 +27,7 @@ router.post('/categoryPageDetails' , categoryPageDetails)
 // Section Routes
 router.post('/createSection', auth , isInstructor ,  createSection)
 router.post('/updateSection', auth , isInstructor ,  updateSection)
-router.post('/deleteSection', auth , isInstructor ,  deleteSection)
+router.delete('/deleteSection', auth , isInstructor ,  deleteSection)
 
 
 // subsection Routes

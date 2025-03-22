@@ -1,9 +1,14 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Form, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { AddNewSection } from "../../../../../../Services.jsx/Operations/DashBoard";
+import { AddNewSection, EditSection } from "../../../../../../Services.jsx/Operations/DashBoard";
 import SectionSubsectionDispaly from "./SectionSubsectionDispaly";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
+import { SetEditSection } from "../../../../../../Slices/Section";
+import { form } from "framer-motion/client";
+import { setCourse, setEditCourse, setStep } from "../../../../../../Slices/Courses";
 
 const CourseBuilder = () => {
   const {
@@ -19,9 +24,47 @@ const CourseBuilder = () => {
 
   const { course } = useSelector((state) => state.Course);
   const { token } = useSelector((state) => state.auth);
-  console.log(course);
+  const { editSection } = useSelector((state) => state.section);
+  console.log(editSection)
+
+   if(editSection){
+      setValue("sectionName" , editSection.sectionName)
+   }else{
+      setValue("sectionName" , "")
+   }
+
 
   const FormSubmitHandler = (event) => {
+
+    // edit Section
+    const isFormUpdated = ()=>{
+      if(editSection.sectionName !== event.sectionName){
+        return true
+     }else{
+      return false
+     }
+    }
+    
+    if(editSection){
+      if(isFormUpdated){
+
+        const formData = new FormData()
+        formData.append("sectionName", event.sectionName);
+        formData.append("sectionId", editSection._id );
+        formData.append("CourseId" , course._id)
+
+        try{
+          dispatch(EditSection(formData , token))
+        }catch(error)
+        {
+          console.log(error)
+        }
+
+      }
+    }
+
+// create new Section
+  if(!editSection){
     const formData = new FormData();
     formData.append("sectionName", event.sectionName);
     formData.append("courseId", course._id);
@@ -31,6 +74,7 @@ const CourseBuilder = () => {
     } catch (error) {
       console.log(error);
     }
+  }
   };
 
   return (
@@ -39,7 +83,9 @@ const CourseBuilder = () => {
         <p className=" font-semibold text-xl text-richblack-5">
           Course Builder
         </p>
-        <SectionSubsectionDispaly/>
+
+        <SectionSubsectionDispaly />
+
         <form
           onSubmit={handleSubmit(FormSubmitHandler)}
           className=" flex flex-col gap-y-2"
@@ -61,15 +107,41 @@ const CourseBuilder = () => {
               className="w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5"
             />
           </label>
-          <button
-            type="submit"
-            className=" px-5 py-2 border-yellow-50 border-[2px] self-center items-center rounded-md  flex gap-x-2"
-          >
-            <IoIosAddCircleOutline fill="#ffd60a" />
-            <p className=" text-yellow-50">Create Section</p>
-          </button>
+          { editSection ? (
+            <button
+              type="submit"
+              className=" px-5 py-2 border-yellow-50 border-[2px] self-center items-center rounded-md  flex gap-x-2"
+            >
+              <IoIosAddCircleOutline fill="#ffd60a" />
+              <p className=" text-yellow-50">Edit Section</p>
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className=" px-5 py-2 border-yellow-50 border-[2px] self-center items-center rounded-md  flex gap-x-2"
+            >
+              <IoIosAddCircleOutline fill="#ffd60a" />
+              <p className=" text-yellow-50">Create Section</p>
+            </button>
+          )}
         </form>
       </div>
+
+      <div className=" flex gap-x-2">
+        <button className=" flex px-2 py-1 rounded-md bg-richblack-700" onClick={()=>
+        {
+          dispatch(setEditCourse(course))
+          dispatch(setStep(1))
+        }}>
+          <IoIosArrowBack />
+          <p>Back</p>
+        </button>
+        <button className=" flex px-2 py-1 rounded-md bg-yellow-50">
+          <p>Next</p>
+          <IoIosArrowForward />
+        </button>
+      </div>
+
     </div>
   );
 };

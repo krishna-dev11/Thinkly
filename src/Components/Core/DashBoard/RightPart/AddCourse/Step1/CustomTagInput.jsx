@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
+import { useSelector } from 'react-redux';
 
 const CustomTagInput = ({ name, label, register, Placeholder, errors, setValue, getValues }) => {
 
+    const {editCourse} = useSelector(state=>state.Course)
+
     const [Chip, setChip] = useState([])
+
+    useEffect(()=>{
+        if(editCourse){
+            setChip(editCourse.tag)
+            console.log(Chip)
+        }
+    })
 
     useEffect(() => {
         register( name, {

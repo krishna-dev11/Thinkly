@@ -18,6 +18,9 @@ const {
   COURSE_CATEGORIES_API,
   CREATE_COURSE_API,
   CREATE_SECTION_API,
+  CREATE_SUBSECTION_API,
+  UPDATE_SECTION_API,
+  DELETE_SECTION_API
 } = courseEndpoints;
 
 
@@ -31,6 +34,9 @@ export function updateDisplayPicture(token , data) {
         Authorisation: `Bearer ${token}`,
       })
 
+      console.log(response.data)
+      dispatch(setUser(response.data.User))
+      localStorage.setItem("user" , JSON.stringify(response.data.User))
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -198,6 +204,89 @@ export function AddNewSection(FormData , token) {
       }
 
       toast.success("Section Created Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+
+export function EditSection(FormData , token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("POST" , UPDATE_SECTION_API , FormData ,
+        {
+          Authorisation: `Bearer ${token}`,
+        }
+       )
+
+       console.log(response.data)
+       dispatch(setCourse(response.data.data))
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Section Updated Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function DeleteSection(FormData , token) {
+  console.log(FormData , token)
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("DELETE" , DELETE_SECTION_API , FormData ,
+        {
+          Authorisation: `Bearer ${token}`,
+        }
+       )
+
+      //  console.log(response.data)
+       dispatch(setCourse(response.data.data))
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Section Deleted Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function AddNewSubSection(FormData , token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("POST" , CREATE_SUBSECTION_API , FormData ,
+        {
+          Authorisation: `Bearer ${token}`,
+        }
+       )
+
+       console.log(response.data.data)
+       dispatch(setCourse(response.data.data))
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("SubSection Created Successfully")
     } catch (error) {
       console.log(error);
     }

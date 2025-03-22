@@ -18,6 +18,9 @@ export default function Upload({
   const { course } = useSelector((state) => state.Course);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(viewData || editData || "");
+  const { addSubSection, editSubSection, viewSubSection } = useSelector(
+      (state) => state.subsection
+    );
   const inputRef = useRef(null);
 
   const onDrop = (acceptedFiles) => {
@@ -63,16 +66,22 @@ export default function Upload({
       >
         <input {...getInputProps()}  />
 
-        {previewSource ? (
+        {previewSource || (editSubSection && editSubSection.videoUrl  || viewSubSection && viewSubSection.videoUrl) ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
               <img
-                src={previewSource}
+                src={
+                  previewSource
+                }
                 alt="Preview"
                 className="h-full w-full rounded-md object-cover"
               />
             ) : (
-              <Player aspectRatio="16:9" playsInline src={previewSource} />
+              <Player aspectRatio="16:9" playsInline src={
+                editSubSection ? editSubSection.videoUrl :
+                viewSubSection ? viewSubSection.videoUrl :
+                previewSource
+              } />
             )}
             {!viewData && (
               <button

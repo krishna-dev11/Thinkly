@@ -18,7 +18,7 @@ const CourseInformation = () => {
     const {token} = useSelector(state=>state.auth)
     const {category} = useSelector(state=>state.Category)
     const {editCourse , course} = useSelector(state=>state.Course)
-    // console.log(category)
+    console.log(editCourse , editCourse.courseName)
 
 
   const {
@@ -40,52 +40,51 @@ const CourseInformation = () => {
      }
      getAllCategories()
 
-    //  if(editCourse){
-    //   setValue("courseName" , )
-    //   setValue("courseDescription" , )
-    //   setValue("price" , )
-    //   setValue("category" , )
-    //   setValue("tag" , )
-    //   setValue("whatYouWillLearn" , )
-    //   setValue("instructions" , )
-    //   setValue("thumbnailImage" , )
-    //  }
+     if(editCourse){
+      setValue("CourseTitle" , editCourse.courseName)
+      setValue("CourseDescription" , editCourse.courseDescription )
+      setValue("CoursePrice" , editCourse.price)
+      setValue("CourseCategory" , editCourse.category)
+      // setValue("CourseTag" , editCourse.tag)
+      setValue("CourseBenefits" , editCourse.whatYouWillLearn)
+      // setValue("CourseRequirments" ,  editCourse.instructions.toString() )
+      setValue("CourseThumnail" , editCourse.thumbnailImage)
+     }
   },[])
 
-  // const isFormUpdated = ()=>{
-  //   const currentValues = getValues()
-  //   if(currentValues.CourseTitle !== course.courseName    ||
-  //      currentValues.CourseDescription !== course.courseDescription ||
-  //      currentValues.CoursePrice !== course.price ||
-  //      currentValues.CourseCategory  !== course.category    ||
-  //      currentValues.CourseTag.toString()  !== course.tag.toString()     ||
-  //      currentValues.CourseBenefits !== course.whatYouWillLearn     ||
-  //      currentValues.CourseRequirments.toString()  !== course.instructions.toString()     ||
-  //      currentValues.CourseThumnail  !== course.thumbnailImage   
-  //   ){
-  //     return true
-  //   }
-  //   return false
-  // }
+  const isFormUpdated = ()=>{
+    const currentValues = getValues()
+    if(currentValues.CourseTitle !== editCourse.courseName    ||
+       currentValues.CourseDescription !== editCourse.courseDescription ||
+       currentValues.CoursePrice !== editCourse.price ||
+       currentValues.CourseCategory  !== editCourse.category    ||
+       currentValues.CourseTag.toString()  !== editCourse.tag.toString()     ||
+       currentValues.CourseBenefits !== editCourse.whatYouWillLearn     ||
+       currentValues.CourseRequirments.toString()  !== editCourse.instructions.toString()     ||
+       currentValues.CourseThumnail  !== editCourse.thumbnailImage   
+    ){
+      return true
+    }
+    return false
+  }
 
-  // CourseTitle , CourseDescription , CoursePrice , Category , CourseBenefits
 
   const submitHandler = async(event)=>{
 
     // edit Course
-    // if(editCourse){
-    //   if(isFormUpdated){
-    //     const formData = new FormData()
-    //     formData.append("courseName" , event.CourseTitle)
-    //     formData.append("courseDescription", event.CourseDescription)
-    //     formData.append("price", event.CoursePrice)
-    //     formData.append("category", event.CourseCategory)
-    //     formData.append("tag", JSON.stringify(event.CourseTag))
-    //     formData.append("whatYouWillLearn", event.CourseBenefits)
-    //     formData.append("instructions", JSON.stringify(event.CourseRequirments))
-    //     formData.append("thumbnailImage", event.CourseThumnail)
-    //   }
-    // }
+    if(editCourse){
+      if(isFormUpdated){
+        const formData = new FormData()
+        formData.append("courseName" , editCourse.courseName)
+        formData.append("courseDescription", editCourse.courseDescription)
+        formData.append("price", editCourse.price)
+        formData.append("category", editCourse.category)
+        formData.append("tag", JSON.stringify(editCourse.tag))
+        formData.append("whatYouWillLearn", editCourse.whatYouWillLearn)
+        formData.append("instructions", JSON.stringify(editCourse.instructions))
+        formData.append("thumbnailImage", editCourse.thumbnailImage)
+      }
+    }
 
     console.log(event.CourseCategory)
 
@@ -241,7 +240,7 @@ const CourseInformation = () => {
              setValue = {setValue}
              getValues = {getValues} />
 
-      <button type="submit" className=" px-4 py-2 rounded-md bg-yellow-50 self-end mr-5 ">Next</button>
+      <button type="submit" className=" px-4 py-2 rounded-md bg-yellow-50 self-end mr-5 ">{editCourse ? "Save Edits" : "Next"}</button>
 
     </form>
   );
