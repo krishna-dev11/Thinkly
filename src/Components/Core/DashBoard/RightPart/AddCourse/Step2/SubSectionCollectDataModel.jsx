@@ -77,7 +77,8 @@ const SubSectionCollectDataModel = () => {
       formData.append("timeDuration", undefined);
   
       try {
-        dispatch(AddNewSubSection(formData, token));
+        dispatch(AddNewSubSection(formData, token , addSubSection , editSubSection , viewSubSection ));
+
       } catch (error) {
         console.log(error);
       }

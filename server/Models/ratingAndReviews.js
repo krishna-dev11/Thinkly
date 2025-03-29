@@ -21,6 +21,7 @@ const ratingAndReviewsSchema = new mongoose.Schema({
 		ref: "courses",
 		index: true,
 	}
-});
+},
+{timestamps : true});
 
 module.exports = mongoose.model("ratingAndReviews", ratingAndReviewsSchema);

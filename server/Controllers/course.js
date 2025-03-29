@@ -3,6 +3,9 @@ const Category = require("../Models/category");
 const courses = require("../Models/courses");
 const {uploadImageToCloudinary} = require("../Utilities/uploadImageToCloudinary");
 const { json } = require("express");
+const { path } = require("framer-motion/client");
+const section = require("../Models/section");
+const subsection = require("../Models/subsection");
 
 
 // checked
@@ -282,7 +285,7 @@ exports.getAllDetailsOfOneCourse  = async(req , res)=>{
     try{
 
         const courseId = req.body;
-       console.log(courseId)
+
         const allDetails = await courses.findById(courseId)
                             .populate({
                                 path:"instructor",
@@ -309,7 +312,7 @@ exports.getAllDetailsOfOneCourse  = async(req , res)=>{
 
        return res.status(200).json({
         success:true,
-        message:'all datas of courseId is fethed succcessfully',
+        message:'all data of courseId is fethed succcessfully',
         data:allDetails
        })
 
@@ -320,4 +323,148 @@ exports.getAllDetailsOfOneCourse  = async(req , res)=>{
         })
     }
 }
+
+
+exports.publishCourse = async(req , res)=>{
+    try{
+        const { courseId , status  } = req.body ;
+
+        if(!status || !courseId ){
+            return res.status(400).json({
+                success: false,
+                message:"Please Spesify the Actuall status",
+              });
+        }
+      
+        if (!status || status === undefined) {
+			status = "Draft";        
+		}
+        
+       const editCourse = await courses.findById(courseId);
+       if (!editCourse) {
+        throw new Error("Course not found"); 
+       }
+       editCourse.status = status;
+       await editCourse.save()
+
+
+       const finaleditedCourse = await courses.findById(courseId).populate({
+        path: "courseContent",
+        populate: { path: "subSections" }
+    })
+
+
+        return res.status(200).json({
+            success: true,
+            data : finaleditedCourse,
+            message:`course ${status} successfully`,
+          });
+
+    }catch(error){
+        return res.status(500).json({
+            success: false,
+            message:`Failed to Publish/Draft course`,
+            error : error.message
+          });
+    }
+};
+
+
+exports.getAllCoursesOfInstructor  = async(req , res)=>{
+    try{
+
+        console.log(req.body.InstructorId , "nikhil")
+
+        const { InstructorId }  = req.body;
+
+        const CoursesData = await user.findById({ _id: InstructorId }).populate([
+            {
+                path: "courses",
+                populate: [
+                    { path: "courseContent", populate: { path: "subSections" } },
+                    { path: "ratingAndReviews" },
+                    { path: "studentEnrolled" }
+                ]
+            },{
+                path:"additionalDetails"
+            }
+        ]).exec();
+
+     
+       if(!CoursesData){
+        return res.status(400).json({
+            success:false,
+            message:'Courses Data Not Found'
+        })
+       }                     
+
+       return res.status(200).json({
+        success:true,
+        message:'all data of courseId is fethed succcessfully',
+        data:CoursesData
+       })
+
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            error: error.message,
+            message:'some error occurs in fetching the all related data from the Model associated with the UserId'
+        })
+    }
+}
+
+exports.deleteCourseOfInstructor  = async(req , res)=>{
+    try{
+
+        console.log(req.body , "nikhil")
+
+        const { InstructorId , CourseId }  = req.body;
+
+        const CoursesData = await user.findByIdAndUpdate(
+            InstructorId,  
+            {
+                $pull: { courses: CourseId }  
+            },
+            { new: true }  
+        ).populate([
+            {
+                path: "courses",
+                populate: [
+                    { path: "courseContent", populate: { path: "subSections" } },
+                    { path: "ratingAndReviews" },
+                    { path: "studentEnrolled" }
+                ]
+            },
+            {
+                path: "additionalDetails"
+            }
+        ]).exec();
+        
+
+        await courses.findByIdAndDelete({_id:CourseId})
+
+
+ 
+       if(!CoursesData){
+        return res.status(400).json({
+            success:false,
+            message:'Courses Data Not Found'
+        })
+       }                     
+
+       return res.status(200).json({
+        success:true,
+        message:'all data of courseId is fethed succcessfully',
+        data:CoursesData
+       })
+
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            error: error.message,
+            message:'some error occurs in fetching the all related data from the Model associated with the UserId'
+        })
+    }
+}
+
 

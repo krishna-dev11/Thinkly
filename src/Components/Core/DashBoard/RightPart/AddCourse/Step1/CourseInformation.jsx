@@ -18,7 +18,7 @@ const CourseInformation = () => {
     const {token} = useSelector(state=>state.auth)
     const {category} = useSelector(state=>state.Category)
     const {editCourse , course} = useSelector(state=>state.Course)
-    // console.log(editCourse )
+    console.log(course)
 
 
   const {

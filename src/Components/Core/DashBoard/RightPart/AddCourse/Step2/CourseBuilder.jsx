@@ -136,7 +136,8 @@ const CourseBuilder = () => {
           <IoIosArrowBack />
           <p>Back</p>
         </button>
-        <button className=" flex px-2 py-1 rounded-md bg-yellow-50">
+        <button className=" flex px-2 py-1 rounded-md bg-yellow-50"
+                onClick={()=>dispatch(setStep(3))}>
           <p>Next</p>
           <IoIosArrowForward />
         </button>

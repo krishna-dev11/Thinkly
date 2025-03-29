@@ -14,6 +14,7 @@ const categorySchema = new mongoose.Schema({
         ref:"courses"
     }
      
-});
+},
+{timestamps : true});
 
 module.exports = mongoose.model("category" , categorySchema);

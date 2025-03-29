@@ -20,30 +20,23 @@ import PurchaseHistory from "./Components/Core/DashBoard/RightPart/PurchaseHisto
 import WishList from "./Components/Core/DashBoard/RightPart/WishList";
 import SettingIndex from "./Components/Core/DashBoard/RightPart/Settings/SettingIndex";
 import AddNewCourse from "./Components/Core/DashBoard/RightPart/AddCourse/AddNewCourse";
+import { useSelector } from "react-redux";
+import { ACCOUNT_TYPE } from "./Utilities/Constaints";
+import DisplayMyCourses from "./Components/Core/DashBoard/RightPart/MyCourses/DisplayMyCourses";
+import EditPreviousCourse from "./Components/Core/DashBoard/RightPart/EditCourse/EditPreviousCourse";
 
 function App() {
+
+  const { user } = useSelector((state) => state.profile);
+  // console.log(user.accountType)
+
   return (
     <div className="h-screen">
       <NavBar />
       <Routes>
-        <Route
-          path="/"
-          element={
-              <HomePage/>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-              <AboutPage/>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-              <ContactUsPage/>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactUsPage />} />
 
         {/* OPEN Routes */}
         <Route
@@ -113,17 +106,31 @@ function App() {
           }
         >
           <Route path="/dashboard/my-profile" element={<MyProfile />} />
-          {/* <Route
-            path="/dashboard/enrolled-courses"
-            element={<EnrolledCourses />}
-          /> */}
-          <Route
-            path="/dashboard/purchase-history"
-            element={<PurchaseHistory />}
-          />
-          <Route path="/dashboard/wishlist" element={<WishList />} />
           <Route path="/dashboard/setting" element={<SettingIndex />} />
-          <Route path="/dashboard/add-course" element={<AddNewCourse/>} />
+
+          { 
+             user?.accountType === ACCOUNT_TYPE.STUDENT && (
+            <>
+              <Route
+                path="/dashboard/purchase-history"
+                element={<PurchaseHistory />}
+              />
+              <Route path="/dashboard/wishlist" element={<WishList />} />
+            </>
+          )}
+
+          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+            <>
+              <Route path="/dashboard/add-course" element={<AddNewCourse />} />
+              <Route
+                path="/dashboard/my-courses"
+                element={<DisplayMyCourses />}
+              />
+              <Route path="/dashboard/edit-course" element={<EditPreviousCourse />} />
+
+            </>
+          )}
+
         </Route>
       </Routes>
     </div>
