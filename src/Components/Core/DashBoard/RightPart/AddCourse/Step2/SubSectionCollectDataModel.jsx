@@ -4,7 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 import Upload from "../Step1/Upload";
 import { useDispatch, useSelector } from "react-redux";
 import { SetaddSubSection, SeteditSubSection, SetviewSubSection } from "../../../../../../Slices/SubSection";
-import { AddNewSubSection } from "../../../../../../Services.jsx/Operations/DashBoard";
+import { AddNewSubSection, EditSubSection } from "../../../../../../Services.jsx/Operations/DashBoard";
 
 const SubSectionCollectDataModel = () => {
   const dispatch = useDispatch();
@@ -48,13 +48,22 @@ const SubSectionCollectDataModel = () => {
     if(editSubSection){
       if(isSubSectionFormUpdated){
         const formData = new FormData()
-        formData.append("SubSectionId", sectionId);
+        formData.append("SubSectionId", editSubSection._id);
         formData.append("CourseId", course._id);
         formData.append("subSectionName", event.subSectionName);
         formData.append("description", event.description);
         formData.append("timeDuration", undefined);
         formData.append("lectureVideo", event.subSectionLectureVideo);
+        console.log(sectionId , course._id , event.subSectionName , event.description  , event.subSectionLectureVideo )
+
+        try{
+          dispatch(EditSubSection( formData , token))
+       }catch(error){
+          console.log(error)
+       }
+
       }
+
     }
 
 

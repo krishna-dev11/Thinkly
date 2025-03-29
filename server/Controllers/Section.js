@@ -105,7 +105,8 @@ exports.updateSection = async(req , res)=>{
 exports.deleteSection = async (req, res) => {
     try {
         // Extracting sectionId and courseId from request body
-        const { sectionId, courseId } = req.body;
+        const { sectionId , courseId } = req.body;
+        console.log(sectionId, courseId , "fucky")
 
         // Deleting the section from the 'section' collection
         const deletedSection = await section.findByIdAndDelete(sectionId);

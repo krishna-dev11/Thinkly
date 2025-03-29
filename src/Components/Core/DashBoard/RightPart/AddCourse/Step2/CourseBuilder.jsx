@@ -130,7 +130,7 @@ const CourseBuilder = () => {
       <div className=" flex gap-x-2">
         <button className=" flex px-2 py-1 rounded-md bg-richblack-700" onClick={()=>
         {
-          dispatch(setEditCourse(course))
+          dispatch(setEditCourse(true))
           dispatch(setStep(1))
         }}>
           <IoIosArrowBack />

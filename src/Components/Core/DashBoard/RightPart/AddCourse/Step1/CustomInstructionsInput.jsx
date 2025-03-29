@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 
 const CustomInstructionsInput = ({name , label , Placeholder , register , errors , setValue ,getValues }) => {
 
   const [requirment, setRequirment] = useState("");
   const [RequirmentList, setRequirmentList] = useState([]);
-
+  const {editCourse , course} = useSelector(state=>state.Course)
 
   useEffect(()=>{
-    register( name , {
-          required:true,
-          validate: (value) => value.length > 0
-    })
-},[ register , name])
+    if(editCourse){
+      setRequirmentList(course.instructions)
+    }
+    register(name, { required: true, validate: (value) => value.length > 0 })
+  },[])
+
 
 useEffect(()=>{
   setValue( name , RequirmentList )
-} , [RequirmentList , setValue , name])
+} , [RequirmentList ])
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    setRequirment(event.target.value);
-    event.target.value = "";
-  };
 
   const AddRequirments = () => {
     if (requirment && !RequirmentList.includes(requirment)) {
@@ -47,7 +44,7 @@ useEffect(()=>{
             type="text"
             name={name}
             placeholder={Placeholder}
-            onChange={handleChange}
+            onChange={(e)=>{setRequirment(e.target.value)}}
             value={requirment}
           />
         </label>

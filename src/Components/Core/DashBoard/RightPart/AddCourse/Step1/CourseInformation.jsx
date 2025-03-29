@@ -4,7 +4,7 @@ import { FaRupeeSign } from "react-icons/fa";
 import { apiConnector } from "../../../../../../Services.jsx/apiConnector";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CreateNewCourse, GetAllCategories } from "../../../../../../Services.jsx/Operations/DashBoard";
+import { CreateNewCourse, EditCourse, GetAllCategories } from "../../../../../../Services.jsx/Operations/DashBoard";
 import CustomTagInput from "./CustomTagInput";
 import CustomInstructionsInput from "./CustomInstructionsInput";
 import Upload from "./Upload";
@@ -18,7 +18,7 @@ const CourseInformation = () => {
     const {token} = useSelector(state=>state.auth)
     const {category} = useSelector(state=>state.Category)
     const {editCourse , course} = useSelector(state=>state.Course)
-    console.log(editCourse , editCourse.courseName)
+    // console.log(editCourse )
 
 
   const {
@@ -38,30 +38,33 @@ const CourseInformation = () => {
             console.log(error)
          }
      }
-     getAllCategories()
 
      if(editCourse){
-      setValue("CourseTitle" , editCourse.courseName)
-      setValue("CourseDescription" , editCourse.courseDescription )
-      setValue("CoursePrice" , editCourse.price)
-      setValue("CourseCategory" , editCourse.category)
-      // setValue("CourseTag" , editCourse.tag)
-      setValue("CourseBenefits" , editCourse.whatYouWillLearn)
-      // setValue("CourseRequirments" ,  editCourse.instructions.toString() )
-      setValue("CourseThumnail" , editCourse.thumbnailImage)
+      setValue("CourseTitle" , course.courseName)
+      setValue("CourseDescription" , course.courseDescription )
+      setValue("CoursePrice" , course.price)
+      setValue("CourseCategory" , course.category)
+      setValue("CourseTag" , course.tag)
+      setValue("CourseBenefits" , course.whatYouWillLearn)
+      setValue("CourseRequirments" ,  course.instructions )
+      setValue("courseImage" , course.thumbnail)
      }
+
+     getAllCategories()
+
+
   },[])
 
   const isFormUpdated = ()=>{
     const currentValues = getValues()
-    if(currentValues.CourseTitle !== editCourse.courseName    ||
-       currentValues.CourseDescription !== editCourse.courseDescription ||
-       currentValues.CoursePrice !== editCourse.price ||
-       currentValues.CourseCategory  !== editCourse.category    ||
-       currentValues.CourseTag.toString()  !== editCourse.tag.toString()     ||
-       currentValues.CourseBenefits !== editCourse.whatYouWillLearn     ||
-       currentValues.CourseRequirments.toString()  !== editCourse.instructions.toString()     ||
-       currentValues.CourseThumnail  !== editCourse.thumbnailImage   
+    if(currentValues.CourseTitle !== course.courseName    ||
+       currentValues.CourseDescription !== course.courseDescription ||
+       currentValues.CoursePrice !== course.price ||
+       currentValues.CourseCategory._id !== course.category._id    ||
+       currentValues.CourseTag  !== course.tag     ||
+       currentValues.CourseBenefits !== course.whatYouWillLearn     ||
+       currentValues.CourseRequirments  !== course.instructions     ||
+       currentValues.CourseThumnail  !== course.thumbnailImage   
     ){
       return true
     }
@@ -71,22 +74,35 @@ const CourseInformation = () => {
 
   const submitHandler = async(event)=>{
 
+    console.log(event , "event")
+
     // edit Course
     if(editCourse){
-      if(isFormUpdated){
+      if(isFormUpdated()){
         const formData = new FormData()
-        formData.append("courseName" , editCourse.courseName)
-        formData.append("courseDescription", editCourse.courseDescription)
-        formData.append("price", editCourse.price)
-        formData.append("category", editCourse.category)
-        formData.append("tag", JSON.stringify(editCourse.tag))
-        formData.append("whatYouWillLearn", editCourse.whatYouWillLearn)
-        formData.append("instructions", JSON.stringify(editCourse.instructions))
-        formData.append("thumbnailImage", editCourse.thumbnailImage)
+        formData.append("courseId" , course._id)
+        formData.append("courseName" , event.CourseTitle)
+        formData.append("courseDescription" , event.CourseDescription)
+        formData.append("price" , event.CoursePrice)
+        formData.append("category" , event.CourseCategory)
+        formData.append("tag" , JSON.stringify(event.CourseTag))
+        formData.append("whatYouWillLearn" , event.CourseBenefits)
+        formData.append("instructions" , JSON.stringify(event.CourseRequirments))
+        formData.append("thumbnailImage" , event.courseImage)
+        formData.append("status" , course.status)
+
+        try{
+           dispatch(EditCourse(formData , token))
+        }catch(error){
+           console.log("unable to send FormData data")
+        }
+
+        return
+        
       }
     }
 
-    console.log(event.CourseCategory)
+    console.log(event , "event")
 
 // create new Course
      const formData = new FormData()
@@ -155,7 +171,7 @@ const CourseInformation = () => {
         Price<sup className="text-pink-200">*</sup>
         </p>
         <input
-          type="Number"
+          type="text"
           placeholder="Enter Price"
           {...register("CoursePrice" , {
             required:{

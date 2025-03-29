@@ -15,19 +15,34 @@ export default function Upload({
   viewData = null,
   editData = null,
 }) {
-  const { course } = useSelector((state) => state.Course);
+  const { course , editCourse} = useSelector((state) => state.Course);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(viewData || editData || "");
   const { addSubSection, editSubSection, viewSubSection } = useSelector(
-      (state) => state.subsection
-    );
-  const inputRef = useRef(null);
+    (state) => state.subsection
+  );
+
+
+  useEffect(() => {
+    if (editCourse) {
+      setValue(name, course.thumbnail);
+      setPreviewSource(course.thumbnail);  
+    }
+  }, [editCourse, name, setValue]);
+
+  useEffect(() => {
+    if (editSubSection) {
+      setValue(name, editSubSection.videoUrl);
+      setPreviewSource(editSubSection.videoUrl);  
+    }
+  }, [editSubSection, name, setValue]);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
       previewFile(file);
       setSelectedFile(file);
+      setPreviewSource("");  // Naye file select karne se purana preview reset hoga
     }
   };
 
@@ -64,24 +79,26 @@ export default function Upload({
           isDragActive ? "bg-richblack-600" : "bg-richblack-700"
         } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
       >
-        <input {...getInputProps()}  />
+        <input {...getInputProps()} />
 
-        {previewSource || (editSubSection && editSubSection.videoUrl  || viewSubSection && viewSubSection.videoUrl) ? (
+        {previewSource || (editSubSection && editSubSection.videoUrl) || (viewSubSection && viewSubSection.videoUrl) ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
               <img
-                src={
-                  previewSource
-                }
+                src={previewSource}
                 alt="Preview"
                 className="h-full w-full rounded-md object-cover"
               />
             ) : (
-              <Player aspectRatio="16:9" playsInline src={
-                editSubSection ? editSubSection.videoUrl :
-                viewSubSection ? viewSubSection.videoUrl :
-                previewSource
-              } />
+              <Player
+                aspectRatio="16:9"
+                playsInline
+                src={
+                  previewSource ||
+                  (editSubSection ? editSubSection.videoUrl : "") ||
+                  (viewSubSection ? viewSubSection.videoUrl : "")
+                }
+              />
             )}
             {!viewData && (
               <button

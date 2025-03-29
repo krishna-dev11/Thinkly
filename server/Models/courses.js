@@ -39,6 +39,9 @@ const coursesSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"user"
     }],
+    tag:{
+        type:[String]
+    },
     instructions:{
         type:[String]
     },

@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router();
 
 // import Controllers
-const {createCourse , showAllCourse , getAllDetailsOfOneCourse} = require("../Controllers/course")
+const {createCourse , showAllCourse , editCourse ,  getAllDetailsOfOneCourse} = require("../Controllers/course")
 const {creatcategory , getAllCategory , categoryPageDetails} = require("../Controllers/Category")
 const {createSection , updateSection , deleteSection} = require("../Controllers/Section")
 const {createSubSection , updateSubSection , deleteSubSection} = require("../Controllers/Subsection")
@@ -14,6 +14,7 @@ const {auth , isStudent , isInstructor , isAdmin} = require("../Middlewares/auth
 
 // Course Routes
 router.post('/createCourse' , auth , isInstructor ,  createCourse)
+router.post('/editCourse' , auth , isInstructor ,  editCourse)
 router.get('/showAllCourse' ,  showAllCourse)
 router.post('/getAllDetailsOfOneCourse',  getAllDetailsOfOneCourse)
 
@@ -27,7 +28,7 @@ router.post('/categoryPageDetails' , categoryPageDetails)
 // Section Routes
 router.post('/createSection', auth , isInstructor ,  createSection)
 router.post('/updateSection', auth , isInstructor ,  updateSection)
-router.delete('/deleteSection', auth , isInstructor ,  deleteSection)
+router.post('/deleteSection', auth , isInstructor ,  deleteSection)
 
 
 // subsection Routes

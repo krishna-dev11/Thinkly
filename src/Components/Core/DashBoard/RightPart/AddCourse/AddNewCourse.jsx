@@ -61,7 +61,7 @@ const AddNewCourse = () => {
       <div className=" w-[62%] py-10 flex flex-col gap-y-5">
         <div className="flex items-baseline mx-auto">
           {StepDetails.map((singlestep) => (
-            <div key={singlestep.id} className="flex items-baseline mx-auto">
+            <div key={singlestep._id} className="flex items-baseline mx-auto">
               <div
                 className={` h-[3.5rem] w-[3.5rem] flex justify-center rounded-full text-xl font-inter font-semibold items-center ${
                   Step === singlestep.Step

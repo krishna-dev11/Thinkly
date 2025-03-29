@@ -5,6 +5,7 @@ import { apiConnector } from "../apiConnector";
 import { settoken } from "../../Slices/Auth";
 import { setCategories } from "../../Slices/Categories";
 import { setCourse, setStep } from "../../Slices/Courses";
+import { SetaddSubSection, SeteditSubSection, SetviewSubSection } from "../../Slices/SubSection";
 
 const {
   UPDATE_DISPLAY_PICTURE_API,
@@ -20,7 +21,10 @@ const {
   CREATE_SECTION_API,
   CREATE_SUBSECTION_API,
   UPDATE_SECTION_API,
-  DELETE_SECTION_API
+  DELETE_SECTION_API,
+  UPDATE_SUBSECTION_API,
+  DELETE_SUBSECTION_API,
+  EDIT_COURSE_API
 } = courseEndpoints;
 
 
@@ -31,7 +35,7 @@ export function updateDisplayPicture(token , data) {
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("PUT", UPDATE_DISPLAY_PICTURE_API , data , {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       })
 
       console.log(response.data)
@@ -57,7 +61,7 @@ export function UpdateProfileDetails( token , data ) {
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, data , {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       })
 
 
@@ -83,7 +87,7 @@ export function ChangePassword( token , data ) {
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", CHANGE_PASSWORD_API , data , {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       })
 
 
@@ -107,7 +111,7 @@ export function DeleteAccountPermanentaly( token , data , navigate) {
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("DELETE", DELETE_PROFILE_API , data , {
-        Authorisation: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       })
 
 
@@ -165,7 +169,8 @@ export function CreateNewCourse(FormData , token) {
     try {
       const response = await apiConnector("POST" , CREATE_COURSE_API , FormData ,
         {
-          Authorisation: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         }
        )
   // console.log(response.data)
@@ -184,8 +189,35 @@ export function CreateNewCourse(FormData , token) {
     toast.dismiss(toastId);
   };
 }
+export function EditCourse(FormData , token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("POST" , EDIT_COURSE_API , FormData ,
+        {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        }
+       )
+  // console.log(response.data)
+       dispatch(setStep(2));
+       dispatch(setCourse(response.data.data)) 
 
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
 
+      toast.success("course Edited Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+// section
 export function AddNewSection(FormData , token) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
@@ -193,7 +225,7 @@ export function AddNewSection(FormData , token) {
     try {
       const response = await apiConnector("POST" , CREATE_SECTION_API , FormData ,
         {
-          Authorisation: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         }
        )
 
@@ -220,7 +252,7 @@ export function EditSection(FormData , token) {
     try {
       const response = await apiConnector("POST" , UPDATE_SECTION_API , FormData ,
         {
-          Authorisation: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         }
        )
 
@@ -240,15 +272,15 @@ export function EditSection(FormData , token) {
   };
 }
 
-export function DeleteSection(FormData , token) {
+export function DeleteSection( FormData , token) {
   console.log(FormData , token)
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("DELETE" , DELETE_SECTION_API , FormData ,
+      const response = await apiConnector("POST" , DELETE_SECTION_API , FormData ,
         {
-          Authorisation: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         }
        )
 
@@ -268,6 +300,8 @@ export function DeleteSection(FormData , token) {
   };
 }
 
+
+// Sub section
 export function AddNewSubSection(FormData , token) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
@@ -275,16 +309,18 @@ export function AddNewSubSection(FormData , token) {
     try {
       const response = await apiConnector("POST" , CREATE_SUBSECTION_API , FormData ,
         {
-          Authorisation: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         }
        )
 
-       console.log(response.data.data)
-       dispatch(setCourse(response.data.data))
-
-      if (!response.data.success) {
+       if (!response.data.success) {
         throw new Error(response.data.message);
       }
+
+      //  console.log(response.data.data)
+       dispatch(setCourse(response.data.data))
+       
+
 
       toast.success("SubSection Created Successfully")
     } catch (error) {
@@ -295,6 +331,62 @@ export function AddNewSubSection(FormData , token) {
   };
 }
 
+
+export function EditSubSection(FormData , token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("POST" , UPDATE_SUBSECTION_API , FormData ,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+       )
+
+       if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      console.log(response.data.data)
+      dispatch(setCourse(response.data.data))
+        
+
+      toast.success("SubSection Created Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function DeleteSubSection( FormData , token) {
+  console.log(FormData , token)
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("POST" , DELETE_SUBSECTION_API , FormData ,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+       )
+
+      //  console.log(response.data)
+       dispatch(setCourse(response.data.data))
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("SubSection Deleted Successfully")
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
 
 
 

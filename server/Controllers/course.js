@@ -1,21 +1,141 @@
 const user = require("../Models/user");
 const Category = require("../Models/category");
 const courses = require("../Models/courses");
-const {uploadImageToCloudinary} = require("../Utilities/uploadImageToCloudinary")
+const {uploadImageToCloudinary} = require("../Utilities/uploadImageToCloudinary");
+const { json } = require("express");
 
 
 // checked
-exports.createCourse = async(req , res)=>{
-    try{
+exports.createCourse = async (req, res) => {
+    try {
 
-        console.log(req.body)
-        // const {courseName , courseDescription ,  whatYouWillLearn , price  , tag , category , instructions} = req.body ;
-        const {courseName , courseDescription ,  whatYouWillLearn , price  , tag , category , status , instructions} = req.body ;
-        const thumbnail = req.files.thumbnailImage
-        console.log(thumbnail)
+        const { courseName , courseDescription , whatYouWillLearn , price , tag , category , status , instructions } = req.body;
+
+        const thumbnail = req.files?.thumbnailImage || req.body?.thumbnailImage;
         
 
-        if(!courseName || !courseDescription || !whatYouWillLearn || !price || !tag  || !thumbnail  || !category  || !instructions ){
+        if (!courseName || !courseDescription || !whatYouWillLearn || !price || !tag || !thumbnail || !category || !instructions) {
+            return res.status(400).json({
+                success: false,
+                message: "Please fill all details completely and carefully",
+            });
+        }
+
+        // Default status
+        if (!status) {
+            status = "Draft";
+        }
+
+        // Ensure `tag` is an array
+        // if (typeof tag === "string") {
+        //     try {
+        //         tag = JSON.parse(tag);
+        //     } catch (error) {
+        //         return res.status(400).json({
+        //             success: false,
+        //             message: "Invalid format for tag. It should be an array.",
+        //         });
+        //     }
+        // }
+        // if (!Array.isArray(tag) || tag.length === 0) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Tag must be a non-empty array.",
+        //     });
+        // }
+
+        // // Ensure `instructions` is an array
+        // if (typeof instructions === "string") {
+        //     try {
+        //         instructions = JSON.parse(instructions);
+        //     } catch (error) {
+        //         return res.status(400).json({
+        //             success: false,
+        //             message: "Invalid format for instructions. It should be an array.",
+        //         });
+        //     }
+        // }
+        // if (!Array.isArray(instructions) || instructions.length === 0) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Instructions must be a non-empty array.",
+        //     });
+        // }
+
+
+
+        // Check if user is an instructor
+        const userId = req.user.id;
+        const checkInstructor = await user.findById(userId);
+        if (!checkInstructor || checkInstructor.accountType !== "Instructor") {
+            return res.status(403).json({
+                success: false,
+                message: "You do not have permission to create a course.",
+            });
+        }
+
+        // Check if category exists
+        const categoryDetails = await Category.findById(category);
+        if (!categoryDetails) {
+            return res.status(400).json({
+                success: false,
+                message: "Category not found.",
+            });
+        }
+
+        // Upload thumbnail to Cloudinary
+        const uploadThumbnail = await uploadImageToCloudinary(thumbnail, process.env.CLOUDINARY_FOLDER);
+
+        // Create a new course
+        const newCourse = await courses.create({
+            courseName:courseName,
+            courseDescription:courseDescription,
+            price:price,
+            whatYouWillLearn:whatYouWillLearn,
+            instructor: checkInstructor._id,
+            thumbnail: uploadThumbnail.secure_url,
+            tag : JSON.parse(tag) ,
+            category: categoryDetails._id,
+            status : status,
+            instructions : JSON.parse(instructions)
+        });
+
+        console.log(newCourse , "newCourse") 
+
+        // Update instructor with new course
+        await user.findByIdAndUpdate(checkInstructor._id, {
+            $push: { courses: newCourse._id }
+        }, { new: true });
+
+        // Update category with new course
+        await Category.findByIdAndUpdate(category, {
+            $push: { course: newCourse._id }
+        }, { new: true });
+
+        return res.status(201).json({
+            success: true,
+            data: newCourse,
+            message: "Course created successfully.",
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Failed to create course.",
+            error: error.message,
+        });
+    }
+};
+
+
+exports.editCourse = async(req , res)=>{
+    try{
+        const {courseId , courseName , courseDescription ,  whatYouWillLearn , price  , tag , category , status , instructions } = req.body ;
+
+        const thumbnail = req.body.thumbnailImage || req.files.thumbnailImage
+
+
+        if(!courseId || !courseName || !courseDescription || !whatYouWillLearn || !price || !tag  || !thumbnail  || !category  || !instructions ){
             return res.status(400).json({
                 success: false,
                 message:"fill add details completely and carefully",
@@ -28,8 +148,8 @@ exports.createCourse = async(req , res)=>{
             
 		}
         
-console.log(status)
-
+// console.log(status)
+// ye req me authentication ke wakt dala hai
         const userId = req.user.id
         const checkInstructor = await user.findById({ _id:userId } , 
             {
@@ -40,13 +160,11 @@ console.log(status)
         if(!checkInstructor){
             return res.status(400).json({
                 success: false,
-                message:"you are not asigned with us as an instructor so the instructor has only rights of creating the course ",
+                message:"you are not asigned with us as an instructor so the instructor has only rights of Editing the course ",
               });
         }
 
         const categoryDetails = await  Category.findById(category)
-        // const categoryDetails = await  Category.findOne({name:category})
-        // console.log(categoryDetails)
         if(!categoryDetails){
             return res.status(400).json({
                 success: false,
@@ -54,49 +172,61 @@ console.log(status)
               });
         }
 
-        const uploadthumbnail = await uploadImageToCloudinary(thumbnail , process.env.CLOUDINARY_FOLDER);
-        // console.log(uploadthumbnail)
+       var uploadthumbnail 
+       if(!req.body.thumbnailImage){
+        uploadthumbnail = await uploadImageToCloudinary(thumbnail , process.env.CLOUDINARY_FOLDER);
+       }
 
 
-        const newCourse = await courses.create({
-            courseName,
-            courseDescription,
-            price,
-            whatYouWillLearn,
-            instructor : checkInstructor._id,
-            thumbnail: uploadthumbnail.secure_url,
-            tag : tag,
-            category : categoryDetails._id,
-            status: status,
-            instructions : instructions
+       const editCourse = await courses.findById(courseId);
 
-        });
+       if (!editCourse) {
+        throw new Error("Course not found"); 
+       }
 
-        console.log(newCourse)
+       editCourse.courseName = courseName;
+       editCourse.courseDescription = courseDescription;
+       editCourse.price = price;
+       editCourse.whatYouWillLearn = whatYouWillLearn;
+       editCourse.instructor = checkInstructor._id;
+       editCourse.thumbnail = uploadthumbnail ? uploadthumbnail.secure_url : thumbnail;
+       editCourse.tag = typeof tag === "string" ? JSON.parse(tag) : tag;
+       editCourse.category = categoryDetails._id;
+       editCourse.status = status;
+       editCourse.instructions = typeof instructions === "string" ? JSON.parse(instructions) : instructions;
+
+       await editCourse.save()
+
+       const finaleditedCourse = await courses.findById(courseId).populate({
+        path: "courseContent",
+        populate: { path: "subSections" }
+    })
 
 
 
-        const updateUserCourseArray = await user.findByIdAndUpdate({_id : checkInstructor._id}, 
-            {
-                $push:{
-                    courses:newCourse._id
-                }
-            },
-            {new:true}
-        )
+        // const editCourse = await courses.findByIdAndUpdate({_id: courseId},{
+        //     courseName,
+        //     courseDescription,
+        //     price,
+        //     whatYouWillLearn,
+        //     instructor : checkInstructor._id,
+        //     thumbnail: uploadthumbnail ? uploadthumbnail.secure_url  : thumbnail ,
+        //     tag : JSON.parse(tag),
+        //     category : categoryDetails._id,
+        //     status: status,
+        //     instructions : JSON.parse(instructions)
 
-        await Category.findByIdAndUpdate({_id:category},
-            {
-                $push:{
-                    course : newCourse._id
-                }
-            },
-            {new : true}
-        )
+        // }).populate({
+        //     path: "courseContent",
+        //     populate: { path: "subSections" }
+        // });
+
+        console.log(editCourse , "EditCouse")
+
 
         return res.status(200).json({
             success: true,
-            data : newCourse,
+            data : finaleditedCourse,
             message:"course created successfully",
           });
 
