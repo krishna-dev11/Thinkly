@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RxCross1 } from "react-icons/rx";
 import Upload from "../Step1/Upload";
 import { useDispatch, useSelector } from "react-redux";
-import { SetaddSubSection, SeteditSubSection, SetviewSubSection } from "../../../../../../Slices/SubSection";
-import { AddNewSubSection, EditSubSection } from "../../../../../../Services.jsx/Operations/DashBoard";
+import {
+  SetaddSubSection,
+  SeteditSubSection,
+  SetviewSubSection,
+} from "../../../../../../Slices/SubSection";
+import {
+  AddNewSubSection,
+  EditSubSection,
+} from "../../../../../../Services.jsx/Operations/DashBoard";
 
 const SubSectionCollectDataModel = () => {
   const dispatch = useDispatch();
@@ -16,6 +23,8 @@ const SubSectionCollectDataModel = () => {
   const { token } = useSelector((state) => state.auth);
   const { course } = useSelector((state) => state.Course);
 
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     reset,
@@ -25,49 +34,53 @@ const SubSectionCollectDataModel = () => {
     getValues,
   } = useForm();
 
-  if(viewSubSection){
-    setValue("lectureVideo" , viewSubSection.videoUrl)
-    setValue("subSectionName" , viewSubSection.title)
-    setValue("description" , viewSubSection.description)
-  }else if(editSubSection){
-    setValue("lectureVideo" , editSubSection.videoUrl)
-    setValue("subSectionName" , editSubSection.title)
-    setValue("description" , editSubSection.description)
+  if (viewSubSection) {
+    setValue("lectureVideo", viewSubSection.videoUrl);
+    setValue("subSectionName", viewSubSection.title);
+    setValue("description", viewSubSection.description);
+  } else if (editSubSection) {
+    setValue("lectureVideo", editSubSection.videoUrl);
+    setValue("subSectionName", editSubSection.title);
+    setValue("description", editSubSection.description);
   }
 
   const FormSubmitHandler = (event) => {
+    const isSubSectionFormUpdated = () => {
+      if (editSubSection.subSectionName !== event.subSectionName) {
+        return true;
+      } else {
+        return false;
+      }
+    };
 
-    const isSubSectionFormUpdated = ()=>{
-      if(editSubSection.subSectionName !== event.subSectionName){
-        return true
-     }else{
-      return false
-     }
-    }
-
-    if(editSubSection){
-      if(isSubSectionFormUpdated){
-        const formData = new FormData()
+    if (editSubSection) {
+      if (isSubSectionFormUpdated) {
+        const formData = new FormData();
         formData.append("SubSectionId", editSubSection._id);
         formData.append("CourseId", course._id);
         formData.append("subSectionName", event.subSectionName);
         formData.append("description", event.description);
         formData.append("timeDuration", undefined);
         formData.append("lectureVideo", event.subSectionLectureVideo);
-        console.log(sectionId , course._id , event.subSectionName , event.description  , event.subSectionLectureVideo )
+        console.log(
+          sectionId,
+          course._id,
+          event.subSectionName,
+          event.description,
+          event.subSectionLectureVideo
+        );
 
-        try{
-          dispatch(EditSubSection( formData , token))
-       }catch(error){
-          console.log(error)
-       }
-
+        try {
+          dispatch(EditSubSection(formData, token , addSubSection,
+            editSubSection,
+            viewSubSection));
+        } catch (error) {
+          console.log(error);
+        }
       }
-
     }
 
-
-    if(addSubSection){
+    if (addSubSection) {
       const formData = new FormData();
       formData.append("lectureVideo", event.subSectionLectureVideo);
       formData.append("subSectionName", event.subSectionName);
@@ -75,21 +88,29 @@ const SubSectionCollectDataModel = () => {
       formData.append("sectionId", sectionId);
       formData.append("CourseId", course._id);
       formData.append("timeDuration", undefined);
-  
-      try {
-        dispatch(AddNewSubSection(formData, token , addSubSection , editSubSection , viewSubSection ));
 
+      try {
+        setLoading(true);
+        dispatch(
+          AddNewSubSection(
+            formData,
+            token,
+            addSubSection,
+            editSubSection,
+            viewSubSection
+          )
+        );
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
-
   };
 
   return (
-    <div className="fixed inset-0 z-[1000] grid justify-center items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className=" flex flex-col rounded-md">
-        <div className=" flex justify-between px-3 bg-richblack-700">
+    <div className="fixed w-full inset-0 z-[1000] grid justify-center items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm h-screen ">
+      <div className=" flex flex-col w-[25rem] rounded-md   border border-richblack-700">
+        <div className=" flex justify-between px-3 py-3 rounded-t-md bg-richblack-700">
           <p className=" text-richblack-5">
             {addSubSection
               ? "Add Lecture"
@@ -99,15 +120,16 @@ const SubSectionCollectDataModel = () => {
           </p>
           <RxCross1
             fill="#f1f2ff"
-            onClick={() => ( addSubSection && dispatch(SetaddSubSection(null)) ,
-                               editSubSection && dispatch(SeteditSubSection(null)),
-                               viewSubSection && dispatch(SetviewSubSection(null)))}
-            
+            onClick={() => (
+              addSubSection && dispatch(SetaddSubSection(null)),
+              editSubSection && dispatch(SeteditSubSection(null)),
+              viewSubSection && dispatch(SetviewSubSection(null))
+            )}
           />
         </div>
 
         <form
-          className=" flex flex-col bg-richblack-800"
+          className=" flex flex-col bg-richblack-800 px-6 py-4 rounded-b-md  gap-y-3"
           onSubmit={handleSubmit(FormSubmitHandler)}
         >
           <Upload
@@ -136,7 +158,7 @@ const SubSectionCollectDataModel = () => {
               style={{
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
               }}
-              className="w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5"
+              className="w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5"
             />
           </label>
 
@@ -155,24 +177,27 @@ const SubSectionCollectDataModel = () => {
               style={{
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
               }}
-              className="w-full rounded-[0.5rem] bg-richblack-800  p-[10px] placeholder-gray-500 text-richblack-5"
+              className="w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5"
             />
           </label>
 
-          <div className=" flex gap-x-2">
+          <div className=" flex gap-x-2 justify-between">
             <button
-              className=" px-3 py-2 bg-richblack-700 rounded-md"
+              className=" px-3 py-2 bg-richblack-700 text-richblack-5 rounded-md"
               type="submit"
-              onClick={() => ( addSubSection && dispatch(SetaddSubSection(false)) ,
-                               editSubSection && dispatch(SeteditSubSection(false)),
-                               viewSubSection && dispatch(SetviewSubSection(false)))}
+              onClick={() => (
+                addSubSection && dispatch(SetaddSubSection(false)),
+                editSubSection && dispatch(SeteditSubSection(false)),
+                viewSubSection && dispatch(SetviewSubSection(false))
+              )}
             >
               Cancel
             </button>
 
             {editSubSection && (
               <button
-                className=" px-3 py-2 bg-yellow-50 rounded-md"
+                disabled={loading}
+                className=" px-3 py-2 bg-yellow-50 rounded-md "
                 type="submit"
               >
                 Save Edits
@@ -180,6 +205,7 @@ const SubSectionCollectDataModel = () => {
             )}
             {addSubSection && (
               <button
+                disabled={loading}
                 className=" px-3 py-2 bg-yellow-50 rounded-md"
                 type="submit"
               >

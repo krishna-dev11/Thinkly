@@ -1,5 +1,10 @@
+// const { COURSE_STATUS } = require("../../src/Utilities/Constaints");
 const category = require("../Models/category");
 require('dotenv').config();
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max)
+}
 
 // Checked
 exports.creatcategory = async (req, res) => {
@@ -72,38 +77,71 @@ exports.getAllCategory = async (req, res) => {
 //checked
 exports.categoryPageDetails = async (req, res) => {
   try {
-   
+          // console.log(req.body  , "nikkkkkk")
           //get categoryId
-          const {categoryId} = req.body;
+          const  { categoryId }  = req.body;
           //get courses for specified categoryId
           const selectedCategory = await category.findById({_id:categoryId})
-                                          .populate("course")
+                                          .populate({
+                                            path:"course",
+                                            match:{status:"Published"},
+                                            populate:{
+                                               path:"instructor"
+                                            },
+                                          })
                                           .exec();
-                                          console.log(selectedCategory)                                
+                                           
           //validation
           if(!selectedCategory) {
               return res.status(404).json({
                   success:false,
-                  message:'Data Not Found',
+                  message:'Data  Not Found Along With These CategoryId',
               });
           }
-          //get coursesfor different categories
+
+          //get courses for different categories
           const differentCategories = await category.find(
                                       {
                                        _id: {$ne: categoryId},
                                        })
-                                       .populate("course")
+                                       .populate({
+                                        path:"course",
+                                            match:{status:"Published"},
+                                            populate:{
+                                               path:"instructor"
+                                            },
+                                       })
                                        .exec();
+                                       const RandomCategory = await category.findOne({
+                                        _id: differentCategories[getRandomInt(differentCategories.length)]._id
+                                      });
 
           //get top 10 selling courses
           //HW - write it on your own
+          const AllCategories = await category.find()
+             .populate({
+              path:"course",
+                  match:{status:"Published"},
+                  populate:{
+                     path:"instructor"
+                  },
+             })
+             .exec();
+
+             const CombinedIntoSingleArray = AllCategories.flatMap(category=>category.course)
+             const TopSellingCourses = CombinedIntoSingleArray
+                                        .sort(( a , b )=> b.studentEnrolled.length - a.studentEnrolled.length )
+                                        .slice(0 , 10 )
+
+
 
           //return response
           return res.status(200).json({
               success:true,
               data: {
                   selectedCategory,
-                  differentCategories,
+                  RandomCategory,
+                  TopSellingCourses
               },
           });
 

@@ -71,7 +71,7 @@ const Publish = () => {
         </label>
 
         <button type="submit" className=" flex px-2 py-1 rounded-md bg-yellow-50 self-end">
-          Save
+          Save Changes
         </button>
       </form>
 

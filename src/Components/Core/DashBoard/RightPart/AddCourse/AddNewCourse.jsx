@@ -57,38 +57,60 @@ const AddNewCourse = () => {
   ];
 
   return (
-    <div className=" flex w-full h-full px-5 relative  font-inter">
-      <div className=" w-[62%] py-10 flex flex-col gap-y-5">
-        <div className="flex items-baseline mx-auto">
-          {StepDetails.map((singlestep) => (
-            <div key={singlestep._id} className="flex items-baseline mx-auto">
+    <div className=" flex w-full h-full px-5 relative  font-inter ">
+      <div className=" w-[62%] py-10 flex flex-col gap-y-5 ">
+        <div className=" flex flex-col gap-y-1 w-full">
+          <div className="flex items-baseline mx-auto">
+            {StepDetails.map((singlestep) => (
               <div
-                className={` h-[3.5rem] w-[3.5rem] flex justify-center rounded-full text-xl font-inter font-semibold items-center ${
-                  Step === singlestep.Step
-                    ? " text-yellow-50 bg-yellow-800 opacity-60 border-[2px]  border-yellow-50"
-                    : " bg-richblack-700 text-richblack-300 border-richblack-500 border"
-                }`}
+                key={singlestep._id}
+                className="flex  items-center justify-center  mx-auto"
               >
-                {Step > singlestep.Step ? (
-                  <TiTick fill="#ffd60a" size={25} />
-                ) : (
-                  singlestep.Step
-                )}
+                <div
+                  className={` h-[3.5rem] w-[3.5rem] flex justify-center rounded-full text-xl font-inter font-semibold items-center ${
+                    Step === singlestep.Step
+                      ? " text-yellow-50 bg-yellow-800 opacity-60 border-[2px]  border-yellow-50"
+                      : " bg-richblack-700 text-richblack-300 border-richblack-500 border"
+                  }`}
+                >
+                  {Step > singlestep.Step ? (
+                    <TiTick fill="#ffd60a" size={25} />
+                  ) : (
+                    singlestep.Step
+                  )}
+                </div>
+                <div className="">
+                  {singlestep.Step !== 3 && (
+                    <div
+                      className={`font-semibold text-2xl ${
+                        Step > singlestep.Step
+                          ? "text-yellow-50 "
+                          : " text-richblack-300"
+                      }`}
+                    >
+                      ------------------------
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="">
-                {singlestep.Step !== 3 && (
-                  <div className={`font-semibold text-2xl ${ Step > singlestep.Step ? "text-yellow-50 " : " text-richblack-300"}`}>
-                  --------------------
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className=" flex justify-between px-5 w-[90%] mx-auto ">
+            {
+              StepDetails.map((singlestep)=>(
+                <p className={`${Step > singlestep.Step ? " text-yellow-50" : "text-richblack-5"}`}>{singlestep.title}</p>
+              ))
+            }
+          </div>
         </div>
-        <div>
-          {
-            Step === 1 ? <CourseInformation/> : Step === 2 ? <CourseBuilder/> : <Publish/>
-          }
+        <div className=" py-8">
+          {Step === 1 ? (
+            <CourseInformation />
+          ) : Step === 2 ? (
+            <CourseBuilder />
+          ) : (
+            <Publish />
+          )}
         </div>
       </div>
 

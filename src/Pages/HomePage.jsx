@@ -20,7 +20,7 @@ import BackGroundGradient from "../Components/Common/BackGroundGradient";
 const HomePage = () => {
   return (
     // wrapperh-   h-[6631px]
-    <div className=" w-[100%] overflow-x-hidden m-0 p-0 box-border  ">
+    <div className=" w-[100%] overflow-x-hidden m-0 p-0 box-border translate-y-10  ">
       {/* nav  */}
      
 

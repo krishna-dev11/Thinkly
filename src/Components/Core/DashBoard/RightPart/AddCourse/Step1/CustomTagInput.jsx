@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const CustomTagInput = ({
   name,
-  label,
+  lable,
   register,
   Placeholder,
   errors,
@@ -54,7 +54,7 @@ const CustomTagInput = ({
         {Chip.map((c, i) => (
           <div
             key={i}
-            className="flex gap-x-2 items-center px-3 py-1 rounded-xl bg-pink-50"
+            className="flex gap-x-2 items-center px-3 py-1 rounded-full bg-yellow-50"
           >
             <p>{c}</p>
             <RxCross2
@@ -65,9 +65,9 @@ const CustomTagInput = ({
         ))}
       </div>
 
-      <label>
+      <label className="  mx-auto">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-          {label}
+          {lable}
           <sup className="text-pink-200">*</sup>
         </p>
         <input
@@ -75,7 +75,10 @@ const CustomTagInput = ({
           name={name}
           placeholder={Placeholder}
           onKeyDown={handleKeyDown}
-          className="p-2 border border-gray-300 rounded-md w-full"
+          style={{
+            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+          }}
+          className=" w-full  rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder:px-8 placeholder-gray-500 text-richblack-5"
         />
       </label>
 

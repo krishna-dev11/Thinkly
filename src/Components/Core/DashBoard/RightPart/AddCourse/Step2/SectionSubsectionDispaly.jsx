@@ -71,31 +71,32 @@ const SectionSubsectionDispaly = () => {
   return (
     <>
       {course?.courseContent?.length > 0 && (
-        <div className=" w-full bg-richblack-700 rounded-md flex flex-col py-2 ">
+        <div className=" w-full bg-richblack-700 rounded-md flex flex-col py-4 ">
           {course?.courseContent?.map((section) => (
             <details
               key={section._id}
-              className=" w-[90%] flex flex-col gap-y-5 mx-auto border-b-[1px] border-richblack-600"
+              className=" w-[90%] flex flex-col  gap-y-5 mx-auto border-b-[1px] border-richblack-600 "
             >
               <summary className="list-none flex flex-col gap-y-1">
-                <div className=" flex justify-between px-2 ring-richblack-400">
+                <div className=" flex justify-between px-2 ring-richblack-400 ">
                   <div className=" flex gap-x-1 justify-center items-center">
                     <CiLineHeight fill="#6e727f" />
-                    <p className=" text-richblack-5">{section.sectionName}</p>
+                    <p className=" text-richblack-5 cursor-pointer">{section.sectionName}</p>
                   </div>
                   <div className=" flex gap-x-1 justify-center items-center">
                     <MdEdit
-                      fill="#6e727f"
+                      // fill="#6e727f"
+                   
                       onClick={(e) => {
                         e.stopPropagation(); // Preventing the click from triggering <summary> toggle
                         dispatch(
                           SetEditSection(editSection === null ? section : null)
                         );
                       }}
-                      className=" cursor-pointer z-40"
+                      className=" cursor-pointer z-40 text-richblack-400 hover:text-caribbeangreen-50 "
                     />
                     <RiDeleteBinLine
-                      fill="#6e727f"
+                      // fill="#6e727f"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSectionDeleteSection({
@@ -113,12 +114,14 @@ const SectionSubsectionDispaly = () => {
                           btn2Onclick: () => setSectionDeleteSection(null),
                         });
                       }}
-                      className=" cursor-pointer z-40"
+                      className=" cursor-pointer z-40 text-richblack-400 hover:text-caribbeangreen-50 "
                     />
                     <p className=" text-richblack-400 text-lg font-semibold">
                       |
                     </p>
-                    <TiArrowSortedDown fill="#6e727f" />
+                    <TiArrowSortedDown 
+                    // fill="#6e727f"
+                    className="cursor-pointer z-40 text-richblack-400 hover:text-caribbeangreen-50 " />
                   </div>
                 </div>
               </summary>
@@ -145,7 +148,8 @@ const SectionSubsectionDispaly = () => {
                     </div>
                     <div className=" flex gap-x-1 justify-center items-center">
                       <MdEdit
-                        fill="#6e727f"
+                      className="cursor-pointer z-40 text-richblack-400 hover:text-blue-300 "
+                        // fill="#6e727f"
                         onClick={(e) => {
                           e.stopPropagation(); // Preventing the click from triggering <summary> toggle
                           dispatch(
@@ -156,7 +160,7 @@ const SectionSubsectionDispaly = () => {
                         }}
                       />
                       <RiDeleteBinLine
-                        fill="#6e727f"
+                        // fill="#6e727f"
                         onClick={(e) => {
                           e.stopPropagation();
                           setSubSectionDeleteSection({
@@ -174,13 +178,16 @@ const SectionSubsectionDispaly = () => {
                             btn2Onclick: () => setSubSectionDeleteSection(null),
                           });
                         }}
-                        className=" cursor-pointer z-40"
+                        className="cursor-pointer z-40 text-richblack-400 hover:text-blue-300 "
                       />
 
                       <p className=" text-richblack-400 text-lg font-semibold">
                         |
                       </p>
-                      <TiArrowSortedDown fill="#6e727f" />
+                      <TiArrowSortedDown 
+                      // fill="#6e727f"
+                      className="cursor-pointer z-40 text-richblack-400 hover:text-blue-300 "
+                       />
                     </div>
                   </div>
                 ))}

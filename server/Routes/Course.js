@@ -23,12 +23,10 @@ router.post('/deleteCourseOfInstructor' , auth , isInstructor ,  deleteCourseOfI
 
 
 
-
-
 // Category Routes
 router.post('/creatcategory' , auth , isAdmin , creatcategory )
 router.get('/getAllCategory' ,  getAllCategory)
-router.post('/categoryPageDetails' , categoryPageDetails)
+router.post('/categoryPageDetails' ,  categoryPageDetails)
 
 
 // Section Routes

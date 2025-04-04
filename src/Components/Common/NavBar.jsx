@@ -64,7 +64,7 @@ const NavBar = () => {
     },[])
 
   return (
-    <div className=" w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 ">
+    <div className=" w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 fixed z-50">
 
       <div className=' flex justify-between items-center w-11/12  mx-auto h-full px-10'>
         
@@ -77,16 +77,16 @@ const NavBar = () => {
                 { 
                   NavbarLinks.map((link , index)=>(
                     <li className='text-white ' key={index}>{
-                        link?.title === 'Catalog' ? (<Link to={link?.path}>
-                            <div className='relative group'>
+                        link?.title === 'Catalog' ? (<Link to={link?.path} className=' group'>
+                            <div className='relative '>
                                 <div className='flex gap-x-1 items-baseline '>
                                     <p className=''>{link.title}</p>
                                     <MdKeyboardArrowDown className=' translate-y-1' />
                                 </div>
-                                <div className='w-48 text-black bg-white absolute top-9 rounded-md opacity-0 group-hover:opacity-100 z-20 flex flex-col gap-y-1 p-1 '>{
-                                  category.map((category , index)=>(
+                                <div className='w-48 text-black bg-white absolute top-9 rounded-md  opacity-0 group-hover:opacity-100 z-20 flex flex-col gap-y-1 p-1 '>{
+                                  category.map((cat , index)=>(
                                      <div key={index} className='p-1 flex justify-center items-center text-richblack-600 font-semibold rounded-md bg-richblack-25 w-[98%] mx-auto hover:bg-richblack-50'>
-                                     <Link to={category.link} key={category.id} >{category.name}</Link>
+                                     <Link to={`/catalog/${cat.name.split(" ").join("-").toLowerCase()}/${cat._id}`} key={cat.id} >{cat.name}</Link>
                                      </div>
                                   ))
                                 }</div>

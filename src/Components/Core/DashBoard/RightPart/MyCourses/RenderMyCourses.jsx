@@ -15,121 +15,102 @@ import { setCourse, setEditCourse, setStep } from "../../../../../Slices/Courses
 import { useNavigate } from "react-router-dom";
 
 const RenderMyCourses = () => {
-  const [deleteModal, setDeleteAccountModelActiveData] = useState(null);
+  const [deleteModal, setDeleteModal] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
-  console.log(user._id);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getInstructorsAllCourses = () => {
+    if (user?._id && token) {
       dispatch(FetchInstructorsAllCourses(user._id, token));
-    };
-
-    getInstructorsAllCourses();
-
-    console.log(user);
-  }, []);
-
-  const DeleteCourse = (InstructorId, CourseId) => {
-    console.log(InstructorId, CourseId);
-    try {
-      dispatch(DeleteInstructorCourses(InstructorId, CourseId, token));
-      setDeleteAccountModelActiveData(null);
-    } catch (error) {
-      console.log(error);
     }
+  }, [user?._id, token, dispatch]);
+
+  const deleteCourse = (instructorId, courseId) => {
+    dispatch(DeleteInstructorCourses(instructorId, courseId, token));
+    setDeleteModal(null);
   };
 
   const updateCourse = (course) => {
-    console.log(course)
-    try {
-      dispatch(setEditCourse(true))
-      dispatch(setCourse(course))
-      dispatch(setStep(1))
-      navigate("/dashboard/edit-course");
-    } catch (error) {
-      console.log(error)
-    }
+    dispatch(setEditCourse(true));
+    dispatch(setCourse(course));
+    dispatch(setStep(1));
+    navigate("/dashboard/edit-course");
   };
 
   return (
-    <>
-      <div className=" border border-richblack-700  rounded-md">
-        <Table>
-          <Thead>
+  <div className=" rounded-lg overflow-hidden">
+        <div className="overflow-hidden rounded-md shadow-lg  p-4 ">
+      <Table className="w-full text-left border border-richblack-700 rounded-md">
+        <Thead className=" border border-richblack-700 rounded-md text-white ">
+          <Tr>
+            <Th className="p-3">COURSES</Th>
+            <Th className="p-3">DURATION</Th>
+            <Th className="p-3">PRICE</Th>
+            <Th className="p-3">ACTIONS</Th>
+          </Tr>
+        </Thead>
+        <Tbody >
+          {user?.courses?.length > 0 ? (
+            user.courses.map((course) => (
+              <Tr key={course._id} className="border-b border-gray-700">
+                <Td className="flex items-center gap-4 p-3">
+                  <img
+                    src={course.thumbnail}
+                    alt={course.courseName}
+                    className="w-[10rem] h-full rounded-md object-cover"
+                  />
+                  <div className="text-white flex flex-col gap-y-2">
+                    <p className="font-semibold text-lg">{course.courseName}</p>
+                    <p className="text-sm text-gray-400">{course.courseDescription}</p>
+                    <p className="text-xs text-gray-500">{course.createdAt}</p>
+                    <span
+                      className={`mt-2 px-3 py-1 rounded-full  text-sm font-medium flex self-start items-center  gap-2 ${
+                        course.status === "Draft" ? "text-pink-400 bg-pink-900" : "text-yellow-50 bg-yellow-900"
+                      }`}
+                    >
+                      {course.status === "Draft" ? <FaClock /> : <SiTicktick />}
+                      <p>{course.status}</p>
+                    </span>
+                  </div>
+                </Td>
+                <Td className="p-3 text-white">1h 20min</Td>
+                <Td className="p-3 text-white">${course.price}</Td>
+                <Td className="p-3 flex gap-3 justify-center items-center -translate-y-10">
+                  <MdEdit
+                    className="cursor-pointer text-blue-400 hover:text-blue-100 text-xl"
+                    onClick={() => updateCourse(course)}
+                  />
+                  <RiDeleteBin6Line
+                    className="cursor-pointer text-pink-400 hover:text-pink-100 text-xl"
+                    onClick={() =>
+                      setDeleteModal({
+                        heading: "Are you sure?",
+                        text1: "This action is irreversible. Your course will be permanently deleted.",
+                        button1Text: "Delete",
+                        button2Text: "Cancel",
+                        btn1Onclick: () => deleteCourse(course.instructor, course._id),
+                        btn2Onclick: () => setDeleteModal(null),
+                      })
+                    }
+                  />
+                </Td>
+              </Tr>
+            ))
+          ) : (
             <Tr>
-              <Th>COURSES</Th>
-              <Th>DURATION</Th>
-              <Th>PRICE</Th>
-              <Th>ACTIONS</Th>
+              <Td colSpan="4" className="p-5 text-center text-richblack-5">
+                No Courses Found
+              </Td>
             </Tr>
-          </Thead>
-
-          <Tbody>
-            {user.courses.length > 0 ? (
-              user.courses.map((course) => (
-                <tr key={course._id}>
-                  <td className=" flex gap-x-3">
-                    <img
-                      src={course.thumbnail}
-                      className=" w-[10rem] h-[5rem]"
-                    />
-                    <div className=" flex flex-col gap-y-1 text-richblack-5">
-                      <p>{course.courseName}</p>
-                      <p>{course.courseDescription}</p>
-                      <p>{course.createdAt}</p>
-                      <div
-                        className={` uppercase ${
-                          course.status === "Draft"
-                            ? " text-pink-100"
-                            : " text-yellow-50"
-                        } flex gap-x-2 items-baseline px-3 py-2 rounded-full `}
-                      >
-                        {course.status === "Draft" ? (
-                          <FaClock fill="#f37290" />
-                        ) : (
-                          <SiTicktick fill="#ffd60a" />
-                        )}
-                        <p>{course.status}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className=" text-richblack-5">1h 20min</td>
-                  <td className=" text-richblack-5">{course.price}</td>
-                  <td className=" flex gap-x-2">
-                    <MdEdit fill="#f1f2ff" onClick={() => updateCourse(course)} />
-                    <RiDeleteBin6Line
-                      fill="#f1f2ff"
-                      onClick={() =>
-                        setDeleteAccountModelActiveData({
-                          heading: "Please Rethink again ?",
-                          text1:
-                            "You are on the way of Deleting your Course Permanentaly .",
-                          button1Text: "Delete",
-                          button2Text: "Cancel",
-                          btn1Onclick: () =>
-                            DeleteCourse(course.instructor, course._id),
-                          btn2Onclick: () =>
-                            setDeleteAccountModelActiveData(null),
-                        })
-                      }
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <div className=" text-richblack-5">Course Not Found </div>
-            )}
-          </Tbody>
-        </Table>
-      </div>
-
+          )}
+        </Tbody>
+      </Table>
       {deleteModal && <ConfirmationModal data={deleteModal} />}
-    </>
+    </div>
+  </div>
   );
 };
 

@@ -7,10 +7,10 @@ import * as Icons from "react-icons/fa6"
 const ContactUsPage = () => {
 
   return (
-    <div className=' w-full  bg-richblack-900 '>
+    <div className=' w-full  bg-richblack-900  translate-y-10 '>
 
         {/* contact Form  */}
-        <div className=' w-[85%] flex gap-x-10  mx-auto justify-between py-20'>
+        <div className=' w-[85%] flex gap-x-10  mx-auto justify-between py-20 '>
            
            <div className=' w-[50%] bg-richblack-700  rounded-md flex flex-col gap-y-5 px-10 py-10 h-[23rem] '> 
               {

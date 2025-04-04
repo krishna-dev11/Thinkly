@@ -11,10 +11,10 @@ const DisplayMyCourses = () => {
   const dispatch = useDispatch()
 
   return (
-    <div className=" flex flex-col gap-y-4 px-10 mx-auto py-10">
+    <div className=" flex flex-col gap-y-2 px-10 mx-auto py-10">
 
       <div className=" font-inter flex justify-between px-2">   
-        <p className=" text-richblack-5 text-xl font-semibold font-inter">My Course</p>
+        <p className=" text-richblack-5 text-2xl font-semibold font-inter">My Course</p>
         <button
         onClick={()=>{
           dispatch(setCourse(null))

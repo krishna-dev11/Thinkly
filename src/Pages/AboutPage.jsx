@@ -13,7 +13,7 @@ import ContactForm from '../Components/Core/About.jsx/ContactForm';
 const AboutPage = () => {
 
   return (
-    <div className='  w-[100%] overflow-x-hidden m-0 p-0 box-border '>
+    <div className='  w-[100%] overflow-x-hidden m-0 p-0 box-border translate-y-10  '>
       
       {/* section 1 */}
       <div className=' w-full bg-richblack-800 '>

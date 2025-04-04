@@ -125,10 +125,10 @@ const CourseInformation = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)} className=" w-[95%] bg-richblack-800 rounded-md border border-richblack-700 h-full mx-auto flex flex-col gap-y-4">
+    <form onSubmit={handleSubmit(submitHandler)} className=" w-[95%] bg-richblack-800 rounded-md border border-richblack-700 h-full mx-auto flex flex-col gap-y-4 py-5">
 
-      <label>
-        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+      <label className=" w-[93%] mx-auto">
+        <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5 ">
           Couser Title<sup className="text-pink-200">*</sup>
         </p>
         <input
@@ -147,7 +147,7 @@ const CourseInformation = () => {
         />
       </label>
 
-      <label>
+      <label className=" w-[93%] mx-auto">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
         Course Short Description<sup className="text-pink-200">*</sup>
         </p>
@@ -166,7 +166,7 @@ const CourseInformation = () => {
         />
       </label>
 
-      <label className=" relative">
+      <label className=" w-[93%] mx-auto relative">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5 ">
         Price<sup className="text-pink-200">*</sup>
         </p>
@@ -189,11 +189,15 @@ const CourseInformation = () => {
         </div>
       </label>
 
-      <label className=" relative">
+      <label className=" relative w-[93%] mx-auto">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5 ">
         Category<sup className="text-pink-200">*</sup>
         </p>
         <select
+          style={{
+            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+          }}
+          className="w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder:px-8 placeholder-gray-500 text-richblack-5"
           {...register("CourseCategory" , {
             required:{
                 value:true,
@@ -210,6 +214,7 @@ const CourseInformation = () => {
         </select>
       </label>
 
+      <div className=" w-[93%] mx-auto ">
       <CustomTagInput 
              name="CourseTag"
              lable="Tags"
@@ -217,9 +222,11 @@ const CourseInformation = () => {
              register={register}
              errors={errors}
              setValue = {setValue}
-             getValues = {getValues} />
+             getValues = {getValues} 
+             />
+      </div>
 
-      <label>
+      <label className=" w-[93%] mx-auto">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
         Benefits of the course<sup className="text-pink-200">*</sup>
         </p>
@@ -238,7 +245,8 @@ const CourseInformation = () => {
         />
       </label>
 
-      <Upload
+    <div className="w-[93%]  mx-auto">
+    <Upload
         name="courseImage"
         label="Course Thumbnail"
         register={register}
@@ -246,8 +254,10 @@ const CourseInformation = () => {
         errors={errors}
         // editData={editCourse ? course?.thumbnail : null}
       />
+    </div>
 
-      <CustomInstructionsInput
+    <div className=" w-[93%] mx-auto ">
+    <CustomInstructionsInput
              name="CourseRequirments"
              label="Requirements/Instructions"
              Placeholder="Add Requirments"
@@ -255,6 +265,7 @@ const CourseInformation = () => {
              errors={errors}
              setValue = {setValue}
              getValues = {getValues} />
+    </div>
 
       <button type="submit" className=" px-4 py-2 rounded-md bg-yellow-50 self-end mr-5 ">{editCourse ? "Save Edits" : "Next"}</button>
 

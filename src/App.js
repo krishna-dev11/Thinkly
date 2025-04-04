@@ -24,6 +24,8 @@ import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "./Utilities/Constaints";
 import DisplayMyCourses from "./Components/Core/DashBoard/RightPart/MyCourses/DisplayMyCourses";
 import EditPreviousCourse from "./Components/Core/DashBoard/RightPart/EditCourse/EditPreviousCourse";
+import NotFound from "./Components/Common/NotFound";
+import DisplayCatagoryWiseCourses from "./Pages/DisplayCatagoryWiseCourses";
 
 function App() {
 
@@ -33,10 +35,13 @@ function App() {
   return (
     <div className="h-screen">
       <NavBar />
-      <Routes>
+      <Routes >
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
+
+        <Route path="/catalog/:categoryName/:categoryId" element={<DisplayCatagoryWiseCourses />} />
 
         {/* OPEN Routes */}
         <Route

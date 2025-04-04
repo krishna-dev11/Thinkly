@@ -44,9 +44,10 @@ export const courseEndpoints = {
   CREATE_RATING_API: BASE_URL + "/course/createRating",
   PUBLISH_COURSE_API: BASE_URL + "/course/publishCourse",
   GET_INSTRUCTORs_All_COURSES_API: BASE_URL + "/course/getAllCoursesOfInstructor",
-  
-  
+  GET_CATEGORY_WISE_COURSES_API: BASE_URL + "/course/categoryPageDetails",
+
 }
+
 
 
 // RATINGS AND REVIEWS
@@ -61,8 +62,9 @@ export const categories = {
 
 // CATALOG PAGE DATA
 export const catalogData = {
-  CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
+  CATALOGPAGEDATA_API : BASE_URL + "/course/categoryPageDetails",
 }
+
 // CONTACT-US API
 export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/reach/contact",

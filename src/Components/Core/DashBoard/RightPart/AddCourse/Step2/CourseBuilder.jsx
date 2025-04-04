@@ -88,7 +88,7 @@ const CourseBuilder = () => {
 
         <form
           onSubmit={handleSubmit(FormSubmitHandler)}
-          className=" flex flex-col gap-y-2"
+          className=" flex flex-col gap-y-5"
         >
           <label>
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
@@ -110,7 +110,7 @@ const CourseBuilder = () => {
           { editSection ? (
             <button
               type="submit"
-              className=" px-5 py-2 border-yellow-50 border-[2px] self-center items-center rounded-md  flex gap-x-2"
+              className=" px-5 py-2 border-yellow-50 border-[2px] self-start items-center rounded-md  flex gap-x-2"
             >
               <IoIosAddCircleOutline fill="#ffd60a" />
               <p className=" text-yellow-50">Edit Section</p>
@@ -118,7 +118,7 @@ const CourseBuilder = () => {
           ) : (
             <button
               type="submit"
-              className=" px-5 py-2 border-yellow-50 border-[2px] self-center items-center rounded-md  flex gap-x-2"
+              className=" px-3 py-2 border-yellow-50 border-[2px] self-start  items-center rounded-md  flex gap-x-2"
             >
               <IoIosAddCircleOutline fill="#ffd60a" />
               <p className=" text-yellow-50">Create Section</p>
@@ -127,8 +127,8 @@ const CourseBuilder = () => {
         </form>
       </div>
 
-      <div className=" flex gap-x-2">
-        <button className=" flex px-2 py-1 rounded-md bg-richblack-700" onClick={()=>
+      <div className=" flex  justify-between w-full px-3">
+        <button className=" flex px-2 py-1 rounded-md bg-richblack-700 items-center text-richblack-5 justify-center " onClick={()=>
         {
           dispatch(setEditCourse(true))
           dispatch(setStep(1))
@@ -136,7 +136,7 @@ const CourseBuilder = () => {
           <IoIosArrowBack />
           <p>Back</p>
         </button>
-        <button className=" flex px-2 py-1 rounded-md bg-yellow-50"
+        <button className=" flex px-2 py-1 rounded-md bg-yellow-50 items-center justify-center"
                 onClick={()=>dispatch(setStep(3))}>
           <p>Next</p>
           <IoIosArrowForward />

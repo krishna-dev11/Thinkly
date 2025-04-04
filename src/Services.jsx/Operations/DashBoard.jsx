@@ -146,7 +146,7 @@ export function DeleteAccountPermanentaly(token, data, navigate) {
 
 export function GetAllCategories() {
   return async (dispatch) => {
-    const toastId = toast.loading("Loading");
+    // const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("GET", COURSE_CATEGORIES_API);
@@ -162,7 +162,7 @@ export function GetAllCategories() {
       console.log(error);
     }
     dispatch(setLoading(false));
-    toast.dismiss(toastId);
+    // toast.dismiss(toastId);
   };
 }
 
@@ -337,7 +337,7 @@ export function AddNewSubSection(
       //  console.log(response.data.data)
       dispatch(setCourse(response.data.data));
 
-      console.log(addSubSection, editSubSection, viewSubSection);
+      // console.log(addSubSection, editSubSection, viewSubSection);
 
       addSubSection && dispatch(SetaddSubSection(null));
       editSubSection && dispatch(SeteditSubSection(null));
@@ -352,7 +352,9 @@ export function AddNewSubSection(
   };
 }
 
-export function EditSubSection(FormData, token) {
+export function EditSubSection(FormData, token ,  addSubSection,
+  editSubSection,
+  viewSubSection) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
@@ -373,7 +375,11 @@ export function EditSubSection(FormData, token) {
       console.log(response.data.data);
       dispatch(setCourse(response.data.data));
 
-      toast.success("SubSection Created Successfully");
+      addSubSection && dispatch(SetaddSubSection(null));
+      editSubSection && dispatch(SeteditSubSection(null));
+      viewSubSection && dispatch(SetviewSubSection(null));
+
+      toast.success("SubSection Edited Successfully");
     } catch (error) {
       console.log(error);
     }
@@ -511,3 +517,5 @@ export function DeleteInstructorCourses(InstructorId , CourseId , token) {
     toast.dismiss(toastId);
   };
 }
+
+
