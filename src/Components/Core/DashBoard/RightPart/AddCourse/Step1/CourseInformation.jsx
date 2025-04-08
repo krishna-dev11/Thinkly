@@ -9,6 +9,7 @@ import CustomTagInput from "./CustomTagInput";
 import CustomInstructionsInput from "./CustomInstructionsInput";
 import Upload from "./Upload";
 import { COURSE_STATUS } from "../../../../../../Utilities/Constaints";
+import CourseBenifitsInput from "./CourseBenifitsInput";
 
 const CourseInformation = () => {
 
@@ -86,7 +87,9 @@ const CourseInformation = () => {
         formData.append("price" , event.CoursePrice)
         formData.append("category" , event.CourseCategory)
         formData.append("tag" , JSON.stringify(event.CourseTag))
-        formData.append("whatYouWillLearn" , event.CourseBenefits)
+        // formData.append("whatYouWillLearn" , event.CourseBenefits)
+        formData.append("whatYouWillLearn" , JSON.stringify(event.CourseBenefits))
+
         formData.append("instructions" , JSON.stringify(event.CourseRequirments))
         formData.append("thumbnailImage" , event.courseImage)
         formData.append("status" , course.status)
@@ -111,7 +114,8 @@ const CourseInformation = () => {
      formData.append("price" , event.CoursePrice)
      formData.append("category" , event.CourseCategory)
      formData.append("tag" , JSON.stringify(event.CourseTag))
-     formData.append("whatYouWillLearn" , event.CourseBenefits)
+     formData.append("whatYouWillLearn" , JSON.stringify(event.CourseBenefits))
+    //  formData.append("whatYouWillLearn" , event.CourseBenefits)
      formData.append("instructions" , JSON.stringify(event.CourseRequirments))
      formData.append("thumbnailImage" , event.courseImage)
      formData.append("status" , COURSE_STATUS.DRAFT)
@@ -226,7 +230,21 @@ const CourseInformation = () => {
              />
       </div>
 
-      <label className=" w-[93%] mx-auto">
+
+
+      <div className=" w-[93%] mx-auto ">
+      <CourseBenifitsInput
+             name="CourseBenefits"
+             lable="Benefits of the course"
+             Placeholder="Enter Benefits of the course"
+             register={register}
+             errors={errors}
+             setValue = {setValue}
+             getValues = {getValues} 
+             />
+      </div>
+
+      {/* <label className=" w-[93%] mx-auto">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
         Benefits of the course<sup className="text-pink-200">*</sup>
         </p>
@@ -243,7 +261,7 @@ const CourseInformation = () => {
           }}
           className="w-full rounded-[0.5rem] bg-richblack-700  p-[10px] placeholder-gray-500 text-richblack-5"
         />
-      </label>
+      </label> */}
 
     <div className="w-[93%]  mx-auto">
     <Upload

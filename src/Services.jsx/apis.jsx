@@ -39,12 +39,21 @@ export const courseEndpoints = {
   DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
   DELETE_COURSE_API: BASE_URL + "/course/deleteCourseOfInstructor",
   GET_FULL_COURSE_DETAILS_AUTHENTICATED:
-    BASE_URL + "/course/getFullCourseDetails",
+    BASE_URL + "/course/getAllDetailsOfOneCourse",
   LECTURE_COMPLETION_API: BASE_URL + "/course/updateCourseProgress",
   CREATE_RATING_API: BASE_URL + "/course/createRating",
   PUBLISH_COURSE_API: BASE_URL + "/course/publishCourse",
   GET_INSTRUCTORs_All_COURSES_API: BASE_URL + "/course/getAllCoursesOfInstructor",
   GET_CATEGORY_WISE_COURSES_API: BASE_URL + "/course/categoryPageDetails",
+  GET_ALL_COURSES_DETAILS_FOR_CARD_VIEW : BASE_URL + "/course/getEnrolledCoursesDataForCardViews"
+}
+
+
+// Cart
+export const CartEndpoints = {
+  ADD_COURSE_IN_CART_API: BASE_URL + "/course/AddCourseInCart",
+  REMOVED_COURSE_IN_CART_API: BASE_URL + "/course/RemoveCourseInCart",
+  EMTYING_CART_API: BASE_URL + "/course/EmptyCart"
 
 }
 

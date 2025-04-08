@@ -17,6 +17,7 @@ const UpdateProfile = () => {
     register,
     handleSubmit,
     reset,
+    setValue, getValues ,
     formState: { errors, isSubmitSuccessful },
   } = useForm();
 
@@ -44,7 +45,10 @@ const UpdateProfile = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(SubmitUpdatedProfileDetails)} className=" flex flex-col gap-y-5 items-end">
+    <form
+      onSubmit={handleSubmit(SubmitUpdatedProfileDetails)}
+      className=" flex flex-col gap-y-5 items-end"
+    >
       <div className=" flex flex-col py-4 rounded-md px-5 w-full bg-richblack-800  gap-x-3  border border-richblack-700">
         <p className=" text-richblack-5 text-lg font-inter font-semibold">
           Profile Information
@@ -72,6 +76,7 @@ const UpdateProfile = () => {
               />
               {errors.FirstName && <span>{errors.FirstName.message}</span>}
             </label>
+            
             <label className=" w-[48%]">
               <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                 Last Name<sup className="text-pink-200">*</sup>
@@ -95,7 +100,6 @@ const UpdateProfile = () => {
           </div>
 
           <div className=" flex  justify-between">
-
             <label className=" w-[48%]">
               <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
                 Date of Birth<sup className="text-pink-200">*</sup>
@@ -123,12 +127,18 @@ const UpdateProfile = () => {
                 Gender<sup className="text-pink-200">*</sup>
               </p>
               <div className=" flex gap-x-3 bg-richblack-700 rounded-md px-3 py-4 ">
-                <CustomRadioButton/>
+                <CustomRadioButton
+                  name="gender"
+                  lable="Gender"
+                  Placeholder="Enter Benefits of the course"
+                  register={register}
+                  errors={errors}
+                  setValue={setValue}
+                  getValues={getValues}
+                />
               </div>
             </label>
           </div>
-
-
 
           <div className=" flex justify-between">
             <label className=" w-[48%]">
@@ -171,7 +181,7 @@ const UpdateProfile = () => {
               <textarea
                 type="text"
                 name="about"
-                placeholder="Enter Bio Details"
+                placeholder=" Please Enter Bio In Second Person Voice"
                 {...register("about", {
                   required: {
                     value: true,

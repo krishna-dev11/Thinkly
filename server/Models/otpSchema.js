@@ -40,11 +40,6 @@ otpSchema.pre("save" , async function(next){
         console.log("error in sending the email by function call")
     }
 
-   // if(this.isNew){
-   //    await sendVerificationEmail(this.email , this.otp)
-      
-   //      next()
-   // }
 })
 
 

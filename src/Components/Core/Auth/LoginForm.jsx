@@ -67,6 +67,7 @@ const LoginForm = () => {
       }}
     />
   </label>
+
   <label  className='relative'>
     <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5 ">Password <sup className="text-pink-200">*</sup></p>
     <input
@@ -92,6 +93,7 @@ const LoginForm = () => {
         <span>Forgot Password</span>
     </Link>
   </label>
+  
   <button
     type="submit"
     className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
@@ -100,6 +102,7 @@ const LoginForm = () => {
   </button>
 
 </form>
+
     </div>
 
   )

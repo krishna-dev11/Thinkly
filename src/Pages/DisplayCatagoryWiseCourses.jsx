@@ -22,7 +22,7 @@ const DisplayCategoryWiseCourses = () => {
       }
     };
     getCategoryCourses();
-  }, [categoryId, categoryName]);
+  }, [categoryId , categoryName]);
 
   // Jab tak data load ho raha hai, ek loading state dikhao
   if (loading) {
@@ -34,7 +34,7 @@ const DisplayCategoryWiseCourses = () => {
   }
 
   return (
-    <div className="flex flex-col w-full h-[calc(100%-6%)] translate-y-10 bg-richblack-900">
+    <div className="flex flex-col w-full h-[calc(100%-6%)] translate-y-7 bg-richblack-900">
       <CategoryWiseCoursesPageTopPart />
       <Fotter />
     </div>

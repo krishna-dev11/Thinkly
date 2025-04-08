@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
    category : [] , 
    CategoryWiseCourses : null,
+   courseDetails : null
 }
 
 
@@ -15,9 +16,12 @@ const initialState = {
          },
          setCategoryWiseCourses(state , action){
             state.CategoryWiseCourses = action.payload
+         },
+         setWholeCourseData(state , action){
+            state.courseDetails = action.payload
          }
       }
       })
 
-  export const {setCategories , setCategoryWiseCourses} = CategorySlice.actions
+  export const {setCategories , setCategoryWiseCourses , setWholeCourseData } = CategorySlice.actions
   export default CategorySlice.reducer

@@ -6,6 +6,7 @@ import CourseReducer from '../Slices/Courses'
 import CategoryReducer from '../Slices/Categories'
 import SectionReducer from '../Slices/Section'
 import SubSectionReducer from '../Slices/SubSection'
+import CartReducer from '../Slices/Cart'
 
 export const rootReducer = combineReducers({
     auth:authReducer,
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
     Category:CategoryReducer,
     section:SectionReducer,
     subsection:SubSectionReducer,
+    cart : CartReducer
 })

@@ -81,7 +81,7 @@ export default function Upload({
       >
         <input {...getInputProps()} disabled={viewSubSection}/>
 
-        {previewSource || (editSubSection && editSubSection.videoUrl) || (viewSubSection && viewSubSection.videoUrl) ? (
+        {previewSource  || (editSubSection && editSubSection.videoUrl) || (viewSubSection && viewSubSection.videoUrl) ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
               <img

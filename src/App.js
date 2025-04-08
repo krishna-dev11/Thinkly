@@ -26,6 +26,11 @@ import DisplayMyCourses from "./Components/Core/DashBoard/RightPart/MyCourses/Di
 import EditPreviousCourse from "./Components/Core/DashBoard/RightPart/EditCourse/EditPreviousCourse";
 import NotFound from "./Components/Common/NotFound";
 import DisplayCatagoryWiseCourses from "./Pages/DisplayCatagoryWiseCourses";
+import ONECourseDetail from "./Pages/ONECourseDetail";
+import EnrolledCourses from "./Pages/EnrolledCourses";
+import ActiveCourseList from "./Components/Core/EnrolledCourses/Right/ActiveCourseList";
+import Bookmarks from "./Components/Core/EnrolledCourses/Right/Bookmarks";
+import Community from "./Components/Core/EnrolledCourses/Right/Community";
 
 function App() {
 
@@ -40,6 +45,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
+        <Route path="/CourseDetails/:CourseId" element={<ONECourseDetail />}/>
+
 
         <Route path="/catalog/:categoryName/:categoryId" element={<DisplayCatagoryWiseCourses />} />
 
@@ -137,6 +144,26 @@ function App() {
           )}
 
         </Route>
+
+
+        <Route
+          element={
+            <PrivateRoute>
+              <EnrolledCourses />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} />
+          <Route path="/EnrolledCourses/book-marks" element={<Bookmarks/>} />
+          <Route path="/EnrolledCourses/community" element={<Community/>} />
+          {/* <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} />
+          <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} /> */}
+
+
+
+        </Route>
+
+
       </Routes>
     </div>
   );

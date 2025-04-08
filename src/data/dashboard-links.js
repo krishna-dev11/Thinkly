@@ -1,4 +1,10 @@
+import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "../Utilities/Constaints";
+import { useEffect } from "react";
+
+
+
+
 export const sidebarLinks = [
   {
     name: "My Profile",
@@ -19,7 +25,7 @@ export const sidebarLinks = [
   },
   {
     name: "Enrolled Courses",
-    path: "/dashboard/enrolled-courses",
+    path: `/EnrolledCourses/active-Courses`,
     type: ACCOUNT_TYPE.STUDENT,
     icon: "FaBook"
   },
@@ -47,4 +53,23 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.INSTRUCTOR,
     icon: "FaPlus",
   },
+];
+
+
+export const BuyedCoursessidebarLinks = [
+  {
+    name: "Active Courses",
+    path: "/EnrolledCourses/active-Courses",
+    icon: "FaBook",
+  },
+  {
+    name: "Bookmarks",
+    path: "/EnrolledCourses/book-marks",
+    icon: "FaBookmark",
+  },
+  {
+    name: "Community",
+    path: "/EnrolledCourses/community",
+    icon: "FaRegComments",
+  }
 ];

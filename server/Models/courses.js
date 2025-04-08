@@ -13,10 +13,12 @@ const coursesSchema = new mongoose.Schema({
         required:true,
         ref:"user"
     },
-    whatYouWillLearn:{
-        type:String,
-        required:true
-    },
+    whatYouWillLearn:[
+        {
+            type:String,
+            required:true
+        }
+    ],
     courseContent:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"section"

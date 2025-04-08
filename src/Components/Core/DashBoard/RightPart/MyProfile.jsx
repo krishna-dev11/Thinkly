@@ -10,12 +10,13 @@ const MyProfile = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="  h-full w-full">
-      <p className=" text-richblack-5 text-2xl font-semibold px-4 py-5">
-        My Profile
-      </p>
+    <div className="  w-full py-10 flex flex-col gap-y-4">
+      <div className="  px-4 flex flex-col gap-y-3">
+        <p className=" text-richblack-5"> Home / Dashboard / <span className=" text-yellow-50">My-Profile</span></p>
+        <p className="text-richblack-5 text-3xl font-semibold">My Profile</p>
+      </div>
 
-      <div className=" w-[80%] h-[80%]  mx-auto flex flex-col gap-y-4 mt-4">
+      <div className=" w-[80%] h-[80%]  mx-auto flex flex-col gap-y-4 mt-4 ">
 
 
         <div className=" flex justify-between py-3 rounded-md px-5 w-full bg-richblack-800 items-center border border-richblack-700">

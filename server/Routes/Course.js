@@ -2,13 +2,19 @@ const express = require("express")
 const router = express.Router();
 
 // import Controllers
-const {createCourse , showAllCourse , editCourse ,  getAllDetailsOfOneCourse , publishCourse , getAllCoursesOfInstructor , deleteCourseOfInstructor} = require("../Controllers/course")
+const {createCourse , showAllCourse , editCourse ,  getAllDetailsOfOneCourse , publishCourse , getAllCoursesOfInstructor , deleteCourseOfInstructor  , getEnrolledCoursesDataForCardViews , getCartCoursesData , AddCourseInCart , RemoveCourseInCart , EmptyCart} = require("../Controllers/course")
+// const {getEnrolledCoursesDataForCardViews} = require("../Controllers/CourseProgres")
+
+
 const {creatcategory , getAllCategory , categoryPageDetails} = require("../Controllers/Category")
 const {createSection , updateSection , deleteSection} = require("../Controllers/Section")
 const {createSubSection , updateSubSection , deleteSubSection} = require("../Controllers/Subsection")
 const {createRatingAndReviews , getAverageRating , getAllRatingAndReviews} = require("../Controllers/RatingAndReviews")
 // middleware
 const {auth , isStudent , isInstructor , isAdmin} = require("../Middlewares/auth")
+
+
+
 
 
 
@@ -20,6 +26,14 @@ router.post('/getAllDetailsOfOneCourse',  getAllDetailsOfOneCourse)
 router.post('/publishCourse', auth , isInstructor , publishCourse)
 router.post('/getAllCoursesOfInstructor' , auth , isInstructor ,  getAllCoursesOfInstructor)
 router.post('/deleteCourseOfInstructor' , auth , isInstructor ,  deleteCourseOfInstructor)
+router.post('/getEnrolledCoursesDataForCardViews' , auth , isStudent ,  getEnrolledCoursesDataForCardViews)
+router.post('/getCartCoursesData' , auth , isStudent ,  getCartCoursesData)
+router.post('/AddCourseInCart' , auth , isStudent ,  AddCourseInCart)
+router.post('/RemoveCourseInCart' , auth , isStudent ,  RemoveCourseInCart)
+router.post('/EmptyCart' , auth , isStudent ,  EmptyCart)
+
+
+
 
 
 

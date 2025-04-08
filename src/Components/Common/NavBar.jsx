@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../assets/Logo/Logo-Full-Light.png'
+import logoDark from '../../assets/Logo/Logo-Full-Dark.png'
 import {NavbarLinks} from '../../data/navbar-links'
 import { Link, matchPath, useNavigate } from 'react-router-dom'
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -23,6 +24,10 @@ const NavBar = () => {
  const {token} = useSelector((state)=>state.auth)
  const {user} = useSelector((state)=>state.profile)
  const location = useLocation();
+
+ const conditionFormNavBarWholeStyle = location.pathname.split("/").includes("EnrolledCourses")
+
+
 
  const dispatch = useDispatch()
  const navigate = useNavigate()
@@ -64,19 +69,19 @@ const NavBar = () => {
     },[])
 
   return (
-    <div className=" w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 fixed z-50">
+    <div className={`${ conditionFormNavBarWholeStyle  ? " w-full h-[8%]  border border-richblack-100 bg-white  backdrop-blur-md  border-b-[1px] border-white/20 fixed z-50" : "w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 fixed z-50"}`}>
 
       <div className=' flex justify-between items-center w-11/12  mx-auto h-full px-10'>
         
        <Link to={"/"}>
-       <img src={logo} className='w-[9rem]'/>
+       <img src={conditionFormNavBarWholeStyle ? logoDark : logo} className='w-[9rem]'/>
        </Link>
 
  {/* middle part */}
             <ul className='flex gap-x-5'>
                 { 
                   NavbarLinks.map((link , index)=>(
-                    <li className='text-white ' key={index}>{
+                    <li className={`${ conditionFormNavBarWholeStyle  ? " text-richblack-900" : " text-white"}`} key={index}>{
                         link?.title === 'Catalog' ? (<Link to={link?.path} className=' group'>
                             <div className='relative '>
                                 <div className='flex gap-x-1 items-baseline '>
@@ -93,7 +98,7 @@ const NavBar = () => {
                                 <div className='h-5 w-5 bg-white  absolute rotate-45 top-7 left-14 opacity-0 group-hover:opacity-100 '></div>
                             </div>
                         </Link>) : (
-                            <Link to={link?.path} className={` ${mathroute(link?.path) ? "text-yellow-25" : "text-white"}`}>{link.title}</Link>
+                            <Link to={link?.path} className={` ${mathroute(link?.path) ? "text-yellow-25" : conditionFormNavBarWholeStyle  ? " text-richblack-900" : " text-white"}`}>{link.title}</Link>
                         )
                     }</li>
                   ))
@@ -106,18 +111,18 @@ const NavBar = () => {
 
         {
           <div>
-          <CiSearch fill="white" size={25}/>
+          <CiSearch fill={conditionFormNavBarWholeStyle  ? "black" : "white"} size={25}/>
           </div>
         }
 
         {
           token === null  && 
           <div>
-             <Link to={"/login"} className='py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20'>Login</Link>
+             <Link to={"/login"} className={`${conditionFormNavBarWholeStyle  ? " py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20" : " py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20"}`}>Login</Link>
          </div>
 
         }
-
+   
         {
           token === null  && 
           <div>
@@ -129,10 +134,10 @@ const NavBar = () => {
 
         {
           user !== null && user.accountType !== "Instructor" && 
-          <Link to={"/dashboard/cart"}>
+          <Link to={"/dashboard/wishlist"}>
           <div className=' relative flex flex-col gap-x-1'>
-          <MdOutlineShoppingCart fill='white' size={23} />
-          <span className='absolute h-4 w-4 bg-white right-[-.9rem] top-[-.5rem] rounded-full animate-bounce '></span>
+          <MdOutlineShoppingCart fill={conditionFormNavBarWholeStyle  ? "black" : "white"} size={23} />
+          <span className={` justify-center items-center flex  font-inter font-semibold ${conditionFormNavBarWholeStyle  ? "absolute h-4 w-4  bg-richblack-900 text-white right-[-.9rem] top-[-.5rem] rounded-full animate-bounce" : "absolute h-4 w-4 bg-white right-[-.9rem] top-[-.5rem] rounded-full animate-bounce "}`}>{user.cart.length}</span>
           </div>
           </Link> 
         }

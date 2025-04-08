@@ -8,7 +8,7 @@ const CategoryWiseCoursesPageTopPart = () => {
     console.log(CategoryWiseCourses.selectedCategory.course)
 
   return (
-    <div className=' mt-4'>
+    <div className=''>
         {/* specifications part */}
         <div className=' bg-richblack-700  flex '>
             <div className=' flex flex-col gap-x-1'>
