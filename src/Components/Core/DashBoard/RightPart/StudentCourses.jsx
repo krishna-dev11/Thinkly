@@ -1,11 +1,10 @@
-
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Wrench } from 'lucide-react'
 
-const PurchaseHistory = () => {
+const StudentCourses = () => {
   return (
-    <div className="h-screen w-full bg-gradient-to-br text-white from-gray-100 to-white flex flex-col items-center justify-center px-4">
+    <div className="h-screen w-full bg-gradient-to-br text-richblack-5 from-gray-100 to-white flex flex-col items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -39,4 +38,5 @@ const PurchaseHistory = () => {
   )
 }
 
-export default PurchaseHistory
+export default StudentCourses
+

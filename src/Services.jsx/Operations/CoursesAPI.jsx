@@ -57,7 +57,7 @@ export function GetWholeCourseDetails(courseId) {
         }
       );
 
-      // console.log(response.data.data)
+      console.log(response.data.data)
       dispatch(setWholeCourseData(response.data.data));
       // localStorage.setItem("CategoryCourses" , JSON.stringify(response.data.data))
 

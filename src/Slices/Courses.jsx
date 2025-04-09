@@ -4,7 +4,8 @@ const initialState = {
    Step:1,
    course:null,
    editCourse : false , 
-   userBuyedCoursesDataForCard : null
+   userBuyedCoursesDataForCard : null,
+   videoUrl: null
 }
 
 
@@ -26,8 +27,11 @@ const initialState = {
          setUserBuyedCoursesDataForCard(state , action){
             state.userBuyedCoursesDataForCard = action.payload
          },
+         setCurrectVideoUrl(state , action){
+            state.videoUrl = action.payload
+         },
       }
       })
 
-  export const {setStep , setCourse , setEditCourse , setUserBuyedCoursesDataForCard} = CourseSlice.actions
+  export const {setStep , setCourse , setEditCourse , setUserBuyedCoursesDataForCard ,setCurrectVideoUrl} = CourseSlice.actions
   export default CourseSlice.reducer

@@ -537,6 +537,9 @@ exports.getEnrolledCoursesDataForCardViews = async (req, res) => {
           path: "courses",
           populate:{
             path:"instructor"
+          },
+          populate:{
+                        path:"courseContent"
           }
   
         },

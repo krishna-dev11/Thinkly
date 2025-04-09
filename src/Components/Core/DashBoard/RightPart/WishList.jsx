@@ -35,10 +35,9 @@ const WishList = () => {
       console.log("jnsksddsnfdsks")
        if(token){
         // await dispatch(buyCourse( token , [ courseIds ] ,  totalAmount , user    , navigate , dispatch ))
-        buyCourse( token , [ courseIds ] ,  totalAmount , user    , navigate , dispatch )
+       const response =  buyCourse( token ,  courseIds  ,  totalAmount , user    , navigate , dispatch )
         // await dispatch(EmtingCartAfterBuying(user._id , token ))
-        EmtingCartAfterBuying(user._id , token )
-        return
+       return
        }
     }catch(error){
         console.log(error)
@@ -72,20 +71,21 @@ const WishList = () => {
 
       <div className="h-[1px] w-[90%] mx-auto bg-richblack-300"></div>
 
-      <div className=" flex gap-x-4 px-8  justify-evenly">
+      <div className=" flex gap-x-4 px-10">
         {/* table */}
-         <Table className=" w-[60%]">
+         <div className="w-[65%]  self-start">
+         <Table className="  left-10">
            <Tbody className="">
               {
                 user.cart.map(course=>(
-                  <Tr key={course._id} className=" h-[12rem] justify-center items-center flex  border border-b-richblack-700 gap-x-3  ">
+                  <Tr key={course._id} className=" h-[12rem]  items-center flex  border border-b-richblack-700 gap-x-3  ">
                      <Td>
-                        <img src={course.thumbnail} className=" w-[480px]  h-[100px] rounded-md"/>
+                        <img src={course.thumbnail} className=" min-w-[15rem] max-w-[15rem] self-start rounded-md"/>
                      </Td>
-                     <Td className=" flex flex-col gap-y-1 text-white py-4">
+                     <Td className=" flex flex-col gap-y-1 text-white py-4 min-w-[45%]">
                        <p className=" text-richblack-5 font-semibold font-inter">{course.courseName}</p>
                        <p className=" italic text-xs  text-richblack-300 ">{course.courseDescription}</p>
-                       <p className=" lowercase">{course.instructor.firstName} {course.instructor.lastName}</p>
+                       {/* <p className=" lowercase italic">{course.instructor.firstName} {course.instructor.lastName}</p> */}
                        <div>
 
                        </div>
@@ -95,7 +95,7 @@ const WishList = () => {
                          <li>Beginner</li>
                        </ul>
                      </Td>
-                     <Td className=" flex flex-col gap-y-3">
+                     <Td className=" flex flex-col gap-y-3 self-start mt-5">
                       <button className=" flex justify-center items-center px-3 py-2 rounded-md border border-richblack-700 bg-richblack-800 gap-x-1 "
                       onClick={()=>handleRemoveCourseFromCart(course._id)}>
                         <RiDeleteBin5Line fill="#ef476f"/>
@@ -108,13 +108,17 @@ const WishList = () => {
               }
            </Tbody>
          </Table>
+         </div>
 
         {/* Total pay */}
-        <div className=" flex flex-col gap-y-2 font-inter bg-richblack-800 w-[30%] h-[17rem] rounded-md px-5 py-5 ">
+        <div className=" flex flex-col gap-y-2 font-inter bg-richblack-800 w-[30%] absolute  right-11 mt-3 rounded-md px-5 py-5 ">
           <p className=" text-richblack-300 ">Total : </p>
           <p className=" text-2xl text-yellow-50 font-semibold">{`Rs. ${totalAmount}`}</p>
-          <p className="  text-richblack-600 line-through">{`Rs. ${totalAmount + 256}`}</p>
+          {
+            (!totalAmount==0) && <p className="  text-richblack-600 line-through">{`Rs. ${totalAmount + Math.floor(Math.random() * (256-156))+156}`}</p>
+          }
           <button className=" w-[full] py-2 rounded-md bg-yellow-50 text-richblack-900 justify-center flex items-center"
+          disabled={totalAmount == 0}
           onClick={()=>handleBuyCartCourses()}>
              Pay Now
           </button>

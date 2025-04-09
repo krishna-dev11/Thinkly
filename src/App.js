@@ -31,6 +31,10 @@ import EnrolledCourses from "./Pages/EnrolledCourses";
 import ActiveCourseList from "./Components/Core/EnrolledCourses/Right/ActiveCourseList";
 import Bookmarks from "./Components/Core/EnrolledCourses/Right/Bookmarks";
 import Community from "./Components/Core/EnrolledCourses/Right/Community";
+import InstructorDashboard from "./Components/Core/DashBoard/RightPart/InstructorDashboard";
+import ViewCourse from "./Pages/ViewCourse";
+import ViewLectureVideo from "./Components/Core/ViewCourse/Right/ViewLectureVideo";
+import StudentCourses from "./Components/Core/DashBoard/RightPart/StudentCourses";
 
 function App() {
 
@@ -38,7 +42,7 @@ function App() {
   // console.log(user.accountType)
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-richblack-900">
       <NavBar />
       <Routes >
         <Route path="*" element={<NotFound />} />
@@ -128,6 +132,7 @@ function App() {
                 element={<PurchaseHistory />}
               />
               <Route path="/dashboard/wishlist" element={<WishList />} />
+              <Route path="/dashboard/courses" element={<StudentCourses/>} />
             </>
           )}
 
@@ -139,6 +144,7 @@ function App() {
                 element={<DisplayMyCourses />}
               />
               <Route path="/dashboard/edit-course" element={<EditPreviousCourse />} />
+              <Route path="/dashboard/instructor" element={<InstructorDashboard/>}/>
 
             </>
           )}
@@ -156,15 +162,24 @@ function App() {
           <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} />
           <Route path="/EnrolledCourses/book-marks" element={<Bookmarks/>} />
           <Route path="/EnrolledCourses/community" element={<Community/>} />
-          {/* <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} />
-          <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} /> */}
+
+        </Route>
 
 
+        <Route
+          element={
+            <PrivateRoute>
+              <ViewCourse/>
+            </PrivateRoute>
+          }
+        >
+          <Route path="/course/:CourseId/section/:SectionId/subSection/:SubSectionId" element={<ViewLectureVideo/>} />
 
         </Route>
 
 
       </Routes>
+
     </div>
   );
 }

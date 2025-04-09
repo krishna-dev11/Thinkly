@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import CountryCode from '../../../data/countrycode.json'
+import toast from 'react-hot-toast'
 
 const ContactForm = ({heading , description }) => {
 
@@ -30,6 +31,8 @@ const ContactForm = ({heading , description }) => {
     const ActionTaken = (event)=>{
 
         console.log(event)
+
+        toast.success("We Are Connected to You ")
 
         // dispatch()
     }

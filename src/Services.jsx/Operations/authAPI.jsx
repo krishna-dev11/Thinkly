@@ -137,11 +137,13 @@ export function setLogOut(navigate){
             dispatch(settoken(null))
             localStorage.clear("user")
 
-            window.location.reload()
-            
             toast.success("LogOut")
 
-            navigate("/")
+            window.location.reload()
+            
+
+
+            navigate("/login")
 
         }catch(error){
              console.log(error)

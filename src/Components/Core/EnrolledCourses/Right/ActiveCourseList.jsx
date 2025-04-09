@@ -38,7 +38,7 @@ const ActiveCourseList = () => {
   }
 
   return (
-    <div className=" translate-y-5 px-6 py-4 flex flex-col gap-y-5">
+    <div className="  px-6 py-4 flex flex-col gap-y-5 bg-white">
       <div className=" flex flex-col gap-y-2">
         <div className=" flex gap-x-2 items-center">
           <FaArrowLeft />
@@ -53,13 +53,17 @@ const ActiveCourseList = () => {
           Active Courses
         </p>
       </div>
-      <div className=" flex flex-wrap gap-x-4 gap-y-4">
+      {
+         userBuyedCoursesDataForCard.courses.length > 0   ? (
+              <div className=" flex flex-wrap gap-x-4 gap-y-4">
         {
            userBuyedCoursesDataForCard.courses.map(course=>(
-            <BuyedCourseCard key={course._id} data={course}/>
+            <BuyedCourseCard key={course._id} data={course }/>
            ))
         }
       </div>
+            ) : (<div className=" text-richblack-900  h-full w-full justify-center items-center place-items-center"> Yet Not Enrolled in Any course...</div>)
+      }
     </div>
   );
 };

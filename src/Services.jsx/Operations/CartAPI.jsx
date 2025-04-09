@@ -30,8 +30,9 @@ export function AddNewCouseInCart(CourseId , UserID , token , navigate) {
   
         console.log(response.data.data);
 
-        localStorage.setItem("user" , JSON.stringify(response.data.data))
+
         dispatch(setUser(response.data.data));
+        localStorage.setItem("user" , JSON.stringify(response.data.data))
 
         toast.success("Course Add in Cart")
 
@@ -85,7 +86,7 @@ export function AddNewCouseInCart(CourseId , UserID , token , navigate) {
 
   export function EmtingCartAfterBuying(UserID , token ) {
     return async (dispatch) => {
-      console.log(UserID, token , "sabh badhiya");
+      console.log( "sabh badhiya");
       const toastId = toast.loading("Loading");
       dispatch(setLoading(true));
       try {

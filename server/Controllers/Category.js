@@ -1,9 +1,9 @@
 // const { COURSE_STATUS } = require("../../src/Utilities/Constaints");
 const category = require("../Models/category");
-require('dotenv').config();
+require("dotenv").config();
 
 function getRandomInt(max) {
-  return Math.floor(Math.random() * max)
+  return Math.floor(Math.random() * max);
 }
 
 // Checked
@@ -24,7 +24,7 @@ exports.creatcategory = async (req, res) => {
     if (categoryAlreadyExist) {
       return res.status(400).json({
         success: false,
-        message:"you already created the similar category previously",
+        message: "you already created the similar category previously",
       });
     }
     //
@@ -41,7 +41,8 @@ exports.creatcategory = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "there would be some error on creating a new category in database",
+      message:
+        "there would be some error on creating a new category in database",
     });
   }
 };
@@ -49,7 +50,10 @@ exports.creatcategory = async (req, res) => {
 // checked
 exports.getAllCategory = async (req, res) => {
   try {
-    const allCategory = await category.find({}, { name: true, description: true });
+    const allCategory = await category.find(
+      {},
+      { name: true, description: true }
+    );
 
     if (!allCategory) {
       return res.status(400).json({
@@ -62,7 +66,7 @@ exports.getAllCategory = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "all category fetched successfully",
-      data : allCategory
+      data: allCategory,
     });
   } catch (error) {
     return res.status(500).json({
@@ -73,85 +77,88 @@ exports.getAllCategory = async (req, res) => {
   }
 };
 
-
 //checked
 exports.categoryPageDetails = async (req, res) => {
   try {
-          // console.log(req.body  , "nikkkkkk")
-          //get categoryId
-          const  { categoryId }  = req.body;
-          //get courses for specified categoryId
-          const selectedCategory = await category.findById({_id:categoryId})
-                                          .populate({
-                                            path:"course",
-                                            match:{status:"Published"},
-                                            populate:{
-                                               path:"instructor"
-                                            },
-                                          })
-                                          .exec();
-                                           
-          //validation
-          if(!selectedCategory) {
-              return res.status(404).json({
-                  success:false,
-                  message:'Data  Not Found Along With These CategoryId',
-              });
-          }
+    // console.log(req.body  , "nikkkkkk")
+    //get categoryId
+    const { categoryId } = req.body;
+    //get courses for specified categoryId
+    const selectedCategory = await category
+      .findById({ _id: categoryId })
+      .populate({
+        path: "course",
+        match: { status: "Published" },
+        populate: {
+          path: "instructor",
+        },
+      })
+      .exec();
 
-          //get courses for different categories
-          const differentCategories = await category.find(
-                                      {
-                                       _id: {$ne: categoryId},
-                                       })
-                                       .populate({
-                                        path:"course",
-                                            match:{status:"Published"},
-                                            populate:{
-                                               path:"instructor"
-                                            },
-                                       })
-                                       .exec();
-                                       const RandomCategory = await category.findOne({
-                                        _id: differentCategories[getRandomInt(differentCategories.length)]._id
-                                      });
-
-          //get top 10 selling courses
-          //HW - write it on your own
-          const AllCategories = await category.find()
-             .populate({
-              path:"course",
-                  match:{status:"Published"},
-                  populate:{
-                     path:"instructor"
-                  },
-             })
-             .exec();
-
-             const CombinedIntoSingleArray = AllCategories.flatMap(category=>category.course)
-             const TopSellingCourses = CombinedIntoSingleArray
-                                        .sort(( a , b )=> b.studentEnrolled.length - a.studentEnrolled.length )
-                                        .slice(0 , 10 )
-
-
-
-          //return response
-          return res.status(200).json({
-              success:true,
-              data: {
-                  selectedCategory,
-                  RandomCategory,
-                  TopSellingCourses
-              },
-          });
-
-  }
-  catch(error ) {
-      console.log(error);
-      return res.status(500).json({
-          success:false,
-          message:error.message,
+    //validation
+    if (!selectedCategory) {
+      return res.status(404).json({
+        success: false,
+        message: "Data  Not Found Along With These CategoryId",
       });
-  }
-}
+    }
 
+    //get courses for different categories
+
+    const categoriesExceptSelected = await category.find({
+      _id: { $ne: categoryId },
+    });
+
+    let RandomCategory
+    if (categoriesExceptSelected.length > 0) {
+      const randomIndex = getRandomInt(categoriesExceptSelected.length);
+      const randomCategoryId = categoriesExceptSelected[randomIndex]._id;
+
+       RandomCategory = await category
+        .findOne({ _id: randomCategoryId })
+        .populate({
+          path: "course",
+          match: { status: "Published" },
+        })
+        .exec();
+    } else {
+      console.log("No other categories available.");
+    }
+
+    //get top 10 selling courses
+    //HW - write it on your own
+    const AllCategories = await category
+      .find()
+      .populate({
+        path: "course",
+        match: { status: "Published" },
+        populate: {
+          path: "instructor",
+        },
+      })
+      .exec();
+
+    const CombinedIntoSingleArray = AllCategories.flatMap(
+      (category) => category.course
+    );
+    const TopSellingCourses = CombinedIntoSingleArray.sort(
+      (a, b) => b.studentEnrolled.length - a.studentEnrolled.length
+    ).slice(0, 10);
+
+    //return response
+    return res.status(200).json({
+      success: true,
+      data: {
+        selectedCategory,
+        RandomCategory,
+        TopSellingCourses,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -2,26 +2,28 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CourseCard from "./CourseCard";
-import { Pagination, Navigation, Keyboard, Autoplay } from "swiper/modules"; // ✅ Autoplay import kiya
+import { Pagination, Navigation, Keyboard, Autoplay } from "swiper/modules"; 
 import "../../../App.css";
 
-const CourseSlider = ({ data }) => {  // ✅ Props ko correctly destructure kiya
+const CourseSlider = ({ data , speed}) => {  
   console.log(data);
 
   return (
     <div>
       {data.length > 0 ? (
         <Swiper
-          slidesPerView={4}
+          className=" "
+          slidesPerView={3}
+          spaceBetween={10}
           loop={true}
           grabCursor={true}
           direction="horizontal" rtl={true}
           pagination={{ clickable: true }}
           autoplay={{ 
-            delay: 2500, 
-            disableOnInteraction: false, // ✅ User interact kare toh bhi autoplay chalta rahega
+            delay: speed ? speed : 2500, 
+            disableOnInteraction: false,
           }}
-          modules={[Pagination, Navigation, Keyboard, Autoplay]} // ✅ Autoplay module add kiya
+          modules={[Pagination, Navigation, Keyboard , Autoplay ]} 
         >
           {data.map((course) => (
             <SwiperSlide key={course._id}>
@@ -30,7 +32,7 @@ const CourseSlider = ({ data }) => {  // ✅ Props ko correctly destructure kiya
           ))}
         </Swiper>
       ) : (
-        <div>Data nahi hai</div>
+        <div className="   bg-white/10 backdrop-blur-md  border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] py-10 rounded-md justify-center flex items-center text-3xl  font-inter font-semibold ">Courses Not Found</div>
       )}
     </div>
   );

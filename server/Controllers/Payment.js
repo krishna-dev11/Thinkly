@@ -10,7 +10,7 @@ const crypto = require("crypto");
 
 exports.capturePayment = async(req, res) => {
 
-    const { CoursesIds , totalAmount } = req.body;
+    const { CoursesIds  } = req.body;
     const userId = req.user.id;
 
     console.log(CoursesIds , userId)
@@ -19,8 +19,8 @@ exports.capturePayment = async(req, res) => {
         return res.json({success:false, message:"Please provide Course Id"});
     }
 
-    // let totalAmount = 0;
-
+    let totalAmount = 0;
+console.log(CoursesIds , "captured")
     for (const course_id of CoursesIds) {
       try {
         const course = await courses.findById(course_id);
@@ -31,7 +31,7 @@ exports.capturePayment = async(req, res) => {
             message: "Could not find the course",
           });
         }
-    
+      console.log("for iteratie on caputre lopp")
         const uid = new mongoose.Types.ObjectId(userId);
     
         if (course.studentEnrolled.includes(uid)) {
@@ -41,7 +41,7 @@ exports.capturePayment = async(req, res) => {
           });
         }
     
-        // totalAmount += Number(course.price) 
+        totalAmount += Number(course.price) 
       } catch (error) {
         console.error("Error in course loop:", error);
         return res.status(500).json({
@@ -103,6 +103,8 @@ exports.sendPaymentSuccessEmail = async(req, res) => {
              paymentSuccessEmail(`${enrolledStudent.firstName}`,
              amount/100 , orderId , paymentId)
         )
+console.log("send mail")
+        
     }
     catch(error) {
         console.log("error in sending mail", error)
@@ -120,6 +122,7 @@ exports.verifyPayment = async(req, res) => {
     const Courses = req.body?.CoursesIds;
     const userId = req.user.id;
 
+    console.log(Courses , "verify")
 
     console.log( razorpay_order_id ,  razorpay_payment_id , razorpay_signature ,  Courses , userId )
 
@@ -160,6 +163,9 @@ const enrollStudents = async(Courses, userId, res) => {
         return res.status(400).json({success:false,message:"Please Provide data for Courses or UserId"});
     }
 
+console.log(Courses , "Enrolled Students")
+
+
     for(const courseId of Courses) {
         try{
             //find the course and enroll the student in it
@@ -168,7 +174,7 @@ const enrollStudents = async(Courses, userId, res) => {
             {$push:{studentEnrolled:userId}},
             {new:true},
         )
-
+console.log("for checkin")
         if(!enrolledCourse) {
             return res.status(500).json({success:false,message:"Course not Found"});
         }

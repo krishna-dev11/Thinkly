@@ -1,87 +1,101 @@
 const emailTemplate = (otp) => {
 	return `<!DOCTYPE html>
-	<html>
+	<html lang="en">
 	
 	<head>
 		<meta charset="UTF-8">
-		<title>OTP Verification Email</title>
+		<title>OTP Verification</title>
 		<style>
 			body {
-				background-color: #ffffff;
-				font-family: Arial, sans-serif;
-				font-size: 16px;
-				line-height: 1.4;
-				color: #333333;
 				margin: 0;
 				padding: 0;
+				background: linear-gradient(to right, #f2f4f8, #e8ebf0);
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				color: #2d3748;
 			}
 	
 			.container {
 				max-width: 600px;
-				margin: 0 auto;
-				padding: 20px;
+				margin: 40px auto;
+				background-color: #ffffff;
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+				border-radius: 12px;
+				padding: 40px 50px;
 				text-align: center;
 			}
 	
 			.logo {
-				max-width: 200px;
-				margin-bottom: 20px;
+				max-width: 120px;
+				margin-bottom: 30px;
 			}
 	
-			.message {
-				font-size: 18px;
-				font-weight: bold;
-				margin-bottom: 20px;
+			.heading {
+				font-size: 24px;
+				font-weight: 700;
+				color: #1a202c;
+				margin-bottom: 25px;
 			}
 	
 			.body {
 				font-size: 16px;
-				margin-bottom: 20px;
+				line-height: 1.7;
+				text-align: left;
+				color: #4a5568;
 			}
 	
-			.cta {
-				display: inline-block;
-				padding: 10px 20px;
+			.otp-box {
 				background-color: #FFD60A;
 				color: #000000;
-				text-decoration: none;
-				border-radius: 5px;
-				font-size: 16px;
+				display: inline-block;
+				padding: 12px 30px;
+				font-size: 24px;
 				font-weight: bold;
-				margin-top: 20px;
+				border-radius: 8px;
+				margin: 25px 0;
+				letter-spacing: 4px;
 			}
 	
-			.support {
+			.footer {
 				font-size: 14px;
-				color: #999999;
-				margin-top: 20px;
+				color: #718096;
+				text-align: center;
+				margin-top: 40px;
+				line-height: 1.5;
 			}
-	
-			.highlight {
-				font-weight: bold;
+
+			a {
+				color: #1a73e8;
+				text-decoration: none;
 			}
 		</style>
-	
 	</head>
 	
 	<body>
 		<div class="container">
-			<a href="https://studynotion-edtech-project.vercel.app"><img class="logo"
-					src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=600" alt="StudyNotion Logo"></a>
-			<div class="message">OTP Verification Email</div>
+			<a href="https://studynotion-edtech-project.vercel.app">
+				<img class="logo" src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=600" alt="StudyNotion Logo">
+			</a>
+	
+			<div class="heading">🔐 OTP Verification</div>
+	
 			<div class="body">
 				<p>Dear User,</p>
-				<p>Thank you for registering with StudyNotion. To complete your registration, please use the following OTP
-					(One-Time Password) to verify your account:</p>
-				<h2 class="highlight">${otp}</h2>
-				<p>This OTP is valid for 5 minutes. If you did not request this verification, please disregard this email.
-				Once your account is verified, you will have access to our platform and its features.</p>
+				<p>Thanks for signing up with <strong>StudyNotion</strong>! To complete your registration, use the OTP below:</p>
+				
+				<div class="otp-box">${otp}</div>
+	
+				<p>This OTP is valid for the next <strong>5 minutes</strong>.</p>
+				<p>If you didn’t initiate this request, please ignore this email. Otherwise, verify now to start your learning journey.</p>
 			</div>
-			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-					href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!</div>
+	
+			<div class="footer">
+				Need help or have questions?<br>
+				Contact us at <a href="mailto:info@studynotion.com">info@studynotion.com</a>. We're always here to assist you!
+			</div>
 		</div>
 	</body>
 	
 	</html>`;
 };
+
 module.exports = emailTemplate;

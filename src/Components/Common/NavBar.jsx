@@ -25,7 +25,7 @@ const NavBar = () => {
  const {user} = useSelector((state)=>state.profile)
  const location = useLocation();
 
- const conditionFormNavBarWholeStyle = location.pathname.split("/").includes("EnrolledCourses")
+ const conditionFormNavBarWholeStyle = location.pathname.split("/").includes("EnrolledCourses") || location.pathname.split("/").includes("course" && "section" && "subSection")
 
 
 
@@ -69,7 +69,7 @@ const NavBar = () => {
     },[])
 
   return (
-    <div className={`${ conditionFormNavBarWholeStyle  ? " w-full h-[8%]  border border-richblack-100 bg-white  backdrop-blur-md  border-b-[1px] border-white/20 fixed z-50" : "w-full h-[8%] shadow-lg bg-richblack-800 shadow-blue-900/30 backdrop-blur-md  border-b-[1px] border-white/20 fixed z-50"}`}>
+    <div className={`${ conditionFormNavBarWholeStyle  ? " w-full h-[8%]  border-b border-richblack-700 bg-white  backdrop-blur-md   fixed z-50" : "w-full h-[8%] shadow-lg  bg-richblack-900 shadow-blue-900/30 backdrop-blur-md   fixed z-50"}`}>
 
       <div className=' flex justify-between items-center w-11/12  mx-auto h-full px-10'>
         

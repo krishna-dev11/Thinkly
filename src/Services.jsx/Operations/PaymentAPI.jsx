@@ -3,6 +3,8 @@ import { apiConnector } from "../apiConnector";
 import { setLoading } from "../../Slices/Auth";
 import { studentEndpoints } from "../apis";
 import rzpLogo from "../../assets/Logo/rzp_logo.png"
+import { EmtingCartAfterBuying } from "./CartAPI";
+import { useSelector } from "react-redux";
 
 const { COURSE_PAYMENT_API, COURSE_VERIFY_API  , SEND_PAYMENT_SUCCESS_EMAIL_API} = studentEndpoints;
 
@@ -65,7 +67,7 @@ console.log(process.env.REACT_APP_RAZORPAY_KEY   ,  orderResponse.data.message.c
                 //send successful wala mail
                 sendPaymentSuccessEmail( response , orderResponse.data.message.amount , token );
                 //verifyPayment
-                verifyPayment({...response , CoursesIds}, token, navigate, dispatch);
+                verifyPayment({...response , CoursesIds}, token, navigate, dispatch , userDetails) ;
             }
         }
 
@@ -104,24 +106,31 @@ async function sendPaymentSuccessEmail(response, amount, token) {
 
 
 // verify payment
-async function verifyPayment(bodyData, token, navigate ) {
+async function verifyPayment(bodyData, token, navigate, dispatch, user) {
+    const toastId = toast.loading("Verifying Payment...");
 
-    const toastId = toast.loading("Verifying Payment....");
-    try{
-        const response  = await apiConnector("POST", COURSE_VERIFY_API, bodyData , {
-            Authorization:`Bearer ${token}`,
-        })
+    try {
+ 
+        const response = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
+            Authorization: `Bearer ${token}`,
+        });
 
-        if(!response.data.success) {
+        if (!response.data.success) {
             throw new Error(response.data.message);
         }
-        toast.success("payment Successful, ypou are addded to the course");
+
+
+        toast.success("Payment successful");
+
+
+        await EmtingCartAfterBuying(user._id, token);
+
         navigate("/EnrolledCourses/active-Courses");
-        // dispatch(resetCart());
-    }   
-    catch(error) {
-        console.log("PAYMENT VERIFY ERROR....", error);
-        toast.error("Could not verify Payment");
+
+    } catch (error) {
+        console.log("PAYMENT VERIFY ERROR: ", error);
+        toast.error("Could not verify payment");
+    } finally {
+        toast.dismiss(toastId);
     }
-    toast.dismiss(toastId);
 }
