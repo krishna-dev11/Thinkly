@@ -10,7 +10,7 @@ const {
   paymentSuccessEmail,
 } = require("../mail/templates/paymentSuccessEmail");
 const crypto = require("crypto");
-const CourseProgress = require("../Models/CourseProgress");
+const CourseProgress = require('../Models/ProgressCourse');
 // require("dotenv").config()
 
 exports.capturePayment = async (req, res) => {

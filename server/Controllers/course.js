@@ -9,7 +9,7 @@ const { path } = require("framer-motion/client");
 const section = require("../Models/section");
 const subsection = require("../Models/subsection");
 const { default: mongoose } = require("mongoose");
-const courseprogress = require("../Models/CourseProgress");
+const courseprogress = require("../Models/ProgressCourse");
 // const { convertSecondsToDuration } = require("../Utilities/SecondsToDuration");
 
 
