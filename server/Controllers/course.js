@@ -5,7 +5,7 @@ const {
   uploadImageToCloudinary,
 } = require("../Utilities/uploadImageToCloudinary");
 const { json } = require("express");
-const { path } = require("framer-motion/client");
+// const { path } = require("framer-motion/client");
 const section = require("../Models/section");
 const subsection = require("../Models/subsection");
 const { default: mongoose } = require("mongoose");
