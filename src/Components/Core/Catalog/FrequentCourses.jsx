@@ -5,7 +5,7 @@ import RatingStars from '../../Common/RatingStars'
 
 const FrequentCourses = ({data}) => {
 
-console.log(data)
+// console.log(data)
 
       const navigate = useNavigate()
     
@@ -24,7 +24,7 @@ console.log(data)
     <div className=' flex flex-wrap gap-y-3 '>
         {
             data.map(course=>(
-                <div className=' flex flex-col max-w-[35rem] cursor-pointer  min-w-[35rem]  bg-white/10 backdrop-blur-md  border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] mx-auto   gap-y-2  text-richblack-900 rounded-md px-2 py-2  min-h-[24rem]'
+                <div key={course._id} className=' flex flex-col max-w-[35rem] cursor-pointer  min-w-[35rem]  bg-white/10 backdrop-blur-md  border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] mx-auto   gap-y-2  text-richblack-900 rounded-md px-2 py-2  min-h-[24rem]'
            onClick={()=>navigate(`/CourseDetails/${course._id}`)}
       >
        <img src={course.thumbnail} className=' min-h-[21rem]'  />

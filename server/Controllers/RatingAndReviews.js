@@ -5,58 +5,88 @@ const ratingAndReviews = require("../Models/ratingAndReviews");
 
 exports.createRatingAndReviews = async (req, res) => {
   try {
-    // console.log(req.body , req.user.id)
     const userId = req.user.id;
     const { courseId, rating, reviews } = req.body;
 
-    const iscourseExist = await courses.findById({ _id: courseId });
+
+
+    // console.log(courseId , "cId")
+    // console.log(rating , "rating")
+    // console.log(reviews,"reviews")
+
+    if (!courseId || !rating || !reviews) {
+      return res.status(400).json({
+        success: false,
+        message: "Please Provide All Data",
+      });
+    }
+
+    const parsedRating = parseFloat(rating);
+
+    if (!rating || isNaN(parsedRating) || parsedRating < 1 || parsedRating > 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid rating. It should be a number between 1 and 5.",
+      });
+    }
+    
+
+
+    
+
+    // Check if course exists
+    const iscourseExist = await courses.findById(courseId);
     if (!iscourseExist) {
       return res.status(400).json({
         success: false,
         message: "Course Not Found",
       });
     }
-    // console.log(iscourseExist)
 
-    // check user allready Enrolled in  couse
+    // Check if user enrolled
     const isUserAlreadyHit = await courses.findOne({
       _id: courseId,
       studentEnrolled: userId,
-      // or   studentEnrolled : {$elemMatch : {$eq : userId}}
     });
 
-    console.log(isUserAlreadyHit)
-
     if (!isUserAlreadyHit) {
-      return res.status(404).json({
+      return res.status(403).json({
         success: false,
-        message: " student is not Enrolled in Our Course",
+        message: "Student is not enrolled in the course",
+      });
+    }
+
+    // Check if already reviewed
+    const AlreadyReviewed = await ratingAndReviews.findOne({
+      user: userId,
+      course: courseId,
+    });
+
+    if (AlreadyReviewed) {
+      return res.status(403).json({
+        success: false,
+        message: "Course already reviewed by the user",
+      });
+    }
+
+    // Create the rating & review
+    const createRatingandReviews = await ratingAndReviews.create({
+      user: userId,
+      course: courseId, 
+      rating: parsedRating,
+      reviews: reviews,
+    });
+
+    if (!createRatingandReviews) {
+      return res.status(500).json({
+        success: false,
+        message: "Error in creating rating and reviews",
       });
     }
 
 
-    const AlreadyReviewd = await ratingAndReviews.findOne(
-      {
-        user :userId,
-        course : courseId
-      });
-      if(AlreadyReviewd)
-      {
-        return res.status(403).json({
-          success:false,
-          message:"course alreday reviewd by the User"
-        })
-      }
-
-
-    const createRatingandReviews = await ratingAndReviews.create({
-      user: userId,
-      rating: rating,
-      reviews: reviews,
-    });
-
-    const updateCourse = await courses.findByIdAndUpdate(
-      { _id: courseId },
+    await courses.findByIdAndUpdate(
+      courseId,
       {
         $push: {
           ratingAndReviews: createRatingandReviews._id,
@@ -67,16 +97,18 @@ exports.createRatingAndReviews = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "rating and reviews are successfully created",
-      data : createRatingandReviews
+      message: "Rating and review successfully created",
+      data: createRatingandReviews,
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "some error occurs in creating the rating and reviews",
+      error: error.message,
+      message: "Some error occurred in creating the rating and reviews",
     });
   }
 };
+
 
 exports.getAverageRating = async (req, res) => {
   try {
@@ -117,13 +149,14 @@ exports.getAverageRating = async (req, res) => {
   }
 };
 
+
 exports.getAllRatingAndReviews = async (req, res) => {
   try {
     const allRatingAndReviews = await ratingAndReviews.find({})
                                                    .sort({rating:"desc"})
                                                    .populate({
                                                             path:"user",
-                                                            select:"firstName lastName email image"
+                                                            select:"firstName lastName email imageUrl"
                                                     })
                                                     .populate({
                                                       path:"course",

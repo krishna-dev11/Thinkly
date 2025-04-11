@@ -19,7 +19,7 @@ const CourseInformation = () => {
     const {token} = useSelector(state=>state.auth)
     const {category} = useSelector(state=>state.Category)
     const {editCourse , course} = useSelector(state=>state.Course)
-    console.log(course)
+    // console.log(course)
 
 
   const {
@@ -75,7 +75,7 @@ const CourseInformation = () => {
 
   const submitHandler = async(event)=>{
 
-    console.log(event , "event")
+    // console.log(event , "event")
 
     // edit Course
     if(editCourse){
@@ -105,7 +105,7 @@ const CourseInformation = () => {
       }
     }
 
-    console.log(event , "event")
+    // console.log(event , "event")
 
 // create new Course
      const formData = new FormData()

@@ -43,7 +43,7 @@ const UpdatePassword = () => {
       toast.error("Both Password Can't Match");
     }
 
-    console.log(token);
+    // console.log(token);
 
     dispatch(
       forgotPassword(

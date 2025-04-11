@@ -22,13 +22,13 @@ export function AddNewCouseInCart(CourseId , UserID , token , navigate) {
         );
 
 
-        console.log(response.data.data)
+        // console.log(response.data.data)
   
         if (!response.data.success) {
           throw new Error(response.data.message);
         }
   
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
 
         dispatch(setUser(response.data.data));
@@ -63,13 +63,13 @@ export function AddNewCouseInCart(CourseId , UserID , token , navigate) {
         );
 
 
-        console.log(response.data.data)
+        // console.log(response.data.data)
   
         if (!response.data.success) {
           throw new Error(response.data.message);
         }
   
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
         localStorage.setItem("user" , JSON.stringify(response.data.data))
         dispatch(setUser(response.data.data));
@@ -86,7 +86,7 @@ export function AddNewCouseInCart(CourseId , UserID , token , navigate) {
 
   export function EmtingCartAfterBuying(UserID , token ) {
     return async (dispatch) => {
-      console.log( "sabh badhiya");
+      // console.log( "sabh badhiya");
       const toastId = toast.loading("Loading");
       dispatch(setLoading(true));
       try {
@@ -100,13 +100,13 @@ export function AddNewCouseInCart(CourseId , UserID , token , navigate) {
         );
 
 
-        console.log(response.data.data)
+        // console.log(response.data.data)
   
         if (!response.data.success) {
           throw new Error(response.data.message);
         }
   
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
         localStorage.setItem("user" , JSON.stringify(response.data.data))
         dispatch(setUser(response.data.data));

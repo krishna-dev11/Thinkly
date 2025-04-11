@@ -8,6 +8,7 @@ import { Accomplishment } from '../data/aboutus-data'
 import Grey_whiteBox from '../Components/Core/About.jsx/Grey_whiteBox'
 import Fotter from '../Components/Common/Fotter';
 import ContactForm from '../Components/Core/About.jsx/ContactForm';
+import ReviwSlider from '../Components/Core/Home/ReviwSlider';
 
 
 const AboutPage = () => {
@@ -58,7 +59,7 @@ const AboutPage = () => {
       <div className=' w-[95%] mx-auto flex justify-evenly'>
       {
         Accomplishment.map((accomplish)=>(
-          <div className=' flex flex-col gap-y-3 justify-center items-center text-center'>
+          <div className=' flex flex-col gap-y-3 justify-center items-center text-center' key={accomplish.id}>
             <p className="text-richblack-5 text-[1.5rem] md:text-[1.7rem] font-semibold font-inter leading-[2.5rem] md:leading-[2.75rem]">{accomplish.heading}</p>
             <p className=" text-richblack-300 font-inter text-[.8rem] ">{accomplish.description}</p>
           </div>
@@ -76,7 +77,13 @@ const AboutPage = () => {
       </div>
     </div>
 
-    {/* section 4 - footer */}
+  {/* section5 slider */}
+     <div className=' bg-richblack-900'>
+     <ReviwSlider/>
+     </div>
+
+    {/* section 6 - footer */}
+
     <Fotter/>
 
     

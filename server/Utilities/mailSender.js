@@ -20,7 +20,7 @@ exports.mailSender = async(email , title , body)=>{
         html:`${body}`
     })
 
-    console.log(mailsended);
+    // console.log(mailsended);
     return mailsended;
 
   }catch(error){

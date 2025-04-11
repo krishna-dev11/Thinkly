@@ -10,7 +10,7 @@ const Grey_whiteBox = () => {
             AnyOne_Anywhere.map((one)=>(
                 one.id === 1 ? 
                 (<div className={`flex flex-col gap-3 p-5 justify-center
-                                  ${one.id === 1  && " col-span-2" }`}>
+                                  ${one.id === 1  && " col-span-2" }`} key={one.id}>
                     <p className="text-richblack-5 text-[1.5rem] md:text-[1.7rem] font-semibold font-inter leading-[2.5rem] md:leading-[2.75rem]">{one.heading1}</p>
                     <Hieghlightedtext data={one.heading2} color={one.heading2_gradient}/>
                     <p className=" text-richblack-300 font-inter text-[.8rem] w-[90%]">{one.description}</p>

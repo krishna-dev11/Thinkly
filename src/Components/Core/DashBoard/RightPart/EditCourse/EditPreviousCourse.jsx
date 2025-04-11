@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 const EditPreviousCourse = () => {
 
   const {course} = useSelector(state=>state.Course)
-  console.log(course)
+  // console.log(course)
 
   return (
     <div className=' flex flex-col  gap-y-1 py-6 px-3 mx-auto'>

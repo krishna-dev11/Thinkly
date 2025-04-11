@@ -5,7 +5,8 @@ const initialState = {
    course:null,
    editCourse : false , 
    userBuyedCoursesDataForCard : null,
-   videoUrl: null
+   videoUrl: null,
+   RatingAndReviewData:[]
 }
 
 
@@ -19,7 +20,7 @@ const initialState = {
          },
          setCourse(state , action){
             state.course = action.payload
-            console.log(state.course)
+            // console.log(state.course)
          },
          setEditCourse(state , action){
             state.editCourse = action.payload
@@ -30,8 +31,11 @@ const initialState = {
          setCurrectVideoUrl(state , action){
             state.videoUrl = action.payload
          },
+         setRatingAndReviewData(state , action){
+            state.RatingAndReviewData = action.payload
+         },
       }
       })
 
-  export const {setStep , setCourse , setEditCourse , setUserBuyedCoursesDataForCard ,setCurrectVideoUrl} = CourseSlice.actions
+  export const {setStep , setCourse , setRatingAndReviewData , setEditCourse , setUserBuyedCoursesDataForCard ,setCurrectVideoUrl} = CourseSlice.actions
   export default CourseSlice.reducer

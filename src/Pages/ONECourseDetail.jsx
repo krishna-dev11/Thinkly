@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { GetWholeCourseDetails } from "../Services.jsx/Operations/CoursesAPI";
 import Fotter from "../Components/Common/Fotter";
 import { IoInformationCircleOutline, IoGlobeOutline } from "react-icons/io5";
@@ -18,7 +18,8 @@ import GetAvgRating from "../Utilities/avgRating";
 import RatingStars from "../Components/Common/RatingStars";
 import copy from "copy-to-clipboard";
 // import "../App.css";
-import "../Utilities/Loading.css"
+import "../Utilities/Loading.css";
+import ReviwSlider from "../Components/Core/Home/ReviwSlider";
 
 const ONECourseDetail = () => {
   const { courseDetails } = useSelector((state) => state.Category);
@@ -33,8 +34,8 @@ const ONECourseDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(courseDetails , "ksadsdsd")
-  const [ AvrageRatingCount , setAvrageRatingCount] = useState(0)
+  // console.log(courseDetails, "ksadsdsd");
+  const [AvrageRatingCount, setAvrageRatingCount] = useState(0);
 
   const handleBuyCourse = () => {
     if (token) {
@@ -87,12 +88,12 @@ const ONECourseDetail = () => {
   }, [CourseId, dispatch]);
 
   // average rating
-   useEffect(()=>{
-    const getAverageRating = async()=>{
-      const avg = await GetAvgRating(courseDetails.ratingAndReviews)
-       setAvrageRatingCount(avg)
-    }
-   })
+  useEffect(() => {
+    const getAverageRating = async () => {
+      const avg = await GetAvgRating(courseDetails.ratingAndReviews);
+      setAvrageRatingCount(avg);
+    };
+  });
 
   useEffect(() => {
     // totallectures
@@ -122,7 +123,7 @@ const ONECourseDetail = () => {
   if (loading || !courseDetails || Object.keys(courseDetails).length === 0) {
     return (
       <div className="flex items-center justify-center h-screen  w-screen bg-richblack-900">
-          <span className="loader"></span>
+        <span className="loader"></span>
       </div>
     );
   }
@@ -133,24 +134,34 @@ const ONECourseDetail = () => {
       <div className="flex relative bg-richblack-800 w-full translate-y-4  gap-x-6  py-16 px-10">
         {/* Left Side */}
         <div className="flex flex-col gap-y-2 w-3/5">
-          <p>Home / Learning / <span className=" text-yellow-50">{`${courseDetails.courseName}`}</span></p>
+          <p>
+            Home / Learning /{" "}
+            <span className=" text-yellow-50">{`${courseDetails.courseName}`}</span>
+          </p>
           <p className="text-3xl font-semibold">{courseDetails.courseName}</p>
           <p className="text-richblack-300 text-sm">
             {courseDetails.courseDescription}
           </p>
           <div className=" flex gap-x-2  items-center">
-            <p className=" text-yellow-50 text-lg">{parseFloat(AvrageRatingCount)}</p>
+            <p className=" text-yellow-50 text-lg">
+              {parseFloat(AvrageRatingCount)}
+            </p>
             <RatingStars Review_Count={AvrageRatingCount} Star_Size={25} />
             <p>{`(${courseDetails.ratingAndReviews.length} ratings)`}</p>
             <p>{`${courseDetails.studentEnrolled.length} Students`}</p>
           </div>
-          <p className=" ">Created By :- <span className=" lowercase">{`${courseDetails.instructor.firstName} ${courseDetails.instructor.lastName}`}</span></p>
+          <p className=" ">
+            Created By :-{" "}
+            <span className=" lowercase">{`${courseDetails.instructor.firstName} ${courseDetails.instructor.lastName}`}</span>
+          </p>
 
           <div className="flex gap-x-4 items-center">
             <div className="flex gap-x-1 items-center">
               <IoInformationCircleOutline />
               <p>{`Created at: ${FormateDate(courseDetails.createdAt)}`}</p>
-              <p className=" text-caribbeangreen-50">{` | Updated at: ${FormateDate(courseDetails.updatedAt)}`}</p>
+              <p className=" text-caribbeangreen-50">{` | Updated at: ${FormateDate(
+                courseDetails.updatedAt
+              )}`}</p>
             </div>
             <div className="flex gap-x-1 items-center">
               <IoGlobeOutline />
@@ -168,72 +179,74 @@ const ONECourseDetail = () => {
           />
           <p className="text-2xl  mt-2 font-semibold text-richblack-5">{`Rs. ${courseDetails.price}`}</p>
 
-   
-         <div className=" flex flex-col gap-y-2">
-         {  user.cart.some((course) => course._id === courseDetails._id) ? (
-            <button
-              className="w-[90%] mx-auto py-2 bg-yellow-50 text-black  font-semibold rounded"
-              onClick={()=>navigate("/dashboard/wishlist")}
-            >
-              Go to cart
-            </button>
-          ) : user.courses.includes(courseDetails._id) ? (
-            <button
-              className="w-[90%] mx-auto py-2 bg-yellow-50 text-black font-semibold rounded"
-              onClick={() => navigate("/EnrolledCourses/active-Courses")}
-            >
-              Start Learning
-            </button>
+          {user.accountType === "Instructor" ? (
+            <Link to={"/dashboard/my-courses"} className="w-[90%] flex justify-center items-center mx-auto py-2 bg-yellow-50 text-black  font-semibold rounded">
+            Go To My Courses
+            </Link>
           ) : (
-            <button
-              className="w-[90%] mx-auto py-2 bg-yellow-50 text-black font-semibold rounded"
-              onClick={() => handleAddCourseInCart(courseDetails._id)}
-            >
-              Add to cart
-            </button>
+            <div className=" flex flex-col gap-y-2">
+              {user.cart.some((course) => course._id === courseDetails._id) ? (
+                <button
+                  className="w-[90%] mx-auto py-2 bg-yellow-50 text-black  font-semibold rounded"
+                  onClick={() => navigate("/dashboard/wishlist")}
+                >
+                  Go to cart
+                </button>
+              ) : user.courses.includes(courseDetails._id) ? (
+                <button
+                  className="w-[90%] mx-auto py-2 bg-yellow-50 text-black font-semibold rounded"
+                  onClick={() => navigate("/EnrolledCourses/active-Courses")}
+                >
+                  Start Learning
+                </button>
+              ) : (
+                <button
+                  className="w-[90%] mx-auto py-2 bg-yellow-50 text-black font-semibold rounded"
+                  onClick={() => handleAddCourseInCart(courseDetails._id)}
+                >
+                  Add to cart
+                </button>
+              )}
+
+              {!user.courses.includes(courseDetails._id) && (
+                <button
+                  className=" w-[90%] mx-auto py-2 bg-richblack-800 text-white font-semibold rounded border border-richblack-700"
+                  onClick={handleBuyCourse}
+                >
+                  Buy Now
+                </button>
+              )}
+            </div>
           )}
-
-          {
-            !user.courses.includes(courseDetails._id) &&
-            (
-              <button
-            className=" w-[90%] mx-auto py-2 bg-richblack-800 text-white font-semibold rounded border border-richblack-700"
-            onClick={handleBuyCourse}
-          >
-            Buy Now
-          </button>
-
-            )
-          }
-
-          
-         </div>
 
           <p className="text-sm text-richblack-300 mx-auto ">
             30-Day Money-Back Guarantee
           </p>
 
           <div className=" flex flex-col gap-y-2 px-5">
-            <p className="font-semibold mb-1 text-richblack-5">This Course includes:</p>
+            <p className="font-semibold mb-1 text-richblack-5">
+              This Course includes:
+            </p>
             <ul className="text-[#06D6A0] flex flex-col gap-y-1 text-sm list-disc list-inside">
               {courseDetails.tag.map((tag, i) => (
                 <li key={i}>{tag}</li>
               ))}
             </ul>
           </div>
-          <p className="text-yellow-50 cursor-pointer mx-auto "
-             onClick={()=>{
-              copy(window.location.href)
-              toast.success("path Copied")
-             }}
-          >Share</p>
+          <p
+            className="text-yellow-50 cursor-pointer mx-auto "
+            onClick={() => {
+              copy(window.location.href);
+              toast.success("path Copied");
+            }}
+          >
+            Share
+          </p>
         </div>
       </div>
 
-
       <div className="flex flex-col w-full bg-richblack-900 px-6 py-8 gap-y-5">
-
-      {/* What You'll Learn */}
+        {/* What You'll Learn */}
         <div className="mt-6  rounded-md   w-[68%] border gap-y-3 flex flex-col border-richblack-700 py-8 px-8">
           <p className="text-3xl font-semibold">What you'll learn</p>
           <ul className="text-richblack-300 text-sm list-disc flex flex-col gap-y-2 list-inside">
@@ -247,9 +260,19 @@ const ONECourseDetail = () => {
         <div className="mt-6   rounded-md px-3 py-3 gap-y-1 flex flex-col">
           <p className="text-2xl font-semibold ">Course Content</p>
           <ul className="flex gap-x-5 mt-2 text-richblack-300">
-            <li className=" flex  justify-center items-center gap-x-1 "><IoInformationCircleOutline/> {`${courseDetails.courseContent.length} Sections`}</li>
-            <li className=" flex  justify-center items-center gap-x-1 "><IoInformationCircleOutline/>{`${totalLectures} Lectures`}</li>
-            <li className=" flex  justify-center items-center gap-x-1 "> <IoInformationCircleOutline/> {`${totalCourselength} totallength `}</li>
+            <li className=" flex  justify-center items-center gap-x-1 ">
+              <IoInformationCircleOutline />{" "}
+              {`${courseDetails.courseContent.length} Sections`}
+            </li>
+            <li className=" flex  justify-center items-center gap-x-1 ">
+              <IoInformationCircleOutline />
+              {`${totalLectures} Lectures`}
+            </li>
+            <li className=" flex  justify-center items-center gap-x-1 ">
+              {" "}
+              <IoInformationCircleOutline />{" "}
+              {`${totalCourselength} totallength `}
+            </li>
           </ul>
           <OverviewofLectures data={courseDetails.courseContent} />
         </div>
@@ -320,7 +343,10 @@ const ONECourseDetail = () => {
         </div>
 
         {/* Reviews */}
-        <div></div>
+        {/* section5 slider */}
+        <div className=" bg-richblack-900">
+          <ReviwSlider />
+        </div>
       </div>
 
       {/* Footer */}

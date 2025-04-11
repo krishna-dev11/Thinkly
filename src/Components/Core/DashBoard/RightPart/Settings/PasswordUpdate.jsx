@@ -47,7 +47,7 @@ const PasswordUpdate = () => {
         try{
 
 
-            console.log(event)
+            // console.log(event)
             if(!event.oldPassword){
                 return toast.error("Old Password is manditory")
             }

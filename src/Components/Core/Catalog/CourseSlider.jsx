@@ -5,19 +5,19 @@ import CourseCard from "./CourseCard";
 import { Pagination, Navigation, Keyboard, Autoplay } from "swiper/modules"; 
 import "../../../App.css";
 
-const CourseSlider = ({ data , speed}) => {  
-  console.log(data);
+const CourseSlider = ({ data , speed , count}) => {  
+  // console.log(data);
 
   return (
     <div>
       {data.length > 0 ? (
         <Swiper
           className=" "
-          slidesPerView={3}
+          slidesPerView={ count ? count : 3}
           spaceBetween={10}
           loop={true}
           grabCursor={true}
-          direction="horizontal" rtl={true}
+          direction="horizontal" 
           pagination={{ clickable: true }}
           autoplay={{ 
             delay: speed ? speed : 2500, 

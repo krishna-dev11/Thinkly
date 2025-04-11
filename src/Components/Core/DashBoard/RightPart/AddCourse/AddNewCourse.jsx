@@ -61,9 +61,9 @@ const AddNewCourse = () => {
       <div className=" w-[62%] py-10 flex flex-col gap-y-5 ">
         <div className=" flex flex-col gap-y-1 w-full">
           <div className="flex items-baseline mx-auto">
-            {StepDetails.map((singlestep) => (
+            {StepDetails.map((singlestep , index) => (
               <div
-                key={singlestep._id}
+                key={index}
                 className="flex  items-center justify-center  mx-auto"
               >
                 <div
@@ -97,8 +97,8 @@ const AddNewCourse = () => {
           </div>
           <div className=" flex justify-between px-5 w-[90%] mx-auto ">
             {
-              StepDetails.map((singlestep)=>(
-                <p className={`${Step > singlestep.Step ? " text-yellow-50" : "text-richblack-5"}`}>{singlestep.title}</p>
+              StepDetails.map((singlestep , index)=>(
+                <p key={index} className={`${Step > singlestep.Step ? " text-yellow-50" : "text-richblack-5"}`}>{singlestep.title}</p>
               ))
             }
           </div>

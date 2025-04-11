@@ -14,7 +14,7 @@ const DisplayCategoryWiseCourses = () => {
     const getCategoryCourses = async () => {
       try {
         await dispatch(GetCategoryWiseCoursesData(categoryId));
-        console.log("krishna");
+        // console.log("krishna");
       } catch (error) {
         console.log(error);
       } finally {

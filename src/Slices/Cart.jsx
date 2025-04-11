@@ -12,7 +12,7 @@ const initialState = {
     reducers : {
          setCartCoursesIds(state , action){
             state.cartCoursesIds = action.payload
-            console.log(state.cartCoursesIds)
+            // console.log(state.cartCoursesIds)
             
          }
       }

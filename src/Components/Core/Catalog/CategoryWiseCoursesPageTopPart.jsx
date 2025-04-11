@@ -7,7 +7,7 @@ import FrequentCourses from './FrequentCourses'
 const CategoryWiseCoursesPageTopPart = () => {
 
     const {CategoryWiseCourses} = useSelector(state=>state.Category)
-    console.log(CategoryWiseCourses)
+    // console.log(CategoryWiseCourses)
 
   return (
     <div className=''>

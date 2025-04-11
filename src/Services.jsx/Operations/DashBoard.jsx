@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
-import { courseEndpoints, settingsEndpoints } from "../apis";
-import { setLoading, setUser } from "../../Slices/Profile";
+import { courseEndpoints, profileEndpoints, settingsEndpoints } from "../apis";
+import { setInstructorCoursesForDashboardData, setInstructorDashboardData, setLoading, setUser } from "../../Slices/Profile";
 import { apiConnector } from "../apiConnector";
 import { settoken } from "../../Slices/Auth";
 import { setCategories } from "../../Slices/Categories";
@@ -34,9 +34,12 @@ const {
   DELETE_COURSE_API
 } = courseEndpoints;
 
+
+const { GET_ALL_COURSES_OF_INSTRUCTOR_FOR_DASHBOARD , GET_INSTRUCTOR_DASHBOARD_DATA } = profileEndpoints
+
 export function updateDisplayPicture(token, data) {
   return async (dispatch) => {
-    console.log(token, data);
+    // console.log(token, data);
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
@@ -49,12 +52,16 @@ export function updateDisplayPicture(token, data) {
         }
       );
 
-      console.log(response.data);
-      dispatch(setUser(response.data.User));
-      localStorage.setItem("user", JSON.stringify(response.data.User));
+      // console.log(response.data);
+      // dispatch(setUser(response.data.User));
+      // localStorage.setItem("user", JSON.stringify(response.data.User));
+
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
+
+      dispatch(setUser(response.data.data))
+      localStorage.setItem("user" , JSON.stringify(response.data.data)) 
 
       toast.success("Profile Image Save Successfully");
     } catch (error) {
@@ -67,7 +74,7 @@ export function updateDisplayPicture(token, data) {
 
 export function UpdateProfileDetails(token, data) {
   return async (dispatch) => {
-    console.log(data);
+    // console.log(data);
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
@@ -78,6 +85,9 @@ export function UpdateProfileDetails(token, data) {
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
+
+      dispatch(setUser(response.data.data))
+      localStorage.setItem("user" , JSON.stringify(response.data.data)) 
 
       toast.success("Personal Details Updated");
     } catch (error) {
@@ -113,7 +123,7 @@ export function ChangePassword(token, data) {
 
 export function DeleteAccountPermanentaly(token, data, navigate) {
   return async (dispatch) => {
-    console.log(data, token);
+    // console.log(data, token);
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
@@ -133,9 +143,9 @@ export function DeleteAccountPermanentaly(token, data, navigate) {
 
       toast.success("Account Deleted");
 
-      navigate("/");
+      navigate("/signup");
 
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -262,7 +272,7 @@ export function EditSection(FormData, token) {
         }
       );
 
-      console.log(response.data);
+      // console.log(response.data);
       dispatch(setCourse(response.data.data));
 
       if (!response.data.success) {
@@ -279,7 +289,7 @@ export function EditSection(FormData, token) {
 }
 
 export function DeleteSection(FormData, token) {
-  console.log(FormData, token);
+  // console.log(FormData, token);
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
@@ -372,7 +382,7 @@ export function EditSubSection(FormData, token ,  addSubSection,
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.data);
+      // console.log(response.data.data);
       dispatch(setCourse(response.data.data));
 
       addSubSection && dispatch(SetaddSubSection(null));
@@ -389,7 +399,7 @@ export function EditSubSection(FormData, token ,  addSubSection,
 }
 
 export function DeleteSubSection(FormData, token) {
-  console.log(FormData, token);
+  // console.log(FormData, token);
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
@@ -484,7 +494,7 @@ export function FetchInstructorsAllCourses(InstructorId, token) {
 
 export function DeleteInstructorCourses(InstructorId , CourseId , token) {
   return async (dispatch) => {
-    console.log(InstructorId , CourseId , token)
+    // console.log(InstructorId , CourseId , token)
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
@@ -509,6 +519,71 @@ export function DeleteInstructorCourses(InstructorId , CourseId , token) {
       }
 
       toast.success("Course Deleted Successfully")
+
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+
+
+// instructor Dashboard
+
+export function getInstructorDashboardData(token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "GET",
+        GET_INSTRUCTOR_DASHBOARD_DATA,
+        {
+          token
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+       dispatch(setInstructorDashboardData(response.data.data))
+
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+
+export function getInstructorCoursesForDashboardData(token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "GET",
+        GET_ALL_COURSES_OF_INSTRUCTOR_FOR_DASHBOARD,
+        {
+          token
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+       dispatch(setInstructorCoursesForDashboardData(response.data.data))
 
     } catch (error) {
       console.log(error);

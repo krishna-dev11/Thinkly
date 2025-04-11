@@ -31,10 +31,10 @@ import EnrolledCourses from "./Pages/EnrolledCourses";
 import ActiveCourseList from "./Components/Core/EnrolledCourses/Right/ActiveCourseList";
 import Bookmarks from "./Components/Core/EnrolledCourses/Right/Bookmarks";
 import Community from "./Components/Core/EnrolledCourses/Right/Community";
-import InstructorDashboard from "./Components/Core/DashBoard/RightPart/InstructorDashboard";
 import ViewCourse from "./Pages/ViewCourse";
 import ViewLectureVideo from "./Components/Core/ViewCourse/Right/ViewLectureVideo";
 import StudentCourses from "./Components/Core/DashBoard/RightPart/StudentCourses";
+import InstructorDashboard from "./Components/Core/DashBoard/RightPart/InstructorDasboard/InstructorDashboard";
 
 function App() {
 

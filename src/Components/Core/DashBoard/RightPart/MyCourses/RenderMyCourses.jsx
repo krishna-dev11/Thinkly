@@ -54,8 +54,8 @@ const RenderMyCourses = () => {
         </Thead>
         <Tbody >
           {user?.courses?.length > 0 ? (
-            user.courses.map((course) => (
-              <Tr key={course._id} className="border-b border-gray-700">
+            user.courses.map((course , index) => (
+              <Tr key={index} className="border-b border-gray-700">
                 <Td className="flex items-center gap-4 p-3">
                   <img
                     src={course.thumbnail}

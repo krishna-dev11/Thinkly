@@ -25,7 +25,7 @@ const CourseBuilder = () => {
   const { course } = useSelector((state) => state.Course);
   const { token } = useSelector((state) => state.auth);
   const { editSection } = useSelector((state) => state.section);
-  console.log(editSection)
+  // console.log(editSection)
 
    if(editSection){
       setValue("sectionName" , editSection.sectionName)

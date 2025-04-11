@@ -26,6 +26,7 @@ const Publish = () => {
   } = useForm();
 
   useEffect(()=>{
+    console.log(course)
     if(course.status === COURSE_STATUS.PUBLISHED){
       setValue("PublishORDraft" , true)
     }

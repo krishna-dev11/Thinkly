@@ -139,7 +139,7 @@ export function setLogOut(navigate){
 
             toast.success("LogOut")
 
-            window.location.reload()
+            // window.location.reload()
             
 
 

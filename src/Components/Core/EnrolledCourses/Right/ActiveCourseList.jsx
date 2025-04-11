@@ -38,7 +38,7 @@ const ActiveCourseList = () => {
   }
 
   return (
-    <div className="  px-6 py-4 flex flex-col gap-y-5 bg-white">
+    <div className="  px-6 py-4 flex flex-col h-screen gap-y-5 bg-white">
       <div className=" flex flex-col gap-y-2">
         <div className=" flex gap-x-2 items-center">
           <FaArrowLeft />

@@ -3,7 +3,7 @@ require("dotenv").config();
 // auth  check
 exports.auth = async(req , res , next)=>{
     try{
-        console.log( req.body  )
+        // console.log( req.body , "authMiddleware" )
         const token = req.body.token || req.cookies.token || req.header("Authorization").replace("Bearer " , "");
         if(!token){
             return res.status(401).json({
@@ -70,7 +70,7 @@ exports.isStudent = async(req , res , next)=>{
 exports.isInstructor = async(req , res , next)=>{
     try{
 
-        console.log(req.body  , "inst")
+        // console.log(req.body  , "inst")
 
         if(req.user.accountType !== "Instructor"){
             return res.status(401).json({

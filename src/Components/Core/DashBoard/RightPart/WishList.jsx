@@ -32,7 +32,7 @@ const WishList = () => {
 
   const handleBuyCartCourses = async()=>{
     try{
-      console.log("jnsksddsnfdsks")
+      // console.log("jnsksddsnfdsks")
        if(token){
         // await dispatch(buyCourse( token , [ courseIds ] ,  totalAmount , user    , navigate , dispatch ))
        const response =  buyCourse( token ,  courseIds  ,  totalAmount , user    , navigate , dispatch )
@@ -54,7 +54,7 @@ const WishList = () => {
   
   
 
-  console.log(totalAmount , courseIds)
+  // console.log(totalAmount , courseIds)
 
   return (
     <div className=" flex flex-col gap-y-3 translate-y-7">

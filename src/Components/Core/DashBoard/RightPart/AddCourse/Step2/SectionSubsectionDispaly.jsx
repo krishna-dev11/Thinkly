@@ -33,7 +33,7 @@ const SectionSubsectionDispaly = () => {
 
   const { editSection } = useSelector((state) => state.section);
 
-  console.log(addSubSection, editSubSection, viewSubSection);
+  // console.log(addSubSection, editSubSection, viewSubSection);
 
   const handleAddLecture = (event) => {
     dispatch(SetaddSubSection(event));
@@ -54,7 +54,7 @@ const SectionSubsectionDispaly = () => {
   };
 
   const sendSubSectionDeleteRequest = (sectionid, subSectionid, courseid) => {
-    console.log(sectionid, subSectionid, courseid);
+    // console.log(sectionid, subSectionid, courseid);
     const formData = new FormData();
     formData.append("sectionId", sectionid);
     formData.append("subSectionId", subSectionid);

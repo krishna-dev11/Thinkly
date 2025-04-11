@@ -1,6 +1,7 @@
 import React from "react";
 import Hieghlightedtext from "../Components/Core/Home/Hieghlightedtext";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import ReviwSlider from "../Components/Core/Home/ReviwSlider";
 import BlackYellowButton from "../Components/Core/Home/BlackYellowButton";
 import homepageVideo from "../assets/Images/banner.mp4";
 import Text_Running from "../Components/Core/Home/Text_Running";
@@ -69,13 +70,26 @@ const HomePage = () => {
         </div>
 
         {/* video part */}
-        <div className="w-[77%] h-[34rem] mx-auto relative ">
-        <BackGroundGradient shade={"bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]"} position={"-top-[2rem] right-[10rem] "} dimensions={"w-[40rem] h-[20rem]"} z={"-z-0"}/>
-        <div className=" w-full h-full bg-white absolute translate-x-5  translate-y-5 rounded-sm"></div>
-          <video className=" absolute rounded-sm "  muted loop autoPlay>
-            <source src={homepageVideo}></source>
-          </video>
-        </div>
+        <div className="w-[90%] md:w-[80%] lg:w-[77%] h-[30rem] md:h-[32rem] lg:h-[34rem] mx-auto relative">
+  <BackGroundGradient 
+    shade="bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]" 
+    position="-top-[3rem] right-[3rem] md:-top-[2rem] md:right-[6rem] lg:-top-[2rem] lg:right-[10rem]" 
+    dimensions="w-[25rem] h-[15rem] md:w-[35rem] md:h-[18rem] lg:w-[40rem] lg:h-[20rem]" 
+    z="-z-0" 
+  />
+
+  <div className="w-full h-[85%] md:h-[100%] sm:h-[100%] bg-white absolute translate-x-3 translate-y-3 md:translate-x-5 md:translate-y-5 rounded-sm"></div>
+
+  <video 
+    className="absolute w-full h-full object-cover rounded-sm" 
+    muted 
+    loop 
+    autoPlay
+  >
+    <source src={homepageVideo} />
+  </video>
+</div>
+
 
         {/* 3rd part (text-button and Running code section) */}
 
@@ -169,27 +183,40 @@ const HomePage = () => {
               <TimeLine />
             </div> 
 
-            <div className="w-[50%] h-[27rem] mx-auto relative ">
-            <BackGroundGradient shade={"bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]"} position={"top-[6rem] -left-[5rem] "} dimensions={"w-[50rem] h-[10rem]"} z={"-z-0"}/>
-              <div className=" flex bg-caribbeangreen-700 justify-evenly w-[70%] h-[6rem] z-30 absolute bottom-[-3rem] left-24">
-                <div className="flex w-[50%]  justify-center  items-center gap-3">
-                  <p className="text-white text-[2.3rem] font-bold ">10</p>
-                  <p className="text-richblack-300  font-inter text-[.6rem]">
-                    YEARS <br /> EXPERIENCES
-                  </p>
-                </div>
-                <div className="w-[1px] h-[50%] bg-richblack-300 my-auto"></div>
-                <div className="flex w-[50%]  justify-center  items-center gap-3">
-                  <p className="text-white text-[2.3rem] font-bold ">250</p>
-                  <p className="text-richblack-300  font-inter text-[.6rem]">
-                    YEARS <br /> EXPERIENCES
-                  </p>
-                </div>
-                <div></div>
-              </div>
-              <div className=" w-full h-full bg-white absolute z-0 translate-x-5  translate-y-5 rounded-sm"></div>
-              <img src={greenGirlImage} className=" absolute rounded-sm" />
-            </div>
+            <div className="w-[90%] sm:w-[80%] md:w-[65%] lg:w-[50%] h-[24rem] sm:h-[25rem] md:h-[26rem] lg:h-[27rem] mx-auto relative">
+  <BackGroundGradient 
+    shade="bg-[radial-gradient(circle,#1FA2FF_10%,#12D8FA_50%,#A6FFCB_90%)]" 
+    position="top-[4rem] -left-[2rem] sm:top-[5rem] sm:-left-[3rem] md:top-[6rem] md:-left-[5rem]" 
+    dimensions="w-[30rem] h-[8rem] sm:w-[40rem] sm:h-[9rem] md:w-[50rem] md:h-[10rem]" 
+    z="-z-0" 
+  />
+
+  {/* Stats Box */}
+  <div className="flex flex-col sm:flex-row bg-caribbeangreen-700 justify-evenly items-center w-[90%] sm:w-[80%] md:w-[70%] h-[6rem] z-30 absolute -bottom-[3rem] left-[5%] sm:left-[8%] md:left-24 rounded-md shadow-md">
+    <div className="flex w-full sm:w-[50%] justify-center items-center gap-3">
+      <p className="text-white text-[2rem] sm:text-[2.3rem] font-bold">10</p>
+      <p className="text-richblack-300 font-inter text-[.6rem] sm:text-[.7rem]">
+        YEARS <br /> EXPERIENCES
+      </p>
+    </div>
+
+    {/* Divider */}
+    <div className="hidden sm:block w-[1px] h-[50%] bg-richblack-300 my-auto"></div>
+
+    <div className="flex w-full sm:w-[50%] justify-center items-center gap-3 mt-2 sm:mt-0">
+      <p className="text-white text-[2rem] sm:text-[2.3rem] font-bold">250</p>
+      <p className="text-richblack-300 font-inter text-[.6rem] sm:text-[.7rem]">
+        YEARS <br /> EXPERIENCES
+      </p>
+    </div>
+  </div>
+
+  {/* White Layer */}
+  <div className="w-full h-full bg-white absolute z-0 translate-x-2 translate-y-2 sm:translate-x-4 sm:translate-y-4 md:translate-x-5 md:translate-y-5 rounded-sm"></div>
+
+  {/* Image */}
+  <img src={greenGirlImage} className="absolute rounded-sm w-full h-full object-cover" />
+</div>
 
           </div>
         </div>
@@ -202,15 +229,19 @@ const HomePage = () => {
 
 
       {/* section 3 */}
-      <div className=" bg-richblack-900 w-full flex">
+      <div className=" bg-richblack-900 flex-col gap-y-5 w-full flex">
 
 {/* instructor part */}
       <div className='h-full w-[85%]   flex mx-auto p-10 mt-10 '>
 
-        <div className="w-[50%] h-[28rem]  mx-auto relative ">
-          <div className=" w-full h-full bg-white absolute z-0 -translate-x-5  -translate-y-5 "></div>
-          <img src={Instructor} className=" absolute z-10"/>
-        </div>
+      <div className="w-[90%] sm:w-[70%] md:w-[60%] lg:w-[50%] h-[22rem] sm:h-[25rem] md:h-[27rem] lg:h-[28rem] mx-auto relative">
+  {/* White Shadow Layer */}
+  <div className="w-full h-full bg-white absolute z-0 -translate-x-2 -translate-y-2 sm:-translate-x-3 sm:-translate-y-3 md:-translate-x-4 md:-translate-y-4 lg:-translate-x-5 lg:-translate-y-5 rounded-sm"></div>
+
+  {/* Instructor Image */}
+  <img src={Instructor} className="absolute z-10 w-full h-full object-cover rounded-sm" />
+</div>
+
 
            
            <div className="w-[50%] flex flex-col gap-4 p-24"> 
@@ -227,7 +258,9 @@ const HomePage = () => {
     </div>
 
     {/* moving cards part */}
-    
+     
+     <ReviwSlider/>
+
       </div>
          
 

@@ -6,7 +6,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const OverviewofLectures = ({ data }) => {
 
-  console.log(data)
+  // console.log(data)
 
     const [toatalSectionduration , settoatalSectionduration] = useState(0);
 
@@ -37,7 +37,7 @@ const OverviewofLectures = ({ data }) => {
           <div>
                 {
                     section.subSections.map(subSection=>(
-                        <div className=" flex gap-x-2 justify-between  py-2 px-16 items-center border-b  border-richblack-700">
+                        <div className=" flex gap-x-2 justify-between  py-2 px-16 items-center border-b  border-richblack-700" key={subSection._id}>
                             <div className=" flex gap-x-3  ">
                             <IoIosTv /> 
                             <details>

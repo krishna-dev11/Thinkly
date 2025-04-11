@@ -30,7 +30,7 @@ const ContactForm = ({heading , description }) => {
 
     const ActionTaken = (event)=>{
 
-        console.log(event)
+        // console.log(event)
 
         toast.success("We Are Connected to You ")
 

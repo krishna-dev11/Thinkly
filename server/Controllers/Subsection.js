@@ -44,7 +44,7 @@ exports.createSubSection = async (req, res) => {
         lectureVideo,
         process.env.CLOUDINARY_FOLDER
       );
-      console.log(uploadCloudinary , "meeeeeeeeeeeeeeeeeee")
+      // console.log(uploadCloudinary , "meeeeeeeeeeeeeeeeeee")
     } catch (error) {
       return res.status(500).json({
         success: false,
@@ -171,7 +171,7 @@ exports.updateSubSection = async (req, res) => {
     try {
 
       const UpdatesubSection = await subsection.findById({_id:SubSectionId});
-      console.log(UpdatesubSection , "Nikk")
+      // console.log(UpdatesubSection , "Nikk")
       UpdatesubSection.title = subSectionName;
       UpdatesubSection.description = description;
 
@@ -179,7 +179,7 @@ exports.updateSubSection = async (req, res) => {
         lectureVideo,
         process.env.CLOUDINARY_FOLDER
       );
-      console.log(uploadDetails , "me pagal hu")
+      // console.log(uploadDetails , "me pagal hu")
 
       UpdatesubSection.videoUrl = uploadDetails.secure_url;
       UpdatesubSection.timeDuration = `${uploadDetails.duration}`;

@@ -14,6 +14,10 @@ export const endpoints = {
 export const profileEndpoints = {
   GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
+  // instructor Dashboard
+  GET_ALL_COURSES_OF_INSTRUCTOR_FOR_DASHBOARD : BASE_URL + "/profile/getAllCoursesOfInstructorForInstructorDashBoard",
+  GET_INSTRUCTOR_DASHBOARD_DATA: BASE_URL + "/profile/GetInstructorDasboardData",
+  
 }
 
 // STUDENTS ENDPOINTS
@@ -45,7 +49,11 @@ export const courseEndpoints = {
   PUBLISH_COURSE_API: BASE_URL + "/course/publishCourse",
   GET_INSTRUCTORs_All_COURSES_API: BASE_URL + "/course/getAllCoursesOfInstructor",
   GET_CATEGORY_WISE_COURSES_API: BASE_URL + "/course/categoryPageDetails",
-  GET_ALL_COURSES_DETAILS_FOR_CARD_VIEW : BASE_URL + "/course/getEnrolledCoursesDataForCardViews"
+  GET_ALL_COURSES_DETAILS_FOR_CARD_VIEW : BASE_URL + "/course/getEnrolledCoursesDataForCardViews",
+  UPDATE_COURSE_PROGRESS_API : BASE_URL + "/course/updateCourseProgress"
+
+  
+
 }
 
 
@@ -61,7 +69,8 @@ export const CartEndpoints = {
 
 // RATINGS AND REVIEWS
 export const ratingsEndpoints = {
-  REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
+  CREATE_RATING_API: BASE_URL + "/course/createRatingAndReviews",
+  GET_ALL_RATING_AND_REVIEW : BASE_URL + "/course/getAllRatingAndReviews"
 }
 
 // CATAGORIES API

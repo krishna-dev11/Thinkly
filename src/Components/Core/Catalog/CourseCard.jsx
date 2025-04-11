@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GetAvgRating from '../../../Utilities/avgRating'
 import RatingStars from '../../Common/RatingStars'
+import toast from 'react-hot-toast'
+import { useSelector } from 'react-redux'
 
 
 const CourseCard = ({data}) => {
 
-  
+  const { token } = useSelector((state) => state.auth);
   
   const navigate = useNavigate()
 
@@ -23,7 +25,7 @@ const CourseCard = ({data}) => {
 
   return (
     <div className=' flex flex-col max-w-[24rem]  cursor-pointer  bg-white/10 backdrop-blur-md  border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] mx-auto  gap-y-2  text-richblack-900 rounded-md px-2 py-2  min-h-[24rem]'
-           onClick={()=>navigate(`/CourseDetails/${data._id}`)}
+           onClick={()=> token ? navigate(`/CourseDetails/${data._id}`) : toast.error("Login First") }
       >
        <img src={data.thumbnail} className='  '  />
        <p className=' text-sm self-start text-left text-richblack-5 font-semibold'>{data.courseName}</p>

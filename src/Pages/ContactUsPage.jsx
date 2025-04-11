@@ -3,6 +3,7 @@ import Fotter from '../Components/Common/Fotter'
 import ContactForm from '../Components/Core/About.jsx/ContactForm'
 import { chat_visit_call } from '../data/Contact-data'
 import * as Icons from "react-icons/fa6"
+import ReviwSlider from '../Components/Core/Home/ReviwSlider'
 
 const ContactUsPage = () => {
 
@@ -16,7 +17,7 @@ const ContactUsPage = () => {
               {
                 chat_visit_call.map((CVC)=>{
                     let Icon = Icons[CVC.icon]
-                    console.log(<Icon/>)
+                    {/* console.log(<Icon/>) */}
 
                     return (
                     <div className='flex gap-x-5 items-baseline' key={CVC.id}> 
@@ -37,7 +38,14 @@ const ContactUsPage = () => {
               <ContactForm heading={"Got a Idea? We've got the skills. Let's team up"} description={"Tall us more about yourself and what you're got in mind."} />
             </div>
 
+
+
         </div>
+
+  {/* section5 slider */}
+     <div className=' bg-richblack-900'>
+     <ReviwSlider/>
+     </div>        
 
         <Fotter/>
 

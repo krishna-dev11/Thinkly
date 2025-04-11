@@ -5,8 +5,6 @@ const profile = require("../Models/profile");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie-parser");
 const otpGenerator = require("otp-generator");
-// const mailSender = require("../Utilities/mailSender");
-// const { passwordUpdate } = require("../mail/templates/passwordUpdate");
 const passwordUpdate = require("../mail/templates/passwordUpdate");
 const { mailSender } = require("../Utilities/mailSender");
 require("dotenv").config();
@@ -132,7 +130,7 @@ exports.signUP = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(1);
 
-      console.log(recentOtp)
+      // console.log(recentOtp)
       
     if (recentOtp.length === 0 || !recentOtp[0]) {
       return res.status(400).json({
@@ -205,7 +203,7 @@ exports.login = async (req, res) => {
 
   
 
-    const User = await user.findOne({ email: email }).populate("additionalDetails")
+    const User = await user.findOne({ email: email }).populate("additionalDetails  cart coursesProgress")
     // console.log(User)
     if (!User) {
       return res.status(401).json({
@@ -308,10 +306,10 @@ exports.changePassword = async (req, res) => {
         "Password Changed Succssful",
 				passwordUpdate(updatedUserDetails.email, updatedUserDetails.firstName)
 			);
-			console.log("Email sent successfully:", emailResponse.response);
+			// console.log("Email sent successfully:", emailResponse.response);
 		} catch (error) {
 			// If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
-			console.error("Error occurred while sending email:", error);
+			// console.error("Error occurred while sending email:", error);
 			return res.status(500).json({
 				success: false,
 				message: "Error occurred while sending email",

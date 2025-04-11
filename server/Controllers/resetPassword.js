@@ -50,7 +50,7 @@ exports.forgotpasswordToken = async (req, res) => {
       `click on these link and change password ${url}`
     );
 
-    console.log(hi)
+    // console.log(hi)
 
     return res.status(200).json({
       success: true,
@@ -69,7 +69,7 @@ exports.forgotpasswordToken = async (req, res) => {
 // actually  reset password after clicking on the link provided to the authorized email
 exports.forgotPassword = async (req, res) => {
   try {
-    console.log(req.body)
+    // console.log(req.body)
     const { password, confirmedPassword , token } = req.body 
 
     if (!password || !confirmedPassword ) {

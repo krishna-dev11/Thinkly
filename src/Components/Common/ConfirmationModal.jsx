@@ -2,7 +2,7 @@ import React from "react";
 
 const ConfirmationModal = ({data}) => {
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <div className="fixed inset-0 z-[1000] grid justify-center items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">

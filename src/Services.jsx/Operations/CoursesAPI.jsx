@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { catalogData, courseEndpoints } from "../apis";
+import { catalogData, courseEndpoints, ratingsEndpoints } from "../apis";
 import { setLoading } from "../../Slices/Auth";
 import { apiConnector } from "../apiConnector";
 import {
@@ -8,19 +8,24 @@ import {
 } from "../../Slices/Categories";
 import {
   setBuyedCoursesDataForCard,
+  setRatingAndReviewData,
   setUserBuyedCoursesDataForCard,
 } from "../../Slices/Courses";
+import { setUser } from "../../Slices/Profile";
 
 const { CATALOGPAGEDATA_API } = catalogData;
+
+const { CREATE_RATING_API, GET_ALL_RATING_AND_REVIEW } = ratingsEndpoints;
 
 const {
   GET_FULL_COURSE_DETAILS_AUTHENTICATED,
   GET_ALL_COURSES_DETAILS_FOR_CARD_VIEW,
+  UPDATE_COURSE_PROGRESS_API,
 } = courseEndpoints;
 
 export function GetCategoryWiseCoursesData(categoryId) {
   return async (dispatch) => {
-    console.log(categoryId);
+    // console.log(categoryId);
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
@@ -28,7 +33,7 @@ export function GetCategoryWiseCoursesData(categoryId) {
         categoryId,
       });
 
-      console.log(response.data.data);
+      // console.log(response.data.data);
       dispatch(setCategoryWiseCourses(response.data.data));
       // localStorage.setItem("CategoryCourses" , JSON.stringify(response.data.data))
 
@@ -57,7 +62,7 @@ export function GetWholeCourseDetails(courseId) {
         }
       );
 
-      console.log(response.data.data)
+      // console.log(response.data.data);
       dispatch(setWholeCourseData(response.data.data));
       // localStorage.setItem("CategoryCourses" , JSON.stringify(response.data.data))
 
@@ -74,7 +79,7 @@ export function GetWholeCourseDetails(courseId) {
 
 export function GetBuyedCoursesDataOfStudentForCard(StudentId, token) {
   return async (dispatch) => {
-    console.log(StudentId, token);
+    // console.log(StudentId, token);
     const toastId = toast.loading("Loading");
     dispatch(setLoading(true));
     try {
@@ -91,8 +96,95 @@ export function GetBuyedCoursesDataOfStudentForCard(StudentId, token) {
         throw new Error(response.data.message);
       }
 
-      console.log(response.data.data);
+      // console.log(response.data.data);
       dispatch(setUserBuyedCoursesDataForCard(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function CreateRating(courseId, rating, reviews, token) {
+  return async (dispatch) => {
+    // console.log( categoryId)
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "POST",
+        CREATE_RATING_API,
+        {
+          courseId,
+          rating,
+          reviews,
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Rating Created");
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function GetAllRatingAndReview() {
+  return async (dispatch) => {
+    // console.log(StudentId, token);
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("GET", GET_ALL_RATING_AND_REVIEW);
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      // console.log(response.data.data);
+      dispatch(setRatingAndReviewData(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function UpdateProgress(courseId, subSectionId, token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "POST",
+        UPDATE_COURSE_PROGRESS_API,
+        {
+          courseId,
+          subSectionId,
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      dispatch(setUser(response.data.data));
+      localStorage.setItem("user", JSON.stringify(response.data.data));
+
+      toast.success("Lecture Mark As Completed");
     } catch (error) {
       console.log(error);
     }
