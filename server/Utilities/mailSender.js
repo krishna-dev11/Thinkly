@@ -14,7 +14,7 @@ exports.mailSender = async(email , title , body)=>{
     })
 
     let mailsended = await transporter.sendMail({
-        from:'STUDY NOTION || by krishna gothwal',
+        from:'K-TECH || by krishna gothwal',
         to:`${email}`,
         subject:`${title}`,
         html:`${body}`

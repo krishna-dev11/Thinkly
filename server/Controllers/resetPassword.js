@@ -1,3 +1,4 @@
+const { ResetPasswordLink } = require("../mail/templates/ResetPasswordToken");
 const user = require("../Models/user");
 const {mailSender} = require("../Utilities/mailSender");
 const bcrypt = require("bcryptjs");
@@ -44,13 +45,29 @@ exports.forgotpasswordToken = async (req, res) => {
 
     // console.log(url)
 
-    const hi = await mailSender(
-      email,
-      "secure link to change your password ",
-      `click on these link and change password ${url}`
-    );
+    // const hi = await mailSender(
+    //   email,
+    //   "secure link to change your password ",
+    //   `click on these link and change password ${url}`
+    // );
 
-    // console.log(hi)
+        try {
+          console.log("mail sended 1")
+           await mailSender(
+            email,
+            "secure link to change your password",
+            ResetPasswordLink( email , url)
+          );
+          console.log("mail sended")
+        } catch (error) {
+          return res.status(500).json({
+            success: false,
+            message: "Error occurred while sending email",
+            error: error.message,
+          });
+        }
+
+
 
     return res.status(200).json({
       success: true,

@@ -1,4 +1,4 @@
-const ResetPasswordLink = (email, resetUrl) => {
+exports.ResetPasswordLink = (email, resetUrl) => {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -93,4 +93,3 @@ const ResetPasswordLink = (email, resetUrl) => {
     </html>`;
 };
 
-module.exports = ResetPasswordLink;
