@@ -41,31 +41,31 @@ exports.forgotpasswordToken = async (req, res) => {
 
     // console.log(hi)
 
-    const url = `http://localhost:3000/update-password/${token}`;
+    const url = `https://ktech-silk.vercel.app/update-password/${token}`;
 
     // console.log(url)
 
-    // const hi = await mailSender(
-    //   email,
-    //   "secure link to change your password ",
-    //   `click on these link and change password ${url}`
-    // );
+    const hi = await mailSender(
+      email,
+      "secure link to change your password ",
+      `click on these link and change password ${url}`
+    );
 
-        try {
-          console.log("mail sended 1")
-           await mailSender(
-            email,
-            "secure link to change your password",
-            ResetPasswordLink( email , url)
-          );
-          console.log("mail sended")
-        } catch (error) {
-          return res.status(500).json({
-            success: false,
-            message: "Error occurred while sending email",
-            error: error.message,
-          });
-        }
+        // try {
+        //   console.log("mail sended 1")
+        //    await mailSender(
+        //     email,
+        //     "secure link to change your password",
+        //     ResetPasswordLink( email , url)
+        //   );
+        //   console.log("mail sended")
+        // } catch (error) {
+        //   return res.status(500).json({
+        //     success: false,
+        //     message: "Error occurred while sending email",
+        //     error: error.message,
+        //   });
+        // }
 
 
 
