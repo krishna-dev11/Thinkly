@@ -45,11 +45,18 @@ exports.forgotpasswordToken = async (req, res) => {
 
     // console.log(url)
 
-    const hi = await mailSender(
-      email,
-      "secure link to change your password ",
-      `click on these link and change password ${url}`
-    );
+    // const hi = await mailSender(
+    //   email,
+    //   "secure link to change your password ",
+    //   `click on these link and change password ${url}`
+    // );
+
+
+           await mailSender(
+            email,
+            "secure link to change your password",
+            ResetPasswordLinknp( email , url)
+          );
 
         // try {
         //   console.log("mail sended 1")
