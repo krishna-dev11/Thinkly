@@ -1,7 +1,8 @@
-const { ResetPasswordLink } = require("../mail/templates/ResetPasswordToken");
+
 const user = require("../Models/user");
 const {mailSender} = require("../Utilities/mailSender");
 const bcrypt = require("bcryptjs");
+const ResetPasswordLink = require("../mail/templates/ResetPasswordToken")
 
 // checked
 exports.forgotpasswordToken = async (req, res) => {
@@ -52,11 +53,7 @@ exports.forgotpasswordToken = async (req, res) => {
     // );
 
 
-           await mailSender(
-            email,
-            "secure link to change your password",
-            ResetPasswordLinknp( email , url)
-          );
+           await mailSender( email , 'secure link to change your password' , ResetPasswordLink( email , url) );
 
         // try {
         //   console.log("mail sended 1")
