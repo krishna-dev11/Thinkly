@@ -73,7 +73,6 @@ exports.sendOTP = async (req, res) => {
 exports.signUP = async (req, res) => {
 
   
-  
   try {
     const {
       firstName,
