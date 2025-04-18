@@ -64,7 +64,7 @@ const UpdateProfile = () => {
               </p>
               <input
                 type="text"
-                placeholder={user.firstName ? user.firstName : "Enter First Name"}
+                placeholder="Enter First Name"
                 {...register("FirstName", {
                   required: {
                     value: true,
@@ -85,7 +85,7 @@ const UpdateProfile = () => {
               </p>
               <input
                 type="text"
-                placeholder={user.lastName ? user.lastName : "Enter Last Name"}
+                placeholder="Enter Last Name"
                 {...register("LastName", {
                   required: {
                     value: true,
@@ -109,7 +109,7 @@ const UpdateProfile = () => {
               <input
                 type="date"
                 name="dateOfBirth"
-                placeholder={user.additionalDetails.dateOfBirth ? user.additionalDetails.dateOfBirth : "Enter Date Of Birth "}
+                placeholder="Enter Date Of Birth "
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -132,7 +132,7 @@ const UpdateProfile = () => {
                 <CustomRadioButton
                   name="gender"
                   lable="Gender"
-                  Placeholder={user.additionalDetails.gender ? user.additionalDetails.gender : "Please Enter Your Gender "}
+                  Placeholder="Please Enter Your Gender "
                   register={register}
                   errors={errors}
                   setValue={setValue}
@@ -151,7 +151,7 @@ const UpdateProfile = () => {
                 <input
                   type="tel"
                   name="contactNumber"
-                  placeholder={user.additionalDetails.contactNumber ? user.additionalDetails.contactNumber : "Please Enter Your Contact Number "}
+                  placeholder="Please Enter Your Contact Number "
                   {...register("contactNumber", {
                     required: {
                       value: true,
@@ -183,7 +183,7 @@ const UpdateProfile = () => {
               <textarea
                 type="text"
                 name="about"
-                placeholder={user.additionalDetails.about ? user.additionalDetails.about : "Enter Your About in Second Person Voice "}
+                placeholder="Enter Your About in Second Person Voice"
                 {...register("about", {
                   required: {
                     value: true,
