@@ -12,6 +12,8 @@ const UpdateProfile = () => {
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
+
 
   const {
     register,
@@ -62,7 +64,7 @@ const UpdateProfile = () => {
               </p>
               <input
                 type="text"
-                placeholder="Enter First Name"
+                placeholder={user.firstName ? user.firstName : "Enter First Name"}
                 {...register("FirstName", {
                   required: {
                     value: true,
@@ -83,7 +85,7 @@ const UpdateProfile = () => {
               </p>
               <input
                 type="text"
-                placeholder="Enter Last Name"
+                placeholder={user.lastName ? user.lastName : "Enter Last Name"}
                 {...register("LastName", {
                   required: {
                     value: true,
@@ -107,7 +109,7 @@ const UpdateProfile = () => {
               <input
                 type="date"
                 name="dateOfBirth"
-                placeholder="Enter Date of Birth"
+                placeholder={user.additionalDetails.dateOfBirth ? user.additionalDetails.dateOfBirth : "Enter Date Of Birth "}
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -130,7 +132,7 @@ const UpdateProfile = () => {
                 <CustomRadioButton
                   name="gender"
                   lable="Gender"
-                  Placeholder="Enter Benefits of the course"
+                  Placeholder={user.additionalDetails.gender ? user.additionalDetails.gender : "Please Enter Your Gender "}
                   register={register}
                   errors={errors}
                   setValue={setValue}
@@ -149,7 +151,7 @@ const UpdateProfile = () => {
                 <input
                   type="tel"
                   name="contactNumber"
-                  placeholder="Please Enter Your Contact Number"
+                  placeholder={user.additionalDetails.contactNumber ? user.additionalDetails.contactNumber : "Please Enter Your Contact Number "}
                   {...register("contactNumber", {
                     required: {
                       value: true,
@@ -181,7 +183,7 @@ const UpdateProfile = () => {
               <textarea
                 type="text"
                 name="about"
-                placeholder=" Please Enter Bio In Second Person Voice"
+                placeholder={user.additionalDetails.about ? user.additionalDetails.about : "Enter Your About in Second Person Voice "}
                 {...register("about", {
                   required: {
                     value: true,
