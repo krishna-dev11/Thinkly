@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux'
 const GoLive = () => {
 
     const {RoomId} = useParams()
+
     const {user} = useSelector(state=>state.profile)
     const navigate = useNavigate()
 

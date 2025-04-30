@@ -107,7 +107,7 @@ const StartLive = () => {
 
         <div className="flex justify-end">
           <button
-            onClick={() => navigate(`/dashboard/${user?.firstName}`)}
+            onClick={() => navigate(`/dashboard/${user?._id}`)}
             className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 rounded-lg transition duration-200 shadow-md hover:scale-105"
           >
             🚀 Start Live Class
