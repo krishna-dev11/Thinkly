@@ -23,11 +23,12 @@ app.use(cookieParser());
 app.use(
     cors({
         origin:"https://ktech-silk.vercel.app",   
-        // push karte wakt uncomment karna
-        // origin:"http://localhost:3000",
         credentials : true
     })
 )
+
+        // push karte wakt uncomment karna
+        // origin:"http://localhost:3000",
 
 app.use(fileUpload({
     useTempFiles : true,
