@@ -11,7 +11,7 @@ import TimeLine from "../Components/Core/Home/TimeLine";
 import SwissKnife from "../Components/Core/Home/SwissKnife"
 import Instructor from "../assets/Images/Instructor.png"
 import FotterLinks from "../Components/Common/FotterLinks"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import PowerOfCode from "../Components/Core/Home/PowerOfCode";
 import Fotter from "../Components/Common/Fotter";
@@ -19,6 +19,9 @@ import BackGroundGradient from "../Components/Common/BackGroundGradient";
 // import GradientInteractiveBox from "../Components/Common/GradientInteractiveBox";
 
 const HomePage = () => {
+
+  const navigate = useNavigate()
+
   return (
     // wrapperh-   h-[6631px]
     <div className=" w-[100%] overflow-x-hidden m-0 p-0 box-border translate-y-10  ">
@@ -30,7 +33,9 @@ const HomePage = () => {
         {/* Empower Your Future with Coding Skills section */}
         <div className="h-[15rem] w-[70%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
           <div className="flex mx-auto justify-center bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
-            <p className=" text-richblack-200 text-[.9rem]">
+            <p className=" text-richblack-200 text-[.9rem]" 
+            onClick={()=>navigate("/EnterRoom")}
+             >
               Become an Instructor
             </p>
             <FaLongArrowAltRight

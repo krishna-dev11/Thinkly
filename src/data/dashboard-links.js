@@ -53,6 +53,12 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.INSTRUCTOR,
     icon: "FaPlus",
   },
+  {
+    name: "Start Live",
+    path: "/dashboard/StartLive",
+    icon: "FaTv",
+    type: ACCOUNT_TYPE.INSTRUCTOR,
+  }
 ];
 
 
@@ -71,5 +77,10 @@ export const BuyedCoursessidebarLinks = [
     name: "Community",
     path: "/EnrolledCourses/community",
     icon: "FaRegComments",
+  },
+  {
+    name: "Join Live",
+    path: "/EnrolledCourses/EnterRoom",
+    icon: "FaTv",
   }
 ];

@@ -35,6 +35,10 @@ import ViewCourse from "./Pages/ViewCourse";
 import ViewLectureVideo from "./Components/Core/ViewCourse/Right/ViewLectureVideo";
 import StudentCourses from "./Components/Core/DashBoard/RightPart/StudentCourses";
 import InstructorDashboard from "./Components/Core/DashBoard/RightPart/InstructorDasboard/InstructorDashboard";
+import EnterRoom from "./Pages/EnterRoom";
+import LiveClass from "./Pages/LiveClass";
+import StartLive from "./Components/Core/DashBoard/RightPart/StartLive";
+import GoLive from "./Components/Core/DashBoard/RightPart/GoLive";
 
 function App() {
 
@@ -44,12 +48,18 @@ function App() {
   return (
     <div className="h-screen bg-richblack-900">
       <NavBar />
+      
       <Routes >
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
         <Route path="/CourseDetails/:CourseId" element={<ONECourseDetail />}/>
+
+
+
+
+      
 
 
         <Route path="/catalog/:categoryName/:categoryId" element={<DisplayCatagoryWiseCourses />} />
@@ -145,7 +155,10 @@ function App() {
               />
               <Route path="/dashboard/edit-course" element={<EditPreviousCourse />} />
               <Route path="/dashboard/instructor" element={<InstructorDashboard/>}/>
+              <Route path="/dashboard/StartLive" element={<StartLive />} />
+              <Route path="/dashboard/:RoomId" element={<GoLive/>}/>
 
+              
             </>
           )}
 
@@ -162,6 +175,10 @@ function App() {
           <Route path="/EnrolledCourses/active-Courses" element={<ActiveCourseList/>} />
           <Route path="/EnrolledCourses/book-marks" element={<Bookmarks/>} />
           <Route path="/EnrolledCourses/community" element={<Community/>} />
+
+          <Route path="/EnrolledCourses/EnterRoom" element={<EnterRoom/>}/>
+          <Route path="/EnrolledCourses/:RoomId" element={<LiveClass/>}/>
+
 
         </Route>
 

@@ -187,7 +187,7 @@ const NavBar = () => {
                       : "absolute h-4 w-4 bg-white right-[-.9rem] top-[-.5rem] rounded-full animate-bounce "
                   }`}
                 >
-                  {user.cart.length}
+                  {user.cart.length ? user.cart.length : 0}
                 </span>
               </div>
             </Link>
