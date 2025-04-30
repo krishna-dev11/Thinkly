@@ -9,6 +9,9 @@ const LiveClass = () => {
     const {user} = useSelector(state=>state.profile)
     const navigate = useNavigate()
     console.log(user)
+    console.log(user)
+    console.log(user)
+
 
     const MyMeeting = async(element)=>{
      const appId = 1856231876 ;
