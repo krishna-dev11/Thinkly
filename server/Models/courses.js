@@ -63,7 +63,10 @@ const coursesSchema = new mongoose.Schema({
     enum: ["Draft", "Published"],
     default: "Draft",
   },
-
+  TeachLive : {
+    type:Boolean,
+    default : false
+  },
   totalDuration: {
     type: String, 
     default: "0m",

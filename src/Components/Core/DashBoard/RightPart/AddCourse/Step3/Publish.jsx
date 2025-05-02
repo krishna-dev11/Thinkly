@@ -14,6 +14,7 @@ const Publish = () => {
 
   const { token } = useSelector((state) => state.auth);
   const { course } = useSelector((state) => state.Course);
+  console.log(course)
 
 
   const {
@@ -30,6 +31,10 @@ const Publish = () => {
     if(course.status === COURSE_STATUS.PUBLISHED){
       setValue("PublishORDraft" , true)
     }
+
+    if(course.TeachLive === true){
+      setValue("TeachLiveOrNot" , true)
+    }
   },[])
 
   const submitHandler = (event) => {
@@ -40,7 +45,10 @@ const Publish = () => {
     const status = event.PublishORDraft
       ? COURSE_STATUS.PUBLISHED
       : COURSE_STATUS.DRAFT;
+
+      
     formData.append("status", status);
+    formData.append("TeachLive", event.TeachLiveOrNot);
     formData.append("courseId" , course._id);
 
     try {
@@ -48,6 +56,7 @@ const Publish = () => {
     } catch (error) {
       console.log(error);
     }
+
   };
 
   return (
@@ -69,6 +78,19 @@ const Publish = () => {
             })}
           />
           <p className=" text-richblack-300">Make this Course Public</p>
+        </label>
+
+        <label className=" flex gap-x-2 items-baseline">
+          <input
+            type="checkbox"
+            {...register("TeachLiveOrNot", {
+              required: {
+                message:
+                  "please Specify , Do You Want to Teach Live or Not",
+              },
+            })}
+          />
+          <p className=" text-richblack-300">please Specify , You Want to Teach Live or Not</p>
         </label>
 
         <button type="submit" className=" flex px-2 py-1 rounded-md bg-yellow-50 self-end">

@@ -155,7 +155,7 @@ function App() {
               />
               <Route path="/dashboard/edit-course" element={<EditPreviousCourse />} />
               <Route path="/dashboard/instructor" element={<InstructorDashboard/>}/>
-              <Route path="/dashboard/StartLive" element={<StartLive />} />
+              <Route path="/dashboard/StartLive/:CourseId" element={<StartLive />} />
               <Route path="/dashboard/:RoomId" element={<GoLive/>}/>
 
               

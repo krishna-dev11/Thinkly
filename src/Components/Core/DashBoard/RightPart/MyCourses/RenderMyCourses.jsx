@@ -13,6 +13,7 @@ import { MdEdit } from "react-icons/md";
 import ConfirmationModal from "../../../../Common/ConfirmationModal";
 import { setCourse, setEditCourse, setStep } from "../../../../../Slices/Courses";
 import { useNavigate } from "react-router-dom";
+import { IoIosTv } from "react-icons/io";
 
 const RenderMyCourses = () => {
   const [deleteModal, setDeleteModal] = useState(null);
@@ -66,6 +67,7 @@ const RenderMyCourses = () => {
                     <p className="font-semibold text-lg">{course.courseName}</p>
                     <p className="text-sm text-gray-400">{course.courseDescription}</p>
                     <p className="text-xs text-gray-500">{course.createdAt}</p>
+                    <div className=" flex gap-x-3">
                     <span
                       className={`mt-2 px-3 py-1 rounded-full  text-sm font-medium flex self-start items-center  gap-2 ${
                         course.status === "Draft" ? "text-pink-400 bg-pink-900" : "text-yellow-50 bg-yellow-900"
@@ -74,6 +76,17 @@ const RenderMyCourses = () => {
                       {course.status === "Draft" ? <FaClock /> : <SiTicktick />}
                       <p>{course.status}</p>
                     </span>
+                    {
+                      course.TeachLive  && 
+                      <span
+                      onClick={()=>navigate(`/dashboard/StartLive/${course._id}`)}
+                      className={`mt-2 px-3 py-1 rounded-full  cursor-pointer text-sm font-medium flex self-start items-center  gap-2 bg-caribbeangreen-400`}
+                    >
+                      <IoIosTv fill="#ffffff" />
+                      <p>Go Live</p>
+                    </span>
+                    }
+                    </div>
                   </div>
                 </Td>
                 <Td className="p-3 text-white">1h 20min</Td>

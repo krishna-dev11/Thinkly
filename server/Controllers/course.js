@@ -395,12 +395,12 @@ exports.getAllDetailsOfOneCourse = async (req, res) => {
 
 exports.publishCourse = async (req, res) => {
   try {
-    const { courseId, status } = req.body;
+    const { courseId , status , TeachLive } = req.body;
 
-    if (!status || !courseId) {
+    if (!status || !courseId || !TeachLive) {
       return res.status(400).json({
         success: false,
-        message: "Please Spesify the Actuall status",
+        message: "Please Spesify the Actuall status and TeachLive or Not",
       });
     }
 
@@ -408,17 +408,24 @@ exports.publishCourse = async (req, res) => {
       status = "Draft";
     }
 
+    if(!TeachLive || TeachLive === undefined){
+      TeachLive = false
+    }
+
     const editCourse = await courses.findById(courseId);
     if (!editCourse) {
       throw new Error("Course not found");
     }
     editCourse.status = status;
+    editCourse.TeachLive = TeachLive
+    // changes here 
     await editCourse.save();
 
     const finaleditedCourse = await courses.findById(courseId).populate({
       path: "courseContent",
       populate: { path: "subSections" },
     });
+    // may be changes also applied here
 
     return res.status(200).json({
       success: true,

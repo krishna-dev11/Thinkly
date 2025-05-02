@@ -18,6 +18,7 @@ const ViewLectureSideBar = () => {
 
   const { courseDetails } = useSelector((state) => state.Category);
   const { user } = useSelector((state) => state.profile);
+  // console.log(courseDetails)
 
 
   const [loading, setloading] = useState(true);
@@ -51,10 +52,6 @@ const ViewLectureSideBar = () => {
 
   useEffect(() => {
     const setlectureFirstvideoUrl = async () => {
-      console.log(courseDetails)
-      
-      // const url = courseDetails.courseContent[0].subSections[0].videoUrl
-      // dispatch(setCurrectVideoUrl(url));
     };
     setlectureFirstvideoUrl();
   }, [location.pathname, CourseId, SectionId, SubSectionId]);
@@ -65,7 +62,7 @@ const ViewLectureSideBar = () => {
 
   return (
     <>
-      <div className=" py-10 px-2 flex flex-col">
+      <div className=" py-9 px-2 flex flex-col gap-y-3">
         <div
           className=" flex  cursor-pointer justify-between bottom-0  self-start   gap-x-2  px-3 bg-yellow-50 py-2 items-center rounded-full font-semibold "
           onClick={() =>
@@ -84,6 +81,14 @@ const ViewLectureSideBar = () => {
           <VscPreview />
           Add Review
         </div>
+
+        {  courseDetails.TeachLive  &&
+          <div 
+          onClick={()=>navigate(`/EnrolledCourses/${courseDetails._id}`)}
+          className=" w-[95%] h-[2rem] mx-auto cursor-pointer flex justify-center items-center text-white rounded-md bg-caribbeangreen-400">
+            Start Learning Live
+        </div>
+        }
 
         <div className=" px-3">
           <div className=" flex flex-col  gap-y-1 border-b border-richblack-700 py-2">
