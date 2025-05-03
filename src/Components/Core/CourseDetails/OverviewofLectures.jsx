@@ -6,7 +6,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const OverviewofLectures = ({ data }) => {
 
-  // console.log(data)
+  console.log(data)
 
     const [toatalSectionduration , settoatalSectionduration] = useState(0);
 
@@ -14,6 +14,25 @@ const OverviewofLectures = ({ data }) => {
            const newTime = toatalSectionduration + parseFloat(time)
            settoatalSectionduration(newTime)
     }
+
+     function calculateSectionDuration(sectionData) {
+      let totalSeconds = 0;
+    
+      sectionData.subSections.forEach(sub => {
+        const duration = parseFloat(sub.timeDuration);
+        if (!isNaN(duration)) {
+          totalSeconds += duration;
+        }
+      });
+    
+      const hours = Math.floor(totalSeconds / 3600);
+      const remainingSecondsAfterHours = totalSeconds % 3600;
+      const minutes = Math.floor(remainingSecondsAfterHours / 60);
+      const seconds = Math.floor(remainingSecondsAfterHours % 60);
+    
+      return `${hours}h ${minutes}min ${seconds}sec`;
+    }
+    
 
 
     
@@ -28,9 +47,9 @@ const OverviewofLectures = ({ data }) => {
             <IoMdArrowDropdown />
               <p>{section.sectionName}</p>
             </div>
-            <div className=" flex  gap-x-2 justify-center  items-center">
+            <div className=" flex  gap-x-4 justify-center  items-center">
               <p className=" text-yellow-50">{`${section.subSections.length} lectures`}</p>
-              <p className=" text-caribbeangreen-50">{`${Math.floor(Math.random()*(20 , 60))} min`}</p>
+              <p className=" text-caribbeangreen-50">{calculateSectionDuration(section)}</p>
             </div>
           </summary>
 
@@ -48,7 +67,7 @@ const OverviewofLectures = ({ data }) => {
                                 <p className=" text-richblack-300 text-xs w-[90%]">{subSection.description}</p>
                             </details>
                             </div>
-                            <p>{convertMinutesToHoursAndMinutes(subSection.timeDuration)}</p>
+                            <p>{subSection.timeDuration} sec</p>
                         </div>
                     ))
                 }

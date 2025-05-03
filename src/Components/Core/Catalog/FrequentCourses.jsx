@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GetAvgRating from '../../../Utilities/avgRating'
 import RatingStars from '../../Common/RatingStars'
+import ReactStars from 'react-stars'
 
 const FrequentCourses = ({data}) => {
 
-// console.log(data)
+console.log(data)
 
       const navigate = useNavigate()
     
@@ -15,6 +16,7 @@ const FrequentCourses = ({data}) => {
         const getaverageCount  = async()=>{
           const avg = await GetAvgRating(data.ratingAndReviews)
           setaverageRatindAndReviewCount(avg)
+          // console.log(avg)
         }
     
         getaverageCount()
@@ -30,12 +32,20 @@ const FrequentCourses = ({data}) => {
        <img src={course.thumbnail} className=' min-h-[21rem]'  />
        <p className=' text-sm self-start text-left text-richblack-5 font-semibold'>{course.courseName}</p>
        <p className=' text-sm self-start text-left  lowercase text-richblack-300 '> Instructor : {course?.instructor?.firstName} {course?.instructor?.lastName}</p>
-       <div className=' flex gap-x-2  text-yellow-50'>
-          <p>{averageRatindAndReviewCount}</p>
-          <RatingStars  Review_Count={averageRatindAndReviewCount} Star_Size={20}/>
+       <div className=' flex gap-x-2  items-baseline text-yellow-50'>
+          <p className=' text-xl'>{Number(averageRatindAndReviewCount) || 0}</p>
+          {/* <RatingStars  Review_Count={averageRatindAndReviewCount} Star_Size={20}/> */}
+          <ReactStars
+          count={5}
+          edit={false}
+          value={averageRatindAndReviewCount}
+          size={28}
+          color2={"#ffd700"}
+          className=' translate-y-3'
+        />
           <p className=' text-sm'>Ratings...</p>
        </div>
-       <p className=' self-start  text-caribbeangreen-100'>{`Rs. ${data.price}`}</p>
+       <p className=' self-start  text-caribbeangreen-100'>{`Rs. ${data?.price}`}</p>
     </div>
             ))
         }

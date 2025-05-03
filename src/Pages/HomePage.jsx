@@ -16,11 +16,14 @@ import { FaHeart } from "react-icons/fa";
 import PowerOfCode from "../Components/Core/Home/PowerOfCode";
 import Fotter from "../Components/Common/Fotter";
 import BackGroundGradient from "../Components/Common/BackGroundGradient";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 // import GradientInteractiveBox from "../Components/Common/GradientInteractiveBox";
 
 const HomePage = () => {
 
   const navigate = useNavigate()
+  const {token} = useSelector(state=>state.auth)
 
   return (
     // wrapperh-   h-[6631px]
@@ -32,9 +35,12 @@ const HomePage = () => {
       <div className="flex flex-col gap-10 bg-richblack-900  ">
         {/* Empower Your Future with Coding Skills section */}
         <div className="h-[15rem] w-[70%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
-          <div className="flex mx-auto justify-center bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
+          <div className="flex mx-auto justify-center cursor-pointer bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
             <p className=" text-richblack-200 text-[.9rem]" 
-            onClick={()=>navigate("/EnterRoom")}
+            onClick={()=>{
+              token ? toast("First you Want to LogOut And Then Create Account as Instructor") :
+              navigate("/signUp")
+            }}
              >
               Become an Instructor
             </p>

@@ -85,15 +85,21 @@ exports.categoryPageDetails = async (req, res) => {
     const { categoryId } = req.body;
     //get courses for specified categoryId
     const selectedCategory = await category
-      .findById({ _id: categoryId })
-      .populate({
-        path: "course",
-        match: { status: "Published" },
-        populate: {
+    .findById({ _id: categoryId })
+    .populate({
+      path: "course",
+      match: { status: "Published" },
+      populate: [
+        {
           path: "instructor",
         },
-      })
-      .exec();
+        // {
+        //   path: "ratingAndReviews", 
+        // },
+      ],
+    })
+    .exec();
+  
 
     //validation
     if (!selectedCategory) {
@@ -119,6 +125,14 @@ exports.categoryPageDetails = async (req, res) => {
         .populate({
           path: "course",
           match: { status: "Published" },
+          populate: [
+            {
+              path: "instructor",
+            },
+            {
+              path: "ratingAndReviews", 
+            },
+          ],
         })
         .exec();
     } else {
@@ -132,9 +146,14 @@ exports.categoryPageDetails = async (req, res) => {
       .populate({
         path: "course",
         match: { status: "Published" },
-        populate: {
-          path: "instructor",
-        },
+        populate: [
+          {
+            path: "instructor",
+          },
+          {
+            path: "ratingAndReviews", 
+          },
+        ],
       })
       .exec();
 

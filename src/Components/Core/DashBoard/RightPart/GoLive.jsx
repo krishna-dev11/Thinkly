@@ -49,7 +49,7 @@ const GoLive = () => {
         <div ref={MyMeeting} className='  w-full  '/>
   
         <button onClick={()=>{
-            navigate("/dashboard/StartLive")
+            navigate("/dashboard/my-profile")
             window.location.reload();
         }} className=' bg-yellow-5 px-3 py-2 rounded-md   ml-5'> Go Back To Dashboard </button>
 

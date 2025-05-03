@@ -20,6 +20,8 @@ import copy from "copy-to-clipboard";
 // import "../App.css";
 import "../Utilities/Loading.css";
 import ReviwSlider from "../Components/Core/Home/ReviwSlider";
+import calculateTotalCourseDuration from "../Utilities/CalculateDuration";
+import ReactStars from "react-stars";
 
 const ONECourseDetail = () => {
   const { courseDetails } = useSelector((state) => state.Category);
@@ -128,6 +130,8 @@ const ONECourseDetail = () => {
     );
   }
 
+  console.log(courseDetails);
+
   return (
     <div className="flex flex-col w-full translate-y-9 text-richblack-5">
       {/* Top Section */}
@@ -146,7 +150,15 @@ const ONECourseDetail = () => {
             <p className=" text-yellow-50 text-lg">
               {parseFloat(AvrageRatingCount)}
             </p>
-            <RatingStars Review_Count={AvrageRatingCount} Star_Size={25} />
+            {/* <RatingStars Review_Count={AvrageRatingCount} Star_Size={25} />
+             */}
+            <ReactStars
+              count={5}
+              edit={false}
+              value={AvrageRatingCount}
+              size={28}
+              color2={"#ffd700"}
+            />
             <p>{`(${courseDetails.ratingAndReviews.length} ratings)`}</p>
             <p>{`${courseDetails.studentEnrolled.length} Students`}</p>
           </div>
@@ -180,8 +192,11 @@ const ONECourseDetail = () => {
           <p className="text-2xl  mt-2 font-semibold text-richblack-5">{`Rs. ${courseDetails.price}`}</p>
 
           {user.accountType === "Instructor" ? (
-            <Link to={"/dashboard/my-courses"} className="w-[90%] flex justify-center items-center mx-auto py-2 bg-yellow-50 text-black  font-semibold rounded">
-            Go To My Courses
+            <Link
+              to={"/dashboard/my-courses"}
+              className="w-[90%] flex justify-center items-center mx-auto py-2 bg-yellow-50 text-black  font-semibold rounded"
+            >
+              Go To My Courses
             </Link>
           ) : (
             <div className=" flex flex-col gap-y-2">
@@ -271,7 +286,8 @@ const ONECourseDetail = () => {
             <li className=" flex  justify-center items-center gap-x-1 ">
               {" "}
               <IoInformationCircleOutline />{" "}
-              {`${totalCourselength} totallength `}
+              {/* {`${totalCourselength} totallength `} */}
+              {calculateTotalCourseDuration(courseDetails)}
             </li>
           </ul>
           <OverviewofLectures data={courseDetails.courseContent} />

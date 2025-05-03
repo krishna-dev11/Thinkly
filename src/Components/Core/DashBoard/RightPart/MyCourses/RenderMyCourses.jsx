@@ -14,6 +14,8 @@ import ConfirmationModal from "../../../../Common/ConfirmationModal";
 import { setCourse, setEditCourse, setStep } from "../../../../../Slices/Courses";
 import { useNavigate } from "react-router-dom";
 import { IoIosTv } from "react-icons/io";
+import { FormateDate } from "../../../../../Utilities/FormateDate";
+import calculateTotalCourseDuration from "../../../../../Utilities/CalculateDuration";
 
 const RenderMyCourses = () => {
   const [deleteModal, setDeleteModal] = useState(null);
@@ -41,6 +43,8 @@ const RenderMyCourses = () => {
     navigate("/dashboard/edit-course");
   };
 
+  console.log(user.courses)
+
   return (
   <div className=" rounded-lg overflow-hidden">
         <div className="overflow-hidden rounded-md shadow-lg  p-4 ">
@@ -65,8 +69,8 @@ const RenderMyCourses = () => {
                   />
                   <div className="text-white flex flex-col gap-y-2">
                     <p className="font-semibold text-lg">{course.courseName}</p>
-                    <p className="text-sm text-gray-400">{course.courseDescription}</p>
-                    <p className="text-xs text-gray-500">{course.createdAt}</p>
+                    <p className="text-sm text-richblack-300">{course.courseDescription}</p>
+                    <p className="text-xs text-gray-500">{FormateDate(course.createdAt)}</p>
                     <div className=" flex gap-x-3">
                     <span
                       className={`mt-2 px-3 py-1 rounded-full  text-sm font-medium flex self-start items-center  gap-2 ${
@@ -89,8 +93,8 @@ const RenderMyCourses = () => {
                     </div>
                   </div>
                 </Td>
-                <Td className="p-3 text-white">1h 20min</Td>
-                <Td className="p-3 text-white">${course.price}</Td>
+                <Td className="p-3 text-white ">{calculateTotalCourseDuration(course)}</Td>
+                <Td className="p-3 text-caribbeangreen-400">Rs.{course.price}</Td>
                 <Td className="p-3 flex gap-3 justify-center items-center -translate-y-10">
                   <MdEdit
                     className="cursor-pointer text-blue-400 hover:text-blue-100 text-xl"

@@ -2,8 +2,9 @@ import React from "react";
 import ReactStars from "react-stars";
 
 const RatingReviewCard = ({ data }) => {
+  console.log(data)
   return (
-    <div className="flex flex-col max-w-sm   bg-white/10 backdrop-blur-lg border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-md p-4 gap-y-4 text-white  transition-all duration-300 ease-in-out">
+    <div className="flex flex-col max-w-sm min-h-[13rem]  bg-white/10 backdrop-blur-lg border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-md p-4 gap-y-4 text-white  transition-all duration-300 ease-in-out">
 
       {/* User Info */}
       <div className="flex items-center gap-x-4">

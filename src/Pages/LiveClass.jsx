@@ -40,7 +40,7 @@ const LiveClass = () => {
         <div ref={MyMeeting} className='  w-full  '/>
   
         <button onClick={()=>{
-            navigate("/EnrolledCourses/EnterRoom")
+            navigate("/EnrolledCourses/active-Courses")
             window.location.reload();
         }} className=' bg-yellow-5 px-3 py-2 rounded-md   ml-5'> Go Back To Dashboard </button>
 

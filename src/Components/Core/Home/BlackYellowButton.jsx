@@ -5,7 +5,8 @@ import { FaLongArrowAltRight } from "react-icons/fa"
 const BlackYellowButton = ({buttonData1 ,  buttoncolor1  , buttonData2 ,  buttoncolor2 , arrowvisible}) => {
   return (
     <div className=' flex gap-x-5 '>
-        <button className={`py-2 px-3 rounded-md ${buttoncolor1} flex items-baseline gap-2 `}>
+        <button 
+         className={`py-2 px-3 rounded-md ${buttoncolor1} flex items-baseline gap-2 `}>
         <p>{buttonData1}</p>
         <FaLongArrowAltRight fill='#000814' className=' translate-y-[.1rem]'/>
         </button>
