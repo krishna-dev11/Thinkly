@@ -93,7 +93,7 @@ const RenderMyCourses = () => {
                     </div>
                   </div>
                 </Td>
-                <Td className="p-3 text-white ">{calculateTotalCourseDuration(course)}</Td>
+                {/* <Td className="p-3 text-white ">{calculateTotalCourseDuration(course)}</Td> */}
                 <Td className="p-3 text-caribbeangreen-400">Rs.{course.price}</Td>
                 <Td className="p-3 flex gap-3 justify-center items-center -translate-y-10">
                   <MdEdit
