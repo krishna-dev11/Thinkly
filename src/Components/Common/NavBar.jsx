@@ -14,6 +14,8 @@ import { RiDashboard2Line } from "react-icons/ri";
 import { IoLogOutOutline } from "react-icons/io5";
 import { GetAllCategories } from "../../Services.jsx/Operations/DashBoard";
 import { useEffect } from "react";
+import { CiLogin } from "react-icons/ci";
+
 
 const NavBar = () => {
   const { token } = useSelector((state) => state.auth);
@@ -153,10 +155,11 @@ const NavBar = () => {
                 to={"/login"}
                 className={`${
                   conditionFormNavBarWholeStyle
-                    ? " py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20"
-                    : " py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20"
+                    ? " py-2 px-3   text-white flex gap-x-1 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md  "
+                    : " py-2 px-3   text-white shadow-lg flex gap-x-2 items-baseline shadow-blue-900/30 backdrop-blur-md rounded-md "
                 }`}
               >
+                <CiLogin  size={20} className=" translate-y-1"/>
                 Login
               </Link>
             </div>
@@ -166,7 +169,7 @@ const NavBar = () => {
             <div>
               <Link
                 to={"/signup"}
-                className="py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border-r-[2px] border-b-[2px] border-white/20"
+                className="py-2 px-3   text-white shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-md border border-richblack-400"
               >
                 SignUp
               </Link>
