@@ -41,12 +41,12 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.STUDENT,
     icon: "FaBookmark",
   },
-  {
-    name: "Courses",
-    path: "/dashboard/courses",
-    type: ACCOUNT_TYPE.STUDENT,
-    icon: "FaGraduationCap",
-  },
+  // {
+  //   name: "Courses",
+  //   path: "/dashboard/courses",
+  //   type: ACCOUNT_TYPE.STUDENT,
+  //   icon: "FaGraduationCap",
+  // },
   {
     name: "Add Course",
     path: "/dashboard/add-course",
