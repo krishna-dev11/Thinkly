@@ -28,11 +28,11 @@ const Publish = () => {
 
   useEffect(()=>{
     console.log(course)
-    if(course.status === COURSE_STATUS.PUBLISHED){
+    if(course?.status === COURSE_STATUS.PUBLISHED){
       setValue("PublishORDraft" , true)
     }
 
-    if(course.TeachLive === true){
+    if(course?.TeachLive === true){
       setValue("TeachLiveOrNot" , true)
     }
   },[])

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const BuyedCourseCard = ({ data }) => {
 
+
   const navigate = useNavigate()
 
   return (
@@ -22,7 +23,7 @@ const BuyedCourseCard = ({ data }) => {
       </div>
 
       {/* progressBar */}
-      <div>
+      {/* <div>
         <ProgressBar
           completed={60}
           className=""
@@ -30,7 +31,7 @@ const BuyedCourseCard = ({ data }) => {
           labelColor="white"
           labelSize="8px"
         />
-      </div>
+      </div> */}
 
       <div className=" flex justify-between items-center">
         <p className=" text-richblack-200">

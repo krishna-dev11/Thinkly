@@ -8,7 +8,9 @@ import {
 } from "../../Slices/Categories";
 import {
   setBuyedCoursesDataForCard,
+  setcourseComptetionPersentageData,
   setRatingAndReviewData,
+  settotalCourseDuration,
   setUserBuyedCoursesDataForCard,
 } from "../../Slices/Courses";
 import { setUser } from "../../Slices/Profile";
@@ -20,7 +22,7 @@ const { CREATE_RATING_API, GET_ALL_RATING_AND_REVIEW } = ratingsEndpoints;
 const {
   GET_FULL_COURSE_DETAILS_AUTHENTICATED,
   GET_ALL_COURSES_DETAILS_FOR_CARD_VIEW,
-  UPDATE_COURSE_PROGRESS_API,
+  UPDATE_COURSE_PROGRESS_API,  GET_COURSE_PROGRESS_PERSENTAGE , GET_TOTAL_COURSE_DURATION
 } = courseEndpoints;
 
 export function GetCategoryWiseCoursesData(categoryId) {
@@ -185,6 +187,66 @@ export function UpdateProgress(courseId, subSectionId, token) {
       localStorage.setItem("user", JSON.stringify(response.data.data));
 
       toast.success("Lecture Mark As Completed");
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+export function GetCourseCompletionPercentage(userId, courseId , token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "POST",
+        GET_COURSE_PROGRESS_PERSENTAGE,
+        {
+          userId,
+          courseId,
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+    //  console.log(response.data.data)
+     dispatch(setcourseComptetionPersentageData(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+
+export function GetTotalCourseDuration( courseId , token) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "POST",
+        GET_TOTAL_COURSE_DURATION,
+        {
+          courseId,
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+    //  console.log(response.data.data)
+     dispatch(settotalCourseDuration(response.data.data));
     } catch (error) {
       console.log(error);
     }

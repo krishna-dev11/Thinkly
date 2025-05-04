@@ -453,7 +453,12 @@ exports.getAllCoursesOfInstructor = async (req, res) => {
         {
           path: "courses",
           populate: [
-            { path: "courseContent", populate: { path: "subSections" } },
+            { 
+              path: "courseContent", 
+              populate: { 
+                path: "subSections", 
+               } 
+            },
             { path: "ratingAndReviews" },
             { path: "studentEnrolled" },
           ],
@@ -979,3 +984,209 @@ exports.updateCourseProgress = async(req,res) => {
 
 
 
+// course progress nikala 
+exports.getWatchedDuration = async (req, res) => {
+  try {
+    const { userId, courseId } = req.body;
+
+    if (!userId || !courseId) {
+      return res.status(400).json({
+        success: false,
+        message: "userId and courseId are required",
+      });
+    }
+
+    const userProgress = await courseprogress.findOne({ userId, courseId });
+
+    if (!userProgress || userProgress.completedVideos.length === 0) {
+      return res.status(200).json({
+        success: true,
+        watchedDurationMs: 0,
+        watchedDurationFormatted: "0s",
+        message: "No videos completed yet",
+      });
+    }
+
+    const completedSubSections = await subsection.find({
+      _id: { $in: userProgress.completedVideos },
+    });
+
+    let totalMs = 0;
+
+    for (const sub of completedSubSections) {
+      if (typeof sub.timeDuration === "string" && sub.timeDuration.includes(".")) {
+        const [secStr, msStr = "0"] = sub.timeDuration.split(".");
+        const sec = Number(secStr);
+        const ms = Number("0." + msStr) * 1000; // ✅ Correct way to get ms from decimal part
+        totalMs += sec * 1000 + ms;
+      }
+    }
+
+    const totalSec = Math.floor(totalMs / 1000);
+    const minutes = Math.floor(totalSec / 60);
+    const seconds = totalSec % 60;
+
+    const formatted = `${minutes > 0 ? minutes + "m " : ""}${seconds}s`;
+
+    return res.status(200).json({
+      success: true,
+      watchedDurationMs: Math.round(totalMs),
+      watchedDurationFormatted: formatted,
+    });
+  } catch (error) {
+    console.error("Error calculating watched time:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+exports.getTotalCourseDuration = async (req, res) => {
+  try {
+    const { courseId } = req.body; // Get courseId from request
+
+    if (!courseId) {
+      return res.status(400).json({
+        success: false,
+        message: "courseId is required",
+      });
+    }
+
+    // Step 1: Find course details by courseId
+    const course = await courses.findById(courseId).populate({
+      path: "courseContent", // Populate the sections in the course
+      populate: {
+        path: "subSections", // Populate the subsections in each section
+        model: "subSection",
+      },
+    });
+
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
+
+    let totalMs = 0;
+
+    // Step 2: Calculate total duration of all subsections in the course
+    for (const section of course.courseContent) {
+      for (const sub of section.subSections) {
+        if (typeof sub.timeDuration === "string" && sub.timeDuration.includes(".")) {
+          const [secStr, msStr = "0"] = sub.timeDuration.split(".");
+          const sec = Number(secStr);
+          const ms = Number("0." + msStr) * 1000; // Convert milliseconds
+          totalMs += sec * 1000 + ms;
+        }
+      }
+    }
+
+    // Step 3: Convert total time in milliseconds to readable format (e.g., "10m 30s")
+    const totalSec = Math.floor(totalMs / 1000);
+    const minutes = Math.floor(totalSec / 60);
+    const seconds = totalSec % 60;
+
+    const formatted = `${minutes > 0 ? minutes + "m " : ""}${seconds}s`;
+
+    return res.status(200).json({
+      success: true,
+      totalDurationMs: totalMs,
+      totalDurationFormatted: formatted,
+    });
+  } catch (error) {
+    console.error("Error calculating course duration:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+exports.getCourseCompletionPercentage = async (req, res) => {
+  try {
+    const { userId, courseId } = req.body;
+
+    if (!userId || !courseId) {
+      return res.status(400).json({
+        success: false,
+        message: "userId and courseId are required",
+      });
+    }
+
+    // 1. Get User Progress
+    const userProgress = await courseprogress.findOne({ userId, courseId });
+    const completedVideoIds = userProgress?.completedVideos || [];
+
+    // 2. Get Course Details and All SubSections
+    const course = await courses.findById(courseId).populate({
+      path: "courseContent",
+      populate: {
+        path: "subSections",
+        model: "subSection",
+      },
+    });
+
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
+
+    let totalCourseMs = 0;
+    let watchedMs = 0;
+
+    for (const section of course.courseContent) {
+      for (const sub of section.subSections) {
+        if (typeof sub.timeDuration === "string" && sub.timeDuration.includes(".")) {
+          const [secStr, msStr = "0"] = sub.timeDuration.split(".");
+          const sec = Number(secStr);
+          const ms = Number("0." + msStr) * 1000;
+          const durationMs = sec * 1000 + ms;
+          totalCourseMs += durationMs;
+
+          if (completedVideoIds.includes(sub._id.toString())) {
+            watchedMs += durationMs;
+          }
+        }
+      }
+    }
+
+    const watchedSec = Math.floor(watchedMs / 1000);
+    const totalSec = Math.floor(totalCourseMs / 1000);
+
+    const formatTime = (ms) => {
+      const totalSec = Math.floor(ms / 1000);
+      const min = Math.floor(totalSec / 60);
+      const sec = totalSec % 60;
+      return `${min > 0 ? min + "m " : ""}${sec}s`;
+    };
+
+    const percentage = totalCourseMs > 0
+      ? ((watchedMs / totalCourseMs) * 100).toFixed(2)
+      : "0.00";
+
+    return res.status(200).json({
+      success: true,
+      data:{
+        totalDurationMs: totalCourseMs,
+        totalDurationFormatted: formatTime(totalCourseMs),
+        watchedDurationMs: Math.round(watchedMs),
+        watchedDurationFormatted: formatTime(watchedMs),
+        completionPercentage: Number(percentage)
+      },
+      message: "Course progress calculated successfully",
+    });
+
+  } catch (error) {
+    console.error("Error calculating course completion percentage:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};

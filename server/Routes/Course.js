@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router();
 
 // import Controllers
-const {createCourse , showAllCourse , editCourse ,  getAllDetailsOfOneCourse , publishCourse , getAllCoursesOfInstructor , deleteCourseOfInstructor  , getEnrolledCoursesDataForCardViews , getCartCoursesData , AddCourseInCart , RemoveCourseInCart , EmptyCart , updateCourseProgress} = require("../Controllers/course")
+const {createCourse , showAllCourse , editCourse ,  getAllDetailsOfOneCourse , publishCourse , getAllCoursesOfInstructor , deleteCourseOfInstructor  , getEnrolledCoursesDataForCardViews , getCartCoursesData , AddCourseInCart , RemoveCourseInCart , EmptyCart , updateCourseProgress ,  getWatchedDuration , getTotalCourseDuration , getCourseCompletionPercentage} = require("../Controllers/course")
 // const {getEnrolledCoursesDataForCardViews} = require("../Controllers/CourseProgres")
 
 
@@ -35,6 +35,11 @@ router.post('/EmptyCart' , auth , isStudent ,  EmptyCart)
 
 // courseProgress
 router.post('/updateCourseProgress' , auth , isStudent ,  updateCourseProgress)
+router.post("/getWatchedDuration", getWatchedDuration);
+router.post('/getTotalCourseDuration', getTotalCourseDuration);
+router.post('/getCourseCompletionPercentage' , auth , isStudent ,  getCourseCompletionPercentage)
+
+
 
 
 

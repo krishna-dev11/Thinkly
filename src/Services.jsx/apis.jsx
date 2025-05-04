@@ -50,9 +50,9 @@ export const courseEndpoints = {
   GET_INSTRUCTORs_All_COURSES_API: BASE_URL + "/course/getAllCoursesOfInstructor",
   GET_CATEGORY_WISE_COURSES_API: BASE_URL + "/course/categoryPageDetails",
   GET_ALL_COURSES_DETAILS_FOR_CARD_VIEW : BASE_URL + "/course/getEnrolledCoursesDataForCardViews",
-  UPDATE_COURSE_PROGRESS_API : BASE_URL + "/course/updateCourseProgress"
-
-  
+  UPDATE_COURSE_PROGRESS_API : BASE_URL + "/course/updateCourseProgress" , 
+  GET_COURSE_PROGRESS_PERSENTAGE : BASE_URL + "/course/getCourseCompletionPercentage",
+  GET_TOTAL_COURSE_DURATION : BASE_URL + "/course/getTotalCourseDuration"
 
 }
 

@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosTv } from "react-icons/io";
 import { FormateDate } from "../../../../../Utilities/FormateDate";
 import calculateTotalCourseDuration from "../../../../../Utilities/CalculateDuration";
+import { GetTotalCourseDuration } from "../../../../../Services.jsx/Operations/CoursesAPI";
 
 const RenderMyCourses = () => {
   const [deleteModal, setDeleteModal] = useState(null);
@@ -24,12 +25,15 @@ const RenderMyCourses = () => {
 
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
+  
 
   useEffect(() => {
     if (user?._id && token) {
       dispatch(FetchInstructorsAllCourses(user._id, token));
     }
   }, [user?._id, token, dispatch]);
+
+
 
   const deleteCourse = (instructorId, courseId) => {
     dispatch(DeleteInstructorCourses(instructorId, courseId, token));
@@ -93,7 +97,7 @@ const RenderMyCourses = () => {
                     </div>
                   </div>
                 </Td>
-                {/* <Td className="p-3 text-white ">{calculateTotalCourseDuration(course)}</Td> */}
+                <Td className="p-3 text-white ">0min : 0sec</Td>
                 <Td className="p-3 text-caribbeangreen-400">Rs.{course.price}</Td>
                 <Td className="p-3 flex gap-3 justify-center items-center -translate-y-10">
                   <MdEdit
