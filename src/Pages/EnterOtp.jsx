@@ -29,7 +29,9 @@ const EnterOtp = () => {
   }, [timer]);
 
   const submitHandler = (event) => {
+    
     event.preventDefault();
+
     const {
       FirstName,
       lastName,
