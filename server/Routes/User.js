@@ -5,7 +5,7 @@ const router = express.Router();
 const {forgotpasswordToken , forgotPassword} = require('../Controllers/resetPassword')
 const {sendOTP , signUP , login , changePassword} = require('../Controllers/Auth')
 // Middleware
-const {auth , isStudent , isInstructor , isAdmin} = require("../Middlewares/auth")
+const { auth } = require("../Middlewares/auth")
 
 // Forgot Password
 router.post('/forgotpasswordToken' ,  forgotpasswordToken )
