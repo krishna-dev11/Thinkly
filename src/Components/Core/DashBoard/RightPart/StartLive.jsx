@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const StartLive = () => {
   const { CourseId } = useParams()
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.profile);
+  // const { user } = useSelector((state) => state.profile);
 
   return (
     <div className="flex justify-center items-center h-screen bg-richblack-900 px-4">

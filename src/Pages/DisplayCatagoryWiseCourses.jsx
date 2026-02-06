@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Fotter from "../Components/Common/Fotter";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { GetCategoryWiseCoursesData } from "../Services.jsx/Operations/CoursesAPI";
 import CategoryWiseCoursesPageTopPart from "../Components/Core/Catalog/CategoryWiseCoursesPageTopPart";
 
@@ -22,7 +22,7 @@ const DisplayCategoryWiseCourses = () => {
       }
     };
     getCategoryCourses();
-  }, [categoryId , categoryName]);
+  }, [ categoryId , categoryName ]);
 
   // Jab tak data load ho raha hai, ek loading state dikhao
   if (loading) {

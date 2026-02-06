@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { COURSE_STATUS } from "../../../../../../Utilities/Constaints";
 import { useDispatch, useSelector } from "react-redux";
 import { PublishorDraftCourse } from "../../../../../../Services.jsx/Operations/DashBoard";
 import { useNavigate } from "react-router-dom";
-import { SetEditSection } from "../../../../../../Slices/Section";
+// import { SetEditSection } from "../../../../../../Slices/Section";
 import { setStep } from "../../../../../../Slices/Courses";
 import {IoIosArrowBack} from "react-icons/io"
 
@@ -19,11 +19,11 @@ const Publish = () => {
 
   const {
     register,
-    reset,
+    // reset,
     handleSubmit,
     setValue,
-    getValues,
-    formState: { errors, isSubmitSuccessful },
+    // getValues,
+    // formState: { errors, isSubmitSuccessful },
   } = useForm();
 
   useEffect(()=>{

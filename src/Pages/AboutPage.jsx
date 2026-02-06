@@ -1,14 +1,15 @@
 import React from 'react'
 import { topImages } from '../data/aboutus-data';
 import Hieghlightedtext from '../Components/Core/Home/Hieghlightedtext'
-import { PiQuotesFill } from "react-icons/pi";
+// import { PiQuotesFill } from "react-icons/pi";
 import QuoteSection from '../Components/Core/About.jsx/QuoteSection'
 import FoundingStory from '../Components/Core/About.jsx/FoundingStory'
 import { Accomplishment } from '../data/aboutus-data'
-import Grey_whiteBox from '../Components/Core/About.jsx/Grey_whiteBox'
+// import Grey_whiteBox from '../Components/Core/About.jsx/Grey_whiteBox'
 import Fotter from '../Components/Common/Fotter';
 import ContactForm from '../Components/Core/About.jsx/ContactForm';
 import ReviwSlider from '../Components/Core/Home/ReviwSlider';
+import GreywhiteBox from '../Components/Core/About.jsx/GreywhiteBox';
 
 
 const AboutPage = () => {
@@ -36,7 +37,7 @@ const AboutPage = () => {
         <div className=' flex justify-evenly  w-full absolute mx-auto'>
            {
             topImages.map((image)=>(
-               <img src={image.imageUrl} key={image.id} className=' w-[21rem]' ></img>
+               <img alt='userimage' src={image.imageUrl} key={image.id} className=' w-[21rem]' ></img>
             ))
            }
         </div>
@@ -71,7 +72,7 @@ const AboutPage = () => {
 
     {/* section 4 */}
     <div className='w-full  flex flex-col gap-y-32  bg-richblack-900 py-32'>
-      <Grey_whiteBox/>
+      <GreywhiteBox/>
       <div className= " w-[40%] mx-auto">
       <ContactForm heading={"Get in Touch"} description={"We’d love to here for you, Please fill out this form."}/>
       </div>

@@ -1,6 +1,6 @@
-import React from "react";
-import ProgressBar from "@ramonak/react-progress-bar";
-import { PiCertificate, PiCertificateFill } from "react-icons/pi";
+// import React from "react";
+// import ProgressBar from "@ramonak/react-progress-bar";
+import { PiCertificateFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
 const BuyedCourseCard = ({ data }) => {
@@ -10,7 +10,7 @@ const BuyedCourseCard = ({ data }) => {
 
   return (
     <div className=" flex flex-col max-w-[17rem] min-w-[21rem] justify-center  gap-y-2 px-3 py-3 bg-white rounded-md shadow-lg hover:scale-105 transition-all duration-200">
-      <img src={data.thumbnail} className=" w-[19rem]  mx-auto" 
+      <img alt="bought course" src={data.thumbnail} className=" w-[19rem]  mx-auto" 
         onClick={()=>{console.log(data)
                     navigate(`/course/${data._id}/section/${data.courseContent[0]._id}/subSection/${data.courseContent[0].subSections[0]}`)
                      }}

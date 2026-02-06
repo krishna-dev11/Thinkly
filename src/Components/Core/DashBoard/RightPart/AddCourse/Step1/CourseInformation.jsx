@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRupeeSign } from "react-icons/fa";
-import { apiConnector } from "../../../../../../Services.jsx/apiConnector";
+// import { apiConnector } from "../../../../../../Services.jsx/apiConnector";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { CreateNewCourse, EditCourse, GetAllCategories } from "../../../../../../Services.jsx/Operations/DashBoard";
 import CustomTagInput from "./CustomTagInput";
 import CustomInstructionsInput from "./CustomInstructionsInput";
@@ -14,7 +14,7 @@ import CourseBenifitsInput from "./CourseBenifitsInput";
 const CourseInformation = () => {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const {token} = useSelector(state=>state.auth)
     const {category} = useSelector(state=>state.Category)
@@ -24,7 +24,7 @@ const CourseInformation = () => {
 
   const {
     register,
-    reset,
+    // reset,
     handleSubmit,
     setValue,
     getValues,

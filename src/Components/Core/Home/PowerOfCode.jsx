@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react'
+import { useState } from 'react'
 import Hieghlightedtext from './Hieghlightedtext'
 import { HomePageExplore } from '../../../data/homepage-explore'
 import { LuNetwork } from "react-icons/lu";
@@ -9,7 +9,7 @@ const PowerOfCode = () => {
     const [currentTab , setCurrentTab] = useState(HomePageExplore[0].tag)
     const [currentCourse , setcurrentCourse] = useState(HomePageExplore[0].courses)
     const [currentCard , setcurrentCard] = useState(currentCourse[0].heading)
-    // console.log(currentCard)
+    console.log(currentCard)
  
 
     const setMyCards = (value) => {

@@ -1,23 +1,24 @@
-import React from "react";
+// import React from "react";
 import Hieghlightedtext from "../Components/Core/Home/Hieghlightedtext";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import ReviwSlider from "../Components/Core/Home/ReviwSlider";
 import BlackYellowButton from "../Components/Core/Home/BlackYellowButton";
 import homepageVideo from "../assets/Images/banner.mp4";
-import Text_Running from "../Components/Core/Home/Text_Running";
+// import Text_Running from "../Components/Core/Home/Text_Running";
 import frame from "../assets/Images/bghome.svg";
 import greenGirlImage from "../assets/Images/TimelineImage.png";
 import TimeLine from "../Components/Core/Home/TimeLine";
 import SwissKnife from "../Components/Core/Home/SwissKnife"
 import Instructor from "../assets/Images/Instructor.png"
-import FotterLinks from "../Components/Common/FotterLinks"
-import { Link, useNavigate } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
+// import FotterLinks from "../Components/Common/FotterLinks"
+import { useNavigate } from "react-router-dom";
+// import { FaHeart } from "react-icons/fa";
 import PowerOfCode from "../Components/Core/Home/PowerOfCode";
 import Fotter from "../Components/Common/Fotter";
 import BackGroundGradient from "../Components/Common/BackGroundGradient";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import TextRunning from "../Components/Core/Home/TextRunning";
 // import GradientInteractiveBox from "../Components/Common/GradientInteractiveBox";
 
 const HomePage = () => {
@@ -105,7 +106,7 @@ const HomePage = () => {
         {/* 3rd part (text-button and Running code section) */}
 
         <div className="flex flex-col gap-[4rem]">
-          <Text_Running
+          <TextRunning
             textpart1data={"Unlock your"}
             gradienttextdata={"coding potential"}
             textpart2data={"with our online courses."}
@@ -119,7 +120,7 @@ const HomePage = () => {
             code={`<!DOCTYPE html>\n<html>\nhead><title>Example</\ntitle><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</\na><ahref="three/">Three</a>\n/nav>`}
           />
 
-          <Text_Running
+          <TextRunning
             textpart1data={"Start"}
             gradienttextdata={"coding"}
             textpart2data={"in seconds"}
@@ -146,9 +147,9 @@ const HomePage = () => {
       {/* section 2 */}
       <div className=" bg-pure-greys-5 w-full  flex flex-col gap-y-5">
         <div className="w-full flex">
-          <img src={frame} />
-          <img src={frame} />
-          <img src={frame} />
+          <img alt="frame" src={frame} />
+          <img alt="frame" src={frame} />
+          <img alt="frame" src={frame} />
         </div>
 
         {/* image section */}
@@ -226,7 +227,7 @@ const HomePage = () => {
   <div className="w-full h-full bg-white absolute z-0 translate-x-2 translate-y-2 sm:translate-x-4 sm:translate-y-4 md:translate-x-5 md:translate-y-5 rounded-sm"></div>
 
   {/* Image */}
-  <img src={greenGirlImage} className="absolute rounded-sm w-full h-full object-cover" />
+  <img alt="greenGirlImage" src={greenGirlImage} className="absolute rounded-sm w-full h-full object-cover" />
 </div>
 
           </div>
@@ -250,7 +251,7 @@ const HomePage = () => {
   <div className="w-full h-full bg-white absolute z-0 -translate-x-2 -translate-y-2 sm:-translate-x-3 sm:-translate-y-3 md:-translate-x-4 md:-translate-y-4 lg:-translate-x-5 lg:-translate-y-5 rounded-sm"></div>
 
   {/* Instructor Image */}
-  <img src={Instructor} className="absolute z-10 w-full h-full object-cover rounded-sm" />
+  <img alt="Instructor" src={Instructor} className="absolute z-10 w-full h-full object-cover rounded-sm" />
 </div>
 
 

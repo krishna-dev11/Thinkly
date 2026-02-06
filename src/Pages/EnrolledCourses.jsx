@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import SideBar from '../Components/Core/DashBoard/LeftPart/SideBar'
+// import SideBar from '../Components/Core/DashBoard/LeftPart/SideBar'
 import EnrolledCoursesSideBar from '../Components/Core/EnrolledCourses/Left/EnrolledCoursesSideBar'
 
 const EnrolledCourses = () => {

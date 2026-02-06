@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RxCross1 } from "react-icons/rx";
 import Upload from "../Step1/Upload";
@@ -27,9 +27,9 @@ const SubSectionCollectDataModel = () => {
 
   const {
     register,
-    reset,
+    // reset,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     setValue,
     getValues,
   } = useForm();

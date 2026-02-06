@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowLeft, FaLeaf } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GetBuyedCoursesDataOfStudentForCard } from "../../../../Services.jsx/Operations/CoursesAPI";
 import BuyedCourseCard from "./BuyedCourseCard";
 

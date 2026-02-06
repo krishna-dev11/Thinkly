@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // import Tab from '../../Common/Tab';
 // import { TabData } from '../../../Utilities/Constaints';
 // import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setLogin } from '../../../Services.jsx/Operations/authAPI';
 // import { setUser } from '../../../Slices/Profile';
 

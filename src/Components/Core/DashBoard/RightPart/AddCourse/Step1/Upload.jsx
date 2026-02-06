@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect , useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FiUploadCloud } from "react-icons/fi";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import "video-react/dist/video-react.css";
 export default function Upload({
   name,
   label,
-  register,
+  // register,
   setValue,
   errors,
   video = false,
@@ -18,7 +18,7 @@ export default function Upload({
   const { course , editCourse} = useSelector((state) => state.Course);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(viewData || editData || "");
-  const { addSubSection, editSubSection, viewSubSection } = useSelector(
+  const { editSubSection, viewSubSection } = useSelector(
     (state) => state.subsection
   );
 

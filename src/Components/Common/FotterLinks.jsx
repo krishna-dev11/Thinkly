@@ -1,7 +1,7 @@
 import React from "react";
 import { FooterLink1, FooterLink2 } from "../../data/footer-links";
 import { Link } from "react-router-dom";
-import logo from '../../assets/Logo/Logo-Full-Light.png'
+// import logo from '../../assets/Logo/Logo-Full-Light.png'
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const FotterLinks = () => {
@@ -12,7 +12,7 @@ const FotterLinks = () => {
           {
             FooterLink1.map(( footer , index )=>(
               <div className="flex flex-col " key={index}>
-                 <img src={footer.Websitelogo} className=" w-[10rem]"></img>
+                 <img src={footer.Websitelogo}  className=" w-[10rem]" alt="footer logo"></img>
                  <p className={`text-white text-lg font-semibold ${index === 0 && "mt-4"}`}>{footer.title1}</p>
                  <div className="mt-5 space-y-[.4rem] flex flex-col">
                   {

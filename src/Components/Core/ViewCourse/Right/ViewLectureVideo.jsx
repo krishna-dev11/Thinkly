@@ -53,7 +53,7 @@ const ViewLectureVideo = () => {
     };
 
     setlectureFirstvideoUrl();
-  }, [location.pathname, CourseId, SectionId, SubSectionId]);
+  }, [ location.pathname, CourseId, SectionId, SubSectionId]);
 
   const NextButton = () => {
     const sectionIndex = courseDetails.courseContent.findIndex(

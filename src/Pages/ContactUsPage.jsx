@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import Fotter from '../Components/Common/Fotter'
 import ContactForm from '../Components/Core/About.jsx/ContactForm'
 import { chat_visit_call } from '../data/Contact-data'
@@ -17,7 +17,7 @@ const ContactUsPage = () => {
               {
                 chat_visit_call.map((CVC)=>{
                     let Icon = Icons[CVC.icon]
-                    {/* console.log(<Icon/>) */}
+                    
 
                     return (
                     <div className='flex gap-x-5 items-baseline' key={CVC.id}> 

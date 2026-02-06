@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import CountryCode from '../../../data/countrycode.json'
 import toast from 'react-hot-toast'
 
 const ContactForm = ({heading , description }) => {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     const {
          register,
          handleSubmit,
          reset,
-         formState:{ errors , isSubmitSuccessful }
+         formState:{ isSubmitSuccessful }
     } = useForm()
 
     useEffect(()=>{

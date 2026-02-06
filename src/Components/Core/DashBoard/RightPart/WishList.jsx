@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Tbody, Td, Tr } from "react-super-responsive-table";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { buyCourse } from "../../../../Services.jsx/Operations/PaymentAPI";
 import { useNavigate } from "react-router-dom";
-import { EmtingCartAfterBuying, RemovedCousefromTheCart } from "../../../../Services.jsx/Operations/CartAPI";
+import { RemovedCousefromTheCart } from "../../../../Services.jsx/Operations/CartAPI";
 
 const WishList = () => {
   const { token } = useSelector((state) => state.auth);
@@ -35,7 +35,8 @@ const WishList = () => {
       // console.log("jnsksddsnfdsks")
        if(token){
         // await dispatch(buyCourse( token , [ courseIds ] ,  totalAmount , user    , navigate , dispatch ))
-       const response =  buyCourse( token ,  courseIds  ,  totalAmount , user    , navigate , dispatch )
+      //  const response =  buyCourse( token ,  courseIds  ,  totalAmount , user    , navigate , dispatch )
+      buyCourse( token ,  courseIds  ,  totalAmount , user    , navigate , dispatch )
         // await dispatch(EmtingCartAfterBuying(user._id , token ))
        return
        }
@@ -80,7 +81,7 @@ const WishList = () => {
                 user.cart.map(course=>(
                   <Tr key={course._id} className=" h-[12rem]  items-center flex  border border-b-richblack-700 gap-x-3  ">
                      <Td>
-                        <img src={course.thumbnail} className=" min-w-[15rem] max-w-[15rem] self-start rounded-md"/>
+                        <img alt="wishlist course" src={course.thumbnail} className=" min-w-[15rem] max-w-[15rem] self-start rounded-md"/>
                      </Td>
                      <Td className=" flex flex-col gap-y-1 text-white py-4 min-w-[45%]">
                        <p className=" text-richblack-5 font-semibold font-inter">{course.courseName}</p>
@@ -115,10 +116,10 @@ const WishList = () => {
           <p className=" text-richblack-300 ">Total : </p>
           <p className=" text-2xl text-yellow-50 font-semibold">{`Rs. ${totalAmount}`}</p>
           {
-            (!totalAmount==0) && <p className="  text-richblack-600 line-through">{`Rs. ${totalAmount + Math.floor(Math.random() * (256-156))+156}`}</p>
+            (!totalAmount===0) && <p className="  text-richblack-600 line-through">{`Rs. ${totalAmount + Math.floor(Math.random() * (256-156))+156}`}</p>
           }
           <button className=" w-[full] py-2 rounded-md bg-yellow-50 text-richblack-900 justify-center flex items-center"
-          disabled={totalAmount == 0}
+          disabled={totalAmount === 0}
           onClick={()=>handleBuyCartCourses()}>
              Pay Now
           </button>

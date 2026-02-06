@@ -6,7 +6,7 @@ import { TypeAnimation } from 'react-type-animation';
 import BackGroundGradient from '../../Common/BackGroundGradient';
 
 
-const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smalltext , yellowButtondata , blackbuttondata , flex_type , code , gradientShade}) => {
+const TextRunning = ({textpart1data , gradienttextdata , textpart2data , smalltext , yellowButtondata , blackbuttondata , flex_type , code , gradientShade}) => {
   return (
     <div className={`w-[85%] flex  ${flex_type}  h-[18rem] mx-auto mt-10`}>
 
@@ -59,4 +59,4 @@ const Text_Running = ({textpart1data , gradienttextdata , textpart2data , smallt
   )
 }
 
-export default Text_Running
+export default TextRunning
