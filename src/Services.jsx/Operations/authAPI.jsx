@@ -7,6 +7,7 @@ import { setUser } from "../../Slices/Profile"
 
 
 const {
+    CHAT_BOT,
     SENDOTP_API ,
     SIGNUP_API ,
     LOGIN_API,
@@ -14,6 +15,36 @@ const {
     RESETPASSTOKEN_API ,
     RESETPASSWORD_API
 } = endpoints
+
+
+export function askAI(query, setAnswer) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    dispatch(setLoading(true));
+
+    try {
+      const response = await apiConnector(
+        "POST",
+        CHAT_BOT,
+        { query }
+      );
+
+      if (!response || !response.data.success) {
+        throw new Error(response?.data?.message || "AI failed");
+      }
+
+      setAnswer(response.data.aiAnswer);
+    //   toast.success("AI Response Received");
+    } catch (error) {
+      console.log("Error in askAI:", error);
+      toast.error("Failed to get AI response");
+    }
+
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
 
 
 

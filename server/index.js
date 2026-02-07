@@ -5,6 +5,7 @@ const userRoutes = require("./Routes/User")
 const profileRoutes = require("./Routes/Profile")
 const paymentRoutes = require("./Routes/Payment")
 const courseRoutes = require("./Routes/Course")
+const aiRoutes = require("./Routes/aiRoutes");
 
 const {dbconnect} = require('./config/Database')
 const cookieParser = require('cookie-parser')
@@ -22,8 +23,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin:"https://ktech-silk.vercel.app",   
-        // origin:"http://localhost:3000",
+        // origin:"https://ktech-silk.vercel.app",   
+        origin:"http://localhost:3000",
         credentials : true
     })
 )
@@ -43,6 +44,7 @@ app.use("/api/v1/auth" , userRoutes);
 app.use("/api/v1/profile" , profileRoutes);
 app.use("/api/v1/course" , courseRoutes);
 app.use("/api/v1/payment" , paymentRoutes);
+app.use("/api/v1/ai", aiRoutes);
 
 
 app.get('/' , async(req ,res)=>{

@@ -18,6 +18,7 @@ import Fotter from "../Components/Common/Fotter";
 import BackGroundGradient from "../Components/Common/BackGroundGradient";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import AIGeminiChat from "../Components/Common/AIGeminiChat";
 // import GradientInteractiveBox from "../Components/Common/GradientInteractiveBox";
 
 const HomePage = () => {
@@ -31,8 +32,12 @@ const HomePage = () => {
       {/* nav  */}
      
 
+
+         <AIGeminiChat />
+
       {/* section 1 */}
       <div className="flex flex-col gap-10 bg-richblack-900  ">
+
         {/* Empower Your Future with Coding Skills section */}
         <div className="h-[15rem] w-[70%] mx-auto mt-[5rem] flex  flex-col gap-y-3 ">
           <div className="flex mx-auto justify-center cursor-pointer bg-white/25 shadow-lg shadow-blue-900/30 backdrop-blur-md rounded-full border border-white/20 items-baseline gap-3 w-[13rem] py-2 ">
@@ -50,6 +55,7 @@ const HomePage = () => {
             />
           </div>
 
+          
           <div className="  mx-auto flex items-baseline gap-x-2 ">
             <p className=" text-richblack-5 text-[2rem] font-inter font-600 leading-[2.75rem]">
               {" "}
@@ -80,6 +86,8 @@ const HomePage = () => {
           </div>
         </div>
 
+
+
         {/* video part */}
         <div className="w-[90%] md:w-[80%] lg:w-[77%] h-[30rem] md:h-[32rem] lg:h-[34rem] mx-auto relative">
   <BackGroundGradient 
@@ -100,6 +108,9 @@ const HomePage = () => {
     <source src={homepageVideo} />
   </video>
 </div>
+
+
+
 
 
         {/* 3rd part (text-button and Running code section) */}
