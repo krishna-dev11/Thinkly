@@ -192,7 +192,8 @@ const SignUpForm = () => {
        </label>
       </div>
 
-      <button
+   <div className=' flex items-baseline  gap-x-3 '>
+             <button
         type="submit"
         className="mt-6 w-full rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
       >
@@ -205,6 +206,7 @@ const SignUpForm = () => {
        onError={() => console.log("Login Failed")}
       />
       </div>
+   </div>
 
     </form>
 
