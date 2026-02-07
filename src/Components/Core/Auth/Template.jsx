@@ -21,7 +21,7 @@ const Template = ({title , desc1 , desc2 , image , formtype}) => {
         </div>
 
         <div>{
-          formtype == "login" ? <LoginForm/> : <SignUpForm/>
+          formtype === "login" ? <LoginForm/> : <SignUpForm/>
         }</div>
 
       </div>
@@ -31,7 +31,7 @@ const Template = ({title , desc1 , desc2 , image , formtype}) => {
        </div> */}
 
        <div className='w-[59%] min-h-[96%] rounded-md  relative flex justify-center items-center bg-[linear-gradient(0deg,_#260244,_#FA97FF)]'>{
-        formtype == "login" ? <iframe src="https://lottie.host/embed/54b778e3-c5b4-45d6-8f10-5973472b3a13/vmZb5OUBRS.lottie" className=' h-[500px] w-[1000px]'></iframe>  : <iframe src="https://lottie.host/embed/ebc9bc5f-d40e-4bae-8da1-21f4e0aee77f/75N8Mi0SwH.lottie" className=' h-[500px] w-[1000px]'></iframe>
+        formtype === "login" ? <iframe  src="https://lottie.host/embed/54b778e3-c5b4-45d6-8f10-5973472b3a13/vmZb5OUBRS.lottie" className=' h-[500px] w-[1000px]'></iframe>  : <iframe src="https://lottie.host/embed/ebc9bc5f-d40e-4bae-8da1-21f4e0aee77f/75N8Mi0SwH.lottie" className=' h-[500px] w-[1000px]'></iframe>
         }</div>
 
      </div>
