@@ -1,19 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import StudentClassCards from "./StudentClassCards";
+import StudentClassCards from "./StudentClassCards";
 
 const EnterRoom = () => {
   const navigate = useNavigate();
-  // const { user } = useSelector((state) => state.profile);
+  const { user } = useSelector((state) => state.profile);
   // console.log(user)
 
   const {
     register,
     handleSubmit,
-    // reset,
-    // formState: { errors, isSubmitSuccessful },
+    reset,
+    formState: { errors, isSubmitSuccessful },
   } = useForm();
 
   const HandleEnterRoom = (event) => {

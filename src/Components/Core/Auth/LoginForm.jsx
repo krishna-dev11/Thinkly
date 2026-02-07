@@ -4,16 +4,18 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 // import Tab from '../../Common/Tab';
 // import { TabData } from '../../../Utilities/Constaints';
-// import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
-import { useDispatch } from 'react-redux';
-import { setLogin } from '../../../Services.jsx/Operations/authAPI';
+import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
+import { useDispatch, useSelector } from 'react-redux';
+import { setGoogleLogin, setLogin } from '../../../Services.jsx/Operations/authAPI';
 // import { setUser } from '../../../Slices/Profile';
-
+import { GoogleLogin } from '@react-oauth/google';
+import toast from 'react-hot-toast';
 
 const LoginForm = () => {
 
    const[formData , setformdata] = useState({ EmailAddress:"" , Password:""})
 
+   const [accountType , setaccountType] = useState(ACCOUNT_TYPE.STUDENT)
    const [showpassword , setShowPassword] = useState(false)
   //  const [accountType , setaccountType] = useState(ACCOUNT_TYPE.STUDENT)
   
@@ -40,6 +42,29 @@ const LoginForm = () => {
         
         // dispatch(setUser(data))
     }
+
+
+
+    //google login handler 
+   const handleGoogleSuccess = async (credentialResponse) => {
+  try {
+    if (!accountType) {
+      toast.error("Please select account type first");
+      return;
+    }
+
+    dispatch(
+      setGoogleLogin(
+        credentialResponse.credential,
+        accountType,
+        navigate
+      )
+    );
+
+  } catch (error) {
+    console.log("Google Login Error:", error);
+  }
+};
 
 
   return (
@@ -100,6 +125,11 @@ const LoginForm = () => {
   >
     Log In
   </button>
+
+  <GoogleLogin
+      onSuccess={handleGoogleSuccess}
+       onError={() => console.log("Login Failed")}
+  />
 
 </form>
 

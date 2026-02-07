@@ -3,7 +3,7 @@ const OTP = require("../Models/otpSchema");
 const bcrypt = require("bcryptjs");
 const profile = require("../Models/profile");
 const jwt = require("jsonwebtoken");
-// const cookie = require("cookie-parser");
+const cookie = require("cookie-parser");
 const otpGenerator = require("otp-generator");
 const passwordUpdate = require("../mail/templates/passwordUpdate");
 const { mailSender } = require("../Utilities/mailSender");
@@ -13,7 +13,7 @@ require("dotenv").config();
 // send OTP check
 exports.sendOTP = async (req, res) => {
   try {
-    const { email } = req.body;
+    const {email} = req.body;
 
     if (!email) {
       return res.status(401).json({
@@ -32,13 +32,16 @@ exports.sendOTP = async (req, res) => {
       });
     }
 
-    let otp = otpGenerator.generate(6, {
+    
+
+    var otp = otpGenerator.generate(6, {
       lowerCaseAlphabets: false,
       upperCaseAlphabets: false,
       specialChars: false,
     });
+  
 
-    let sameOtpPresent = await OTP.findOne({ otp: otp });
+    const sameOtpPresent = await OTP.findOne({ otp: otp });
 
     while (sameOtpPresent) {
       otp = otpGenerator.generate(6, {
@@ -50,12 +53,12 @@ exports.sendOTP = async (req, res) => {
       sameOtpPresent = await OTP.findOne({ otp: otp });
     }
 
-    await OTP.create({ email, otp });
+    const updateOTP = await OTP.create({ email, otp });
 
     res.status(200).json({
       success: true,
       message: "entery of otp successfully created in database",
-      otp,
+      otp
     });
   } catch (error) {
     return res.status(500).json({
@@ -66,15 +69,11 @@ exports.sendOTP = async (req, res) => {
   }
 };
 
-
-
-
 // signUP  check
 exports.signUP = async (req, res) => {
 
   
   try {
-
     const {
       firstName,
       lastName,
@@ -85,7 +84,7 @@ exports.signUP = async (req, res) => {
       otp,
     } = req.body;
 
-    console.log(req.body)
+    
 
     if (
       !firstName ||
@@ -102,6 +101,8 @@ exports.signUP = async (req, res) => {
       });
     }
 
+    
+    
 
     if (password !== confirmPassword) {
       return res.status(401).json({
@@ -187,13 +188,11 @@ exports.signUP = async (req, res) => {
   }
 };
 
-
-
-
 // login  check
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
 
     if (!email || !password) {
       return res.status(400).json({
@@ -205,7 +204,18 @@ exports.login = async (req, res) => {
   
 
     const User = await user.findOne({ email: email }).populate("additionalDetails  cart coursesProgress")
-    // console.log(User)
+    console.log(User)
+
+if (User.password === 'GOOGLE_AUTH_USER') {
+  return res.status(400).json({
+    success: false,
+    googleAuth:true,
+    message:
+      "you are SignUp using GoogleAuth so now also login with that",
+  });
+}
+
+
     if (!User) {
       return res.status(401).json({
         success: false,

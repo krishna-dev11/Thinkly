@@ -10,6 +10,7 @@ const {
     SENDOTP_API ,
     SIGNUP_API ,
     LOGIN_API,
+    GOOGLE_AUTH_LOGIN_API,
     RESETPASSTOKEN_API ,
     RESETPASSWORD_API
 } = endpoints
@@ -94,10 +95,15 @@ export function setLogin(email , password , navigate){
                 email, 
                 password
             })
-            // console.log(response)
-            // console.log(response.data)
+            
+            // console.log("krishna " , response.data)
             // console.log(response.data.User)
             // console.log(response.data.token)
+
+            // if(response.data.googleAuth)
+            // {
+            //     toast.error("you are Initially SignUp with Google Auth , So Now login In with GoogleAuth ")
+            // }
 
 
             dispatch(settoken(response.data.token))
@@ -116,13 +122,61 @@ export function setLogin(email , password , navigate){
         }catch(error){
              console.log(error)
              console.log("error in Login")
-             toast.error("login failed")
+             if(error.response.data.googleAuth)
+             {
+                toast.error("Try to login Using Google")
+             }else{
+                toast.error("login failed")
+             }
+             
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
         
     }
 }
+
+
+//login google auth 
+export function setGoogleLogin(credential, accountType, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    dispatch(setLoading(true));
+
+    try {
+      const response = await apiConnector(
+        "POST",
+        GOOGLE_AUTH_LOGIN_API,
+        {
+          token: credential,
+          accountType: accountType,
+        },
+        { withCredentials: true }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      dispatch(settoken(response.data.token));
+      localStorage.setItem("token", JSON.stringify(response.data.token));
+
+      dispatch(setUser(response.data.user));
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      toast.success("Google Login Successful");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("Google login failed");
+    }
+
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+
+
 
 export function setLogOut(navigate){
     return async (dispatch)=>{

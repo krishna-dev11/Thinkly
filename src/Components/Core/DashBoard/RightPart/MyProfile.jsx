@@ -21,7 +21,7 @@ const MyProfile = () => {
 
         <div className=" flex justify-between py-3 rounded-md px-5 w-full bg-richblack-800 items-center border border-richblack-700">
           <div className=" flex gap-x-3 justify-center items-center">
-            <img  src={user.imageUrl} className=" h-[4rem] w-[4rem] rounded-full" alt="profile" />
+            <img src={user.imageUrl} className=" h-[4rem] w-[4rem] rounded-full"/>
             <div className=" flex flex-col">
               <p className=" text-richblack-5 font-semibold lowercase text-[1.2rem] font-inter ">{user.firstName}  {user.lastName}</p>
               <p className=" text-richblack-400">{user.email}</p>

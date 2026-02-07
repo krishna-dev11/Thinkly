@@ -20,18 +20,16 @@ dbconnect();
 
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(
     cors({
-        origin:"https://ktech-silk.vercel.app",   
-        // origin:"http://localhost:3000",
+        // origin:"https://ktech-silk.vercel.app",   
+        origin:"http://localhost:3000",
         credentials : true
     })
 )
 
         // push karte wakt uncomment karna
         // origin:"http://localhost:3000",
-
 
 
 app.use(fileUpload({
@@ -41,7 +39,6 @@ app.use(fileUpload({
 
 cloudinaryConnect();
 
-//mounting 
 app.use("/api/v1/auth" , userRoutes);
 app.use("/api/v1/profile" , profileRoutes);
 app.use("/api/v1/course" , courseRoutes);
@@ -56,10 +53,6 @@ app.get('/' , async(req ,res)=>{
 });
 
 
-app.listen( PORT , ()=>{
+app.listen(PORT , ()=>{
     console.log(`app listen at port ${PORT}`)
 });
-
-
-
-

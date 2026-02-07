@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { RiDeleteBinLine } from "react-icons/ri";
-// import { setLogOut } from '../../../../../Services.jsx/Operations/authAPI';
+import { setLogOut } from '../../../../../Services.jsx/Operations/authAPI';
 import { DeleteAccountPermanentaly } from '../../../../../Services.jsx/Operations/DashBoard';
 import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from '../../../../Common/ConfirmationModal';

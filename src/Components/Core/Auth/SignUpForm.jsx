@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Tab from '../../Common/Tab';
@@ -9,8 +9,10 @@ import { ACCOUNT_TYPE } from '../../../Utilities/Constaints';
 import { TabData } from '../../../Utilities/Constaints';
 import { useDispatch } from 'react-redux';
 import {setSignUpData} from "../../../Slices/Auth"
-import { sendOtp } from '../../../Services.jsx/Operations/authAPI';
+import { sendOtp, setGoogleLogin } from '../../../Services.jsx/Operations/authAPI';
 import { setUser } from '../../../Slices/Profile';
+import { GoogleLogin } from "@react-oauth/google";
+// import axios from "axios";
 
 const SignUpForm = () => {
 
@@ -60,6 +62,26 @@ const SignUpForm = () => {
           
         }
 
+        // googole login
+         const handleGoogleSuccess = async (credentialResponse) => {
+  try {
+    if (!accountType) {
+      toast.error("Please select account type first");
+      return;
+    }
+
+    dispatch(
+      setGoogleLogin(
+        credentialResponse.credential,
+        accountType,
+        navigate
+      )
+    );
+
+  } catch (error) {
+    console.log("Google Login Error:", error);
+  }
+};
         
 
   return (
@@ -86,6 +108,7 @@ const SignUpForm = () => {
           }}
         />
       </label>
+      
       <label>
       <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Last Name<sup className="text-pink-200">*</sup>
       </p>
@@ -175,6 +198,13 @@ const SignUpForm = () => {
       >
         Create Account
       </button>
+
+      <div>
+      <GoogleLogin
+      onSuccess={handleGoogleSuccess}
+       onError={() => console.log("Login Failed")}
+      />
+      </div>
 
     </form>
 

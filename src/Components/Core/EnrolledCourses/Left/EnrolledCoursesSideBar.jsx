@@ -1,5 +1,5 @@
-// import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BuyedCoursessidebarLinks } from "../../../../data/dashboard-links";
 import { Link, useNavigate } from "react-router-dom";
 import SlideBarButton from "../../DashBoard/LeftPart/SlideBarButton";
@@ -39,7 +39,7 @@ const EnrolledCoursesSideBar = () => {
 
           <div className=" flex gap-x-2 justify-center items-center  cursor-pointer mx-auto"
              onClick={()=>navigate("/dashboard/my-profile")}>
-            <img alt="sidebar course" src={user.imageUrl} className=" w-[2.5rem] rounded-full"/>
+            <img src={user.imageUrl} className=" w-[2.5rem] rounded-full"/>
             <div className=" flex flex-col  gap-y-1">
               <p className=" font-inter text-richblack-900 uppercase">{user.firstName} {user.lastName}</p>
               <p className=" text-xs  text-richblack-200">{user.accountType}</p>

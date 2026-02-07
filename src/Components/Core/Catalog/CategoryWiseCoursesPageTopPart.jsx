@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CourseSlider from './CourseSlider'
-import { FaCircle } from 'react-icons/fa'
+import { FaArrowRight, FaCircle, FaDotCircle } from 'react-icons/fa'
 import FrequentCourses from './FrequentCourses'
 
 const CategoryWiseCoursesPageTopPart = () => {

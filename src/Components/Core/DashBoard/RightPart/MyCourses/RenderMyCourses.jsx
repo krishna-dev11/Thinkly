@@ -15,8 +15,8 @@ import { setCourse, setEditCourse, setStep } from "../../../../../Slices/Courses
 import { useNavigate } from "react-router-dom";
 import { IoIosTv } from "react-icons/io";
 import { FormateDate } from "../../../../../Utilities/FormateDate";
-// import calculateTotalCourseDuration from "../../../../../Utilities/CalculateDuration";
-// import { GetTotalCourseDuration } from "../../../../../Services.jsx/Operations/CoursesAPI";
+import calculateTotalCourseDuration from "../../../../../Utilities/CalculateDuration";
+import { GetTotalCourseDuration } from "../../../../../Services.jsx/Operations/CoursesAPI";
 
 const RenderMyCourses = () => {
   const [deleteModal, setDeleteModal] = useState(null);

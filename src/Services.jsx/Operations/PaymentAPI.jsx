@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
-// import { setLoading } from "../../Slices/Auth";
+import { setLoading } from "../../Slices/Auth";
 import { studentEndpoints } from "../apis";
 import rzpLogo from "../../assets/Logo/rzp_logo.png";
 import { EmtingCartAfterBuying } from "./CartAPI";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setUser } from "../../Slices/Profile";
 
 const {

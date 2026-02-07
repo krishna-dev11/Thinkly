@@ -1,5 +1,5 @@
 import React from 'react'
-import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt"
+import { ScenarioModel, ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt"
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 

@@ -9,7 +9,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { setLogOut } from "../../Services.jsx/Operations/authAPI";
-// import { CiSettings } from "react-icons/ci";
+import { CiSettings } from "react-icons/ci";
 import { RiDashboard2Line } from "react-icons/ri";
 import { IoLogOutOutline } from "react-icons/io5";
 import { GetAllCategories } from "../../Services.jsx/Operations/DashBoard";
@@ -63,7 +63,7 @@ const NavBar = () => {
       }
     };
     getAllCategories();
-  }, [dispatch, token]);
+  }, []);
 
   return (
     <div
@@ -76,7 +76,6 @@ const NavBar = () => {
       <div className=" flex justify-between items-center w-11/12  mx-auto h-full px-10">
         <Link to={"/"}>
           <img
-            alt="navbar logo"
             src={conditionFormNavBarWholeStyle ? logoDark : logo}
             className="w-[9rem]"
           />
@@ -201,7 +200,6 @@ const NavBar = () => {
   <div className="relative group h-[2.1rem] mt-2 w-[2.1rem] rounded-full">
     {/* Profile Image */}
     <img
-      alt="navbar logo"
       src={user?.imageUrl}
       className="h-[2.1rem] w-[2.1rem] rounded-full"
     />

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-// import RatingStars from "../../../Common/RatingStars";
+import RatingStars from "../../../Common/RatingStars";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import ReactStars from "react-stars";
-// import { render } from 'react-dom'
+import { render } from 'react-dom'
 import { CreateRating } from "../../../../Services.jsx/Operations/CoursesAPI";
 
 const ReviewModal = ({ data }) => {
@@ -11,7 +11,7 @@ const ReviewModal = ({ data }) => {
 
   const { user } = useSelector((state) => state.profile);
   const [ starcount , setStarCount ] = useState(0)
-  const { register ,  handleSubmit } = useForm();
+  const { register, reset, setValue, getValues, handleSubmit } = useForm();
   const { courseDetails } = useSelector((state) => state.Category);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch()
@@ -41,7 +41,7 @@ const ReviewModal = ({ data }) => {
           Add Review{" "}
         </div>
         <div className=" bg-[#000000]  py-6 rounded-b-md  justify-center  flex flex-col items-center gap-y-4">
-          <img alt="userimage" src={user.imageUrl} className=" w-[3rem] rounded-full" />
+          <img src={user.imageUrl} className=" w-[3rem] rounded-full" />
           <p className=" text-richblack-5 uppercase">
             {user.firstName} {user.lastName}
           </p>

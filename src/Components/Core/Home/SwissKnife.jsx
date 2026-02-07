@@ -28,9 +28,9 @@ const SwissKnife = () => {
       </div>
 
       <div className='flex mx-auto'>
-        <img alt="feature 1" src={yourProgress} className='w-[20rem] h-[20rem] translate-x-[5rem]'/>
-        <img alt="feature 2" src={compareOther}  className='w-[25rem] h-[25rem] z-10 translate-y-[-2rem]'/>
-        <img alt="feature 3" src={planLessons}  className='w-[23rem] h-[23rem] z-20 translate-x-[-8rem] translate-y-[-1.5rem]' />
+        <img src={yourProgress} className='w-[20rem] h-[20rem] translate-x-[5rem]'/>
+        <img src={compareOther}  className='w-[25rem] h-[25rem] z-10 translate-y-[-2rem]'/>
+        <img src={planLessons}  className='w-[23rem] h-[23rem] z-20 translate-x-[-8rem] translate-y-[-1.5rem]' />
       </div>
 
       <button className={`py-2 px-3 self-center rounded-md bg-yellow-50 translate-y-[-5rem]`}>Learn More</button>

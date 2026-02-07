@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -11,7 +11,7 @@ const UpdateProfilePicture = () => {
   const { token } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false)
   const [previewSource, setPreviewSource] = useState(null);

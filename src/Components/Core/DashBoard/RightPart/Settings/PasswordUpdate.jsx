@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { FaEye } from "react-icons/fa";
@@ -26,7 +26,7 @@ const PasswordUpdate = () => {
         register,
         reset,
         handleSubmit,
-        formState:{ isSubmitSuccessful}
+        formState:{errors , isSubmitSuccessful}
 
     } = useForm()
 

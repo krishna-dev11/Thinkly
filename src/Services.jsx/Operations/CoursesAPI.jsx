@@ -7,7 +7,7 @@ import {
   setWholeCourseData,
 } from "../../Slices/Categories";
 import {
-  // setBuyedCoursesDataForCard,
+  setBuyedCoursesDataForCard,
   setcourseComptetionPersentageData,
   setRatingAndReviewData,
   settotalCourseDuration,

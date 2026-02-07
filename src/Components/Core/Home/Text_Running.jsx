@@ -1,6 +1,6 @@
 import React from 'react'
 import Hieghlightedtext from "./Hieghlightedtext"
-// import { FaLongArrowAltRight } from "react-icons/fa"
+import { FaLongArrowAltRight } from "react-icons/fa"
 import BlackYellowButton from "./BlackYellowButton"
 import { TypeAnimation } from 'react-type-animation';
 import BackGroundGradient from '../../Common/BackGroundGradient';

@@ -12,10 +12,10 @@ import "swiper/css";
 import { Pagination, Navigation, Keyboard, Autoplay } from "swiper/modules";
 import { buyCourse } from "../Services.jsx/Operations/PaymentAPI";
 import toast from "react-hot-toast";
-// import { setCartCoursesIds } from "../Slices/Cart";
+import { setCartCoursesIds } from "../Slices/Cart";
 import { AddNewCouseInCart } from "../Services.jsx/Operations/CartAPI";
 import GetAvgRating from "../Utilities/avgRating";
-// import RatingStars from "../Components/Common/RatingStars";
+import RatingStars from "../Components/Common/RatingStars";
 import copy from "copy-to-clipboard";
 // import "../App.css";
 import "../Utilities/Loading.css";
@@ -36,7 +36,7 @@ const ONECourseDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(totalCourselength, "ksadsdsd");
+  // console.log(courseDetails, "ksadsdsd");
   const [AvrageRatingCount, setAvrageRatingCount] = useState(0);
 
   const handleBuyCourse = () => {
@@ -96,28 +96,31 @@ const ONECourseDetail = () => {
       setAvrageRatingCount(avg);
     };
   });
-  
 
- useEffect(() => {
-  if (!loading && courseDetails?.courseContent) {
-    let lectureCount = 0;
-    let lectureDuration = 0;
-
-    courseDetails.courseContent.forEach((section) => {
-      lectureCount += section.subSections.length;
-
-      section.subSections.forEach((subsection) => {
-        lectureDuration += parseFloat(subsection.timeDuration) || 0;
+  useEffect(() => {
+    // totallectures
+    if (!loading && courseDetails?.courseContent) {
+      let lectureCount = 0;
+      courseDetails.courseContent.map((section) => {
+        lectureCount += section.subSections.length;
       });
-    });
+      setTotalLectures(lectureCount);
+    }
 
-    setTotalLectures(lectureCount);
+    // totalDuration of COurse
+    if (!loading && courseDetails?.courseContent) {
+      let Lectureduration = 0;
+      courseDetails.courseContent.map((section) => {
+        section.subSections.map((subsection) => {
+          Lectureduration += parseFloat(subsection.timeDuration);
+        });
+      });
 
-    const formattedTime = convertMinutesToHoursAndMinutes(lectureDuration);
-    setTotalLecturesDuration(formattedTime);
-  }
-}, [loading, courseDetails, setTotalLectures, setTotalLecturesDuration, convertMinutesToHoursAndMinutes]);
+      const formatedTime = convertMinutesToHoursAndMinutes(Lectureduration);
 
+      setTotalLecturesDuration(formatedTime);
+    }
+  }, [loading, courseDetails]);
 
   if (loading || !courseDetails || Object.keys(courseDetails).length === 0) {
     return (

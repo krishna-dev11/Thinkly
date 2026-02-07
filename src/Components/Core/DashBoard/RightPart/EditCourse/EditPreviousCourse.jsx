@@ -1,10 +1,10 @@
 import React from 'react'
 import AddNewCourse from '../AddCourse/AddNewCourse'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const EditPreviousCourse = () => {
 
-  // const {course} = useSelector(state=>state.Course)
+  const {course} = useSelector(state=>state.Course)
   // console.log(course)
 
   return (

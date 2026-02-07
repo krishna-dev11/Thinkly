@@ -1,23 +1,23 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Form, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { AddNewSection, EditSection } from "../../../../../../Services.jsx/Operations/DashBoard";
 import SectionSubsectionDispaly from "./SectionSubsectionDispaly";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
-// import { SetEditSection } from "../../../../../../Slices/Section";
-// import { form } from "framer-motion/client";
-import { setEditCourse, setStep } from "../../../../../../Slices/Courses";
+import { SetEditSection } from "../../../../../../Slices/Section";
+import { form } from "framer-motion/client";
+import { setCourse, setEditCourse, setStep } from "../../../../../../Slices/Courses";
 
 const CourseBuilder = () => {
   const {
     register,
-    // reset,
+    reset,
     handleSubmit,
     setValue,
-    // getValues,
-    // formState: { errors, isSubmitSuccessful },
+    getValues,
+    formState: { errors, isSubmitSuccessful },
   } = useForm();
 
   const dispatch = useDispatch();

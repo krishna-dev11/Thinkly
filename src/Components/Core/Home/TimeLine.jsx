@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg"
 import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg"
 import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg"
@@ -35,7 +35,7 @@ const TimeLine = () => {
         timeline.map( (Singletimeline , index) => (
             <div className=' flex gap-x-6' key={index}>
                 <div className=' shadow-sm shadow-richblack-100  h-[3rem] w-[3rem] rounded-full justify-center items-center flex'>
-                <img alt="Singletimeline" src={Singletimeline.Logo} ></img>
+                <img src={Singletimeline.Logo} ></img>
                 </div>
                 <div>
                 <div className=' text-lg font-semibold text-richblack-800 font-inter'>{Singletimeline.heading}</div>
