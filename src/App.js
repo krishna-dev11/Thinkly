@@ -39,6 +39,7 @@ import EnterRoom from "./Pages/EnterRoom";
 import LiveClass from "./Pages/LiveClass";
 import StartLive from "./Components/Core/DashBoard/RightPart/StartLive";
 import GoLive from "./Components/Core/DashBoard/RightPart/GoLive";
+import AIGeminiChat from "./Components/Common/AIGeminiChat";
 
 function App() {
 
@@ -47,8 +48,9 @@ function App() {
 
   return (
     <div className="h-screen bg-richblack-900">
-      <NavBar />
       
+      <NavBar />
+      <div><AIGeminiChat/></div>
       <Routes >
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<HomePage />} />

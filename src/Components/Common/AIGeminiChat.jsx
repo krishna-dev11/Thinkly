@@ -193,11 +193,11 @@ const AIGeminiChat = () => {
   };
 
   return (
-    <div className="absolute right-10 z-[1000] font-sans flex flex-col items-end">
+    <div className="fixed top-[9%] right-10 z-[50] font-sans flex flex-col items-end">
       
       {/* --- CHAT WINDOW --- */}
       <div
-        className={`mb-4 w-[350px] md:w-[400px] h-[550px] bg-gray-100 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform ${
+        className={`mb-4 w-[350px] md:w-[400px] h-[530px] bg-gray-100 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform ${
           isOpen ? "translate-y-0 opacity-100 scale-100" : "translate-y-10 opacity-0 scale-95 pointer-events-none"
         }`}
       >

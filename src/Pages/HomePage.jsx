@@ -18,7 +18,6 @@ import Fotter from "../Components/Common/Fotter";
 import BackGroundGradient from "../Components/Common/BackGroundGradient";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import AIGeminiChat from "../Components/Common/AIGeminiChat";
 // import GradientInteractiveBox from "../Components/Common/GradientInteractiveBox";
 
 const HomePage = () => {
@@ -33,7 +32,6 @@ const HomePage = () => {
      
 
 
-         <AIGeminiChat />
 
       {/* section 1 */}
       <div className="flex flex-col gap-10 bg-richblack-900  ">
