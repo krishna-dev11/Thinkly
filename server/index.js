@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express();
+const dns = require("node:dns");
 
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const userRoutes = require("./Routes/User")
 const profileRoutes = require("./Routes/Profile")
 const paymentRoutes = require("./Routes/Payment")
@@ -23,8 +25,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        // origin:"https://ktech-silk.vercel.app",   
-        origin:"http://localhost:3000",
+        origin:"https://ktech-silk.vercel.app",   
+        // origin:"http://localhost:3000",
         credentials : true
     })
 )
